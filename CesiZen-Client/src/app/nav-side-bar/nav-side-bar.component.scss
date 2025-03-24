@@ -1,0 +1,71 @@
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+.nav {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #FBD14B;
+  //overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+
+  .nav-ul {
+    padding: 1rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .nav-li {
+    text-decoration: none;
+  }
+
+  .nav-div-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  .nav-button {
+    margin: 5px;
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+  }
+
+  .showSideBar {
+    display: block;
+  }
+
+  .hideSideBar {
+    display: none;
+  }
+}
