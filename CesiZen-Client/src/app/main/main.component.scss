@@ -1,0 +1,86 @@
+.main-content {
+  width: 76%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: 12%;
+  margin-right: 12%;
+  background-color: #FFFCF0;
+  position: relative;
+  top: 0;
+  z-index: 1;
+}
+
+.home-container {
+  width: 100%;
+  height: 820px;
+  background-image: url("/assets/home_cezizen.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.search-bar {
+}
+.home-theme-div {
+  width: 40vw;
+  height: 15rem;
+  background: rgba(24, 24, 24, 0.66);
+  opacity: 1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-theme {
+  color: rgba(255, 252, 240, 1);
+  font-family: Bitter;
+  font-weight: lighter;
+  letter-spacing: 1rem;
+  font-size: 5rem;
+  opacity: 1;
+}
+
+article{
+    margin: 1.5rem;
+    text-align: center;
+}
+.home-intro {
+  border: solid 1px;
+  padding: 30px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.home-button {
+  margin-bottom: 2rem; 
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+}
+.home-button:hover {
+  background-color: #444;
+}
+.home-content {
+  border: solid 1px;
+  padding: 80px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: start;
+}
+.home-content-list {
+  list-style: inside;
+  list-style-position: outside;
+}
