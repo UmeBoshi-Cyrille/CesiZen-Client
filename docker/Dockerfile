@@ -1,14 +1,33 @@
+# Stage 1: Build the application
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+RUN npm run build -- --configuration production
+
+# Stage 2: Optimized production image
 FROM nginx:alpine
+# Remove default config
+RUN rm /etc/nginx/conf.d/default.conf
+# Configure environment
+ENV NGINX_ROOT_PATH=/etc/nginx \
+    APP_ROOT_PATH=/usr/share/nginx/html \
+    NGINX_CONF_PATH=/etc/nginx/conf.d/
+# Copy nginx configuration
+COPY docker/nginx/nginx.conf $NGINX_ROOT_PATH/nginx.conf
+COPY docker/nginx/default.conf $NGINX_CONF_PATH
+# Copy build artifacts from builder
+COPY --from=builder /app/dist $APP_ROOT_PATH
 
-ENV NGINX_ROOT_PATH=/etc/nginx
-ENV APP_ROOT_PATH=/usr/share/nginx/html
-ENV NGINX_LOG_PATH=/var/log/nginx
-ENV NGINX_CONFIG_PATH=$NGINX_ROOT_PATH/conf.d
+# Security hardening
+RUN chown -R nginx:nginx $APP_ROOT_PATH && \
+    chmod -R 755 $APP_ROOT_PATH && \
+    find $APP_ROOT_PATH -type f -exec chmod 644 {} \;
 
-COPY docker/nginx/ $NGINX_ROOT_PATH/templates/
-COPY dist $APP_ROOT_PATH
+USER nginx:nginx
 
-RUN chown -R nginx:nginx /var/cache/nginx /var/run $NGINX_LOG_PATH $APP_ROOT_PATH $NGINX_ROOT_PATH \
-    && chmod 777 -R /var/cache/nginx /var/run $NGINX_LOG_PATH $NGINX_ROOT_PATH $APP_ROOT_PATH
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
 
-USER nginx
+EXPOSE 8080
