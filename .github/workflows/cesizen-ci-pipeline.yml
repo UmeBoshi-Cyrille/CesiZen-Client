@@ -55,6 +55,10 @@ jobs:
       matrix:
         node-version: [20]
 
+    defaults:
+      run:
+        working-directory: ./CesiZen-Client
+
     needs: [test]
     outputs:
       app_version: ${{ steps.package-version.outputs.app_version }}
