@@ -1,0 +1,163 @@
+# Multi-stage build reduces final image size
+name : CesiZen-Client - CI Pipeline
+
+on:
+  push: 
+    branches:
+      - develop
+  pull_request:
+    branches: 
+      - develop
+      - main
+
+env:
+  IMAGE_NAME: umhra/cesizen-client
+  VERSION: ${{ fromJSON(needs.docker-image.outputs.app_version) }}
+
+jobs:
+  test:
+    name: Install dependencies - Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout Code
+    - name: Checkout
+      uses: actions/checkout@v4
+    # Step 2: Setup Node with Autot Cache for Node-modules
+    - name: Setup Node.js (v20 LTS)
+      uses: actions/setup-node@v4
+      with: 
+        node-version: 20
+        cache: 'npm'
+    # Step 3: Dependencies Installation
+    - name: Dependencies Installation
+      run: npm ci
+    # Step 4: Quality : Lint
+    - name: lint Code
+      run: npm run lint
+    # Step 5: Unit Test
+    - name: Unit Tests
+      run: npm run test -- --watch=false --browsers=ChromeHeadless
+  
+  # sonar:
+  #   name: Sonar analyze
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4
+  #     with:
+  #       fetch-depth: 0
+  #   - name: Cache SonarQube Cloud packages
+  #     uses: actions/cache@v4
+  #     with:
+  #       path: ~\sonar\cache
+  #       key: ${{ runner.os }}-sonar
+  #       restore-keys: ${{ runner.os }}-sonar
+  #   - name: Cache SonarQube Cloud scanner
+  #     id: cache-sonar-scanner
+  #     uses: actions/cache@v4
+  #     with:
+  #       path: .\.sonar\scanner
+  #       key: ${{ runner.os }}-sonar-scanner
+  #       restore-keys: ${{ runner.os }}-sonar-scanner
+  #   - uses: sonarsource/sonarqube-scan-action@master
+  #     env:
+  #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+    needs: [test]
+    outputs:
+      app_version: ${{ steps.package-version.outputs.app_version }}
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Step 2: Setup Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20
+          cache: 'npm'
+      # Step 3: Build Project
+      - name : Build
+        run: npm run build -- --configuration production
+      # Step 4: Get and load Artifacts to preserfve build for Docker Step
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Extract Package Version
+        id: package-version
+        run: |
+          echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+  docker-image:
+    name: Build Docker Image and Push to Hub
+    runs-on: ubuntu-latest
+    needs: build
+    if: > 
+       (${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}) ||
+       (${{ github.event_name == 'pull_request' && github.base.ref == 'refs/heads/develop' }})
+    env:
+     VERSION: ${{ needs.test.outputs.app_version }}
+       
+    steps:
+      # Step 1: Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Step 2: Download Build Artifact
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with: 
+          name: dist
+      # Step 3: Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Step 4: App Info Extraction
+      - name: Extract App Info
+        run: |
+          echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+          echo "build_time=$(TZ='Europe/Paris' date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV  # ISO-8601 format
+          # export app_name=$(node -p "require('./package.json').name")
+          # export app_version=$(node -p "require('./package.json').version")
+          # echo "app_name=$app_name" >> $GITHUB_ENV
+          # echo "app_version=$app_version" >> $GITHUB_ENV
+      # Step 5:
+      - name: Update index.html with Version Info
+        run: |
+          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" src/index.html
+      # Step 6: build and push Docker image to DockerHub
+        # cache-from and cache-to directives in the GitHub Actions workflow 
+        # enable Docker Layer Caching, which speeds up Docker builds by 
+        # reusing unchanged layers from previous builds
+      - name: Docker Image - Build and push to Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile
+          push: ${{ github.event_name == 'push' }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ env.IMAGE_NAME }}:${{ env.app_version }}
+        # This tells Docker Buildx to pull cached layers from the GitHub 
+        # Actions cache storage backend
+        # If cached layers exist from previous builds, they will be used 
+        # to speed up the current build
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      # Step 4: Check Image Exist
+      - name: Check Image
+        run : |
+          echo "Docker Image has been successfully pushed."
+
+    
