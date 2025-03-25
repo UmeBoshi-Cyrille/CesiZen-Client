@@ -35,8 +35,21 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: false,
     browsers: ['ChromeHeadless'],
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--disable-gpu',
+          '--remote-debugging-port=9222'
+        ]
+      }
+    },
     singleRun: true,
     restartOnFileChange: false,
+    mime: {
+      'text/x-typescript': ['ts', 'tsx']  // Critical for Angular 15+
+    },
     listenAddress: 'localhost',
     hostname: 'localhost'
   });
