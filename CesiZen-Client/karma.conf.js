@@ -46,8 +46,8 @@ module.exports = function (config) {
         ]
       }
     },
-    singleRun: false,
-    restartOnFileChange: true,
+    singleRun: true,
+    restartOnFileChange: false,
     listenAddress: 'localhost',
     hostname: 'localhost'
   });
