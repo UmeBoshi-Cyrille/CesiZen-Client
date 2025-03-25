@@ -15,6 +15,11 @@ jobs:
   test:
     name: Install dependencies - Run Tests
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
+
     defaults:
       run:
         working-directory: ./CesiZen-Client
@@ -26,10 +31,10 @@ jobs:
         with:
           fetch-depth: 0
       # Step 2: Setup Node with Autot Cache for Node-modules
-      - name: Setup Node.js (v20 LTS)
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: ./CesiZen-Client/package-lock.json
       # Step 3: Dependencies Installation
@@ -39,7 +44,7 @@ jobs:
       - name: lint Code
         run: npm run lint
       # Step 5: Unit Test
-      - name: Unit Tests
+      - name: Run Tests
         run: npm run test:ci
 
   build:
