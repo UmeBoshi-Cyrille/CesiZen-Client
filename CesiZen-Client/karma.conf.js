@@ -11,12 +11,19 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
+        random: false
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
+    },
+    files: [
+      { pattern: 'src/test.ts', watched: false }
+    ],
+    preprocessors: {
+      'src/test.ts': ['@angular-devkit/build-angular']
     },
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
@@ -34,9 +41,9 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['ChromeHeadlessCI'],
+    browsers: ['ChromeHeadless'],
     customLaunchers: {
-      ChromeHeadlessCI: {
+      ChromeHeadless: {
         base: 'ChromeHeadless',
         flags: [
           '--no-sandbox',
