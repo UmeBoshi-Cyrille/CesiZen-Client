@@ -41,6 +41,8 @@ jobs:
     # Step 5: Unit Test
     - name: Unit Tests
       run: npm run test:ci
+      env:
+       CHROME_BIN: /usr/bin/google-chrome
 
   build:
     name: Build project
