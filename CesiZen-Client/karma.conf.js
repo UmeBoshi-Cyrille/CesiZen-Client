@@ -48,7 +48,9 @@ module.exports = function (config) {
         flags: [
           '--no-sandbox',
           '--disable-gpu',
-          '--remote-debugging-port=9222'
+          '--disable-dev-shm-usage',
+          '--ignore-certificate-errors',
+          '--window-size=1920,1080'  
         ]
       }
     },
