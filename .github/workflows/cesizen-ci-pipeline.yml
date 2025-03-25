@@ -12,7 +12,7 @@ on:
 
 env:
   IMAGE_NAME: umhra/cesizen-client
-  VERSION: ${{ fromJSON(needs.docker-image.outputs.app_version) }}
+  VERSION: latest
 
 jobs:
   test:
