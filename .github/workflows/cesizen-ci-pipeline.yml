@@ -31,7 +31,7 @@ jobs:
       with: 
         node-version: 20
         cache: 'npm'
-        cache-dependency-path: ./CesiZen-Client/package-lock.json
+        cache-dependency-path: package-lock.json
     # Step 3: Dependencies Installation
     - name: Dependencies Installation
       run: npm ci
@@ -41,8 +41,6 @@ jobs:
     # Step 5: Unit Test
     - name: Unit Tests
       run: npm run test:ci
-      env:
-       CHROME_BIN: /usr/bin/google-chrome
 
   build:
     name: Build project
