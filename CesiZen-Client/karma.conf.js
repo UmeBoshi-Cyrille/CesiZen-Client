@@ -19,12 +19,12 @@ module.exports = function (config) {
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    files: [
-      { pattern: 'src/test.ts', watched: false, included: true, served: true }
-    ],
-    preprocessors: {
-      'src/test.ts': ['@angular-devkit/build-angular']
-    },
+    //files: [
+    //  { pattern: 'src/test.ts', watched: false, included: true, served: true }
+    //],
+    //preprocessors: {
+    //  'src/test.ts': ['@angular-devkit/build-angular']
+    //},
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
