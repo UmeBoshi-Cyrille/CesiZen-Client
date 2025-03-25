@@ -39,5 +39,10 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.27.0"
+  },
+  "overrides": {
+    "inflight": "1.0.7",
+    "rimraf": "^4.0.0",
+    "glob": "^10.3.10" 
   }
 }
