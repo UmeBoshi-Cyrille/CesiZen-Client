@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [18]
 
     defaults:
       run:
@@ -46,34 +46,6 @@ jobs:
       # Step 5: Unit Test
       - name: Run Tests
         run: npm run test:ci
-
-  build:
-    name: Build project
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20]
-
-    defaults:
-      run:
-        working-directory: ./CesiZen-Client
-
-    needs: [test]
-    outputs:
-      app_version: ${{ steps.package-version.outputs.app_version }}
-
-    steps:
-      # Step 1: Checkout Code
-      - name: Checkout
-        uses: actions/checkout@v4
-      # Step 2: Setup Node.js
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: ./CesiZen-Client/package-lock.json
       # Step 3: Install Angular/Cli
       - name: Angular/cli installation
         run: npm install -g @angular/cli@latest
@@ -90,6 +62,50 @@ jobs:
         id: package-version
         run: |
           echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+  # build:
+  #   name: Build project
+  #   runs-on: ubuntu-latest
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [20]
+
+  #   defaults:
+  #     run:
+  #       working-directory: ./CesiZen-Client
+
+  #   needs: [test]
+  #   outputs:
+  #     app_version: ${{ steps.package-version.outputs.app_version }}
+
+  #   steps:
+  #     # Step 1: Checkout Code
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     # Step 2: Setup Node.js
+  #     - name: Setup Node ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: "npm"
+  #         cache-dependency-path: ./CesiZen-Client/package-lock.json
+  #     # Step 3: Install Angular/Cli
+  #     - name: Angular/cli installation
+  #       run: npm install -g @angular/cli@latest
+  #     # Step 3: Build Project
+  #     - name: Build
+  #       run: npm run build -- --configuration production
+  #     # Step 4: Get and load Artifacts to preserfve build for Docker Step
+  #     - name: Upload Artifacts
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: dist
+  #         path: dist/
+  #     - name: Extract Package Version
+  #       id: package-version
+  #       run: |
+  #         echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
   docker-image:
     name: Build Docker Image and Push to Hub
