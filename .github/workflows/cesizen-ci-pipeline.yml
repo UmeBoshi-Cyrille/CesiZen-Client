@@ -146,7 +146,7 @@ jobs:
         # reusing unchanged layers from previous builds
       # Step 6: build and push Docker image to DockerHub
       - name: Docker Image - Build and push to Hub
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile
