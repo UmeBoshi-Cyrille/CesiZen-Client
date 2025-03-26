@@ -9,7 +9,7 @@ RUN npm run build -- --configuration production
 # Stage 2: Optimized production image
 FROM nginx:alpine
 # Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 # Configure environment
 ENV NGINX_ROOT_PATH=/etc/nginx \
   APP_ROOT_PATH=/usr/share/nginx/html \
