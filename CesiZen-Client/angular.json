@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "CesiClient:build:production"
+              "buildTarget": "CesiZen-Client:build:production"
             },
             "development": {
-              "buildTarget": "CesiClient:build:development"
+              "buildTarget": "CesiZen-Client:build:development"
             }
           },
           "defaultConfiguration": "development"
