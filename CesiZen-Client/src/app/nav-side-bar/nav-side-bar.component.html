@@ -1,0 +1,47 @@
+<header>
+  <button class="openbtn" [ngStyle]="{ display: status ? 'none' : 'block' }" (click)="clickEvent()">☰ Menu</button>
+  <nav class="nav" [ngStyle]="{ display: status ? 'block' : 'none' }">
+    <a class="closebtn" (click)="clickEvent()">×</a>
+    <div class="nav-div">
+      <ul class="nav-ul">
+        <li class="nav-li">
+          <a class="nav-link" routerLink="/">
+            <span class="material-symbols-outlined">
+              home
+            </span>
+            Accueil
+          </a>
+        </li>
+        <li class="nav-li">
+          <a class="nav-link" routerLink="/articles">
+            <span class="material-symbols-outlined">
+              library_books
+            </span>
+            Articles
+          </a>
+        </li>
+        <li class="nav-li">
+          <a class="nav-link" routerLink="/exercises">
+            <span class="material-symbols-outlined">
+              cardiology
+            </span>
+            Exercises
+          </a>
+        </li>
+        <li class="nav-li">
+          <a class="nav-link" routerLink="/diagnostics">
+            <span class="material-symbols-outlined">
+              prescriptions
+            </span>
+            Diagnostic
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-div-buttons">
+      <button class="nav-button" routerLink="/inscription">Inscription</button>
+      <button class="nav-button" routerLink="/se-connecter">Se connecter</button>
+    </div>
+  </nav>
+</header>

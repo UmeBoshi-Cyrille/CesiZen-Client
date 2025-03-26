@@ -1,5 +1,5 @@
 {
-  "name": "CesiZen-client",
+  "name": "CesiZen-Client",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -19,10 +19,13 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@tailwindcss/postcss": "^4.0.17",
     "glob": "^11.0.1",
     "inflight": "^1.0.6",
+    "postcss": "^8.5.3",
     "rimraf": "^6.0.1",
     "rxjs": "~7.8.0",
+    "sass": "^1.86.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

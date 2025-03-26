@@ -1,0 +1,102 @@
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+.nav {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #FBD14B;
+  transition: 0.5s;
+  padding-top: 60px;
+
+  .nav-div {
+    text-align: center;
+  }
+
+  .nav-ul {
+    padding: 1rem;
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .material-symbols-outlined {
+    margin-right: 0.5rem;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #111;
+  }
+
+  .nav-link:hover {
+    transform: translateX(20px);
+    color: #FFFCF0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-li {
+    margin-top: 0.3rem;
+  }
+
+  .nav-div-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  .nav-button {
+    margin: 5px 40px;
+    background-color: #FFFCF0;
+    border-radius: 50px;
+    padding: 10px 5px;
+    cursor: pointer;
+    border: solid 0.5px;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.66);
+  }
+
+  .nav-button:hover {
+    background-color: #bca251;
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+  }
+
+  .showSideBar {
+    display: block;
+  }
+
+  .hideSideBar {
+    display: none;
+  }
+}
