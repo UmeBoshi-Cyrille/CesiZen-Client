@@ -38,13 +38,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: ./CesiZen-Client/package-lock.json
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .angular/cache
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       # Step 3: Dependencies Installation
       - name: Dependencies Installation
         run: npm ci
@@ -83,15 +76,8 @@ jobs:
       #     cache: "npm"
       #     cache-dependency-path: ./CesiZen-Client/package-lock.json
       # # Step 3: Dependencies Installation
-      # - name: Dependencies Installation
-      #   run: npm ci
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .angular/cache
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Dependencies Installation
+        run: npm ci
       # # Step 3: Install Angular/Cli
       - name: Angular/cli installation
         run: npm install -g @angular/cli@latest
