@@ -75,8 +75,8 @@ jobs:
       #     cache: "npm"
       #     cache-dependency-path: ./CesiZen-Client/package-lock.json
       # # Step 3: Dependencies Installation
-      # - name: Dependencies Installation
-      #   run: npm ci
+      - name: Dependencies Installation
+        run: npm ci
       # # Step 3: Install Angular/Cli
       - name: Angular/cli installation
         run: npm install -g @angular/cli@latest
