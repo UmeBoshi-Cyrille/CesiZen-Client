@@ -8,7 +8,7 @@ on:
     branches: [develop, main]
 
 env:
-  IMAGE_NAME: umhra/cesizen-client
+  IMAGE_NAME: umhra/cesizen-client:latest
   VERSION: latest
   app_version: ${{ github.sha }}
 
@@ -156,7 +156,7 @@ jobs:
           file: ./docker/Dockerfile
           push: ${{ github.event_name == 'push' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.VERSION || 'latest'}}
+            ${{ env.IMAGE_NAME }}
             ${{ env.IMAGE_NAME }}:${{ env.app_version }}
           # This tells Docker Buildx to pull cached layers from the GitHub
           # Actions cache storage backend
