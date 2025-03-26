@@ -2,7 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN if [ ! -f package-lock.json ]; then npm install; else npm ci; fi
 COPY . .
 RUN npm run build -- --configuration production
 
