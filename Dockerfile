@@ -2,7 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app/CesiZen-Client
 COPY CesiZen-Client/package*.json ./
-RUN npm install
+RUN npm install --ignore-scripts
 COPY CesiZen-Client ./
 RUN npm run build -- --configuration production
 
