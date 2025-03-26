@@ -78,8 +78,8 @@ jobs:
       # - name: Dependencies Installation
       #   run: npm ci
       # # Step 3: Install Angular/Cli
-      # - name: Angular/cli installation
-      #   run: npm install -g @angular/cli@latest
+      - name: Angular/cli installation
+        run: npm install -g @angular/cli@latest
       # Step 3: Build Project
       - name: Build
         run: npm run build -- --configuration production
