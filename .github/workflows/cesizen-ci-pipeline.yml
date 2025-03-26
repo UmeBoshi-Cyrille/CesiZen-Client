@@ -38,12 +38,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: ./CesiZen-Client/package-lock.json
-      #
-      - name: Verify tags
-        run: |
-          echo "IMAGE_NAME: ${{ env.IMAGE_NAME }}"
-          echo "VERSION: ${{ env.VERSION || 'NOT_SET' }}"
-          echo "app_version: ${{ env.app_version || 'NOT_SET' }}"
       # Step 3: Dependencies Installation
       - name: Dependencies Installation
         run: npm ci
@@ -126,6 +120,12 @@ jobs:
         with:
           driver: docker-container
           install: true
+      #
+      - name: Verify tags
+        run: |
+          echo "IMAGE_NAME: ${{ env.IMAGE_NAME }}"
+          echo "VERSION: ${{ env.VERSION || 'NOT_SET' }}"
+          echo "app_version: ${{ env.app_version || 'NOT_SET' }}"
       # Step 3: Login to Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
