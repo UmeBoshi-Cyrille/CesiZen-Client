@@ -1,23 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { SeConnecterComponent } from './se-connecter.component';
 
 describe('SeConnecterComponent', () => {
-  let component: SeConnecterComponent;
-  let fixture: ComponentFixture<SeConnecterComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SeConnecterComponent]
+      imports: [SeConnecterComponent],
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(SeConnecterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      .compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(SeConnecterComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

@@ -1,23 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { InscriptionComponent } from './inscription.component';
 
 describe('InscriptionComponent', () => {
-  let component: InscriptionComponent;
-  let fixture: ComponentFixture<InscriptionComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InscriptionComponent]
+      imports: [InscriptionComponent],
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(InscriptionComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      .compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(InscriptionComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
