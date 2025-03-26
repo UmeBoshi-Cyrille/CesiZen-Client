@@ -90,7 +90,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: ./dist/
+          path: dist
           if-no-files-found: error
       - name: Extract Package Version
         id: package-version
