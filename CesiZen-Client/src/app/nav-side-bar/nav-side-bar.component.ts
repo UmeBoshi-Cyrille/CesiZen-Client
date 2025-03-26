@@ -1,24 +1,21 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-nav-side-bar',
   standalone: true,
-  imports: [NgClass, NgStyle],
+  imports: [NgStyle, RouterLink, RouterModule],
   templateUrl: './nav-side-bar.component.html',
   styleUrl: './nav-side-bar.component.scss'
 })
 export class NavSideBarComponent {
-  //showMyContainer: boolean = false;
-
+  constructor(
+    private route: RouterModule
+  ) { }
   status: boolean = false;
   clickEvent() {
     this.status = !this.status;
-    if (this.status) {
-      console.log('true');
-    } else {
-      console.log('false');
-    }
   }
 }
