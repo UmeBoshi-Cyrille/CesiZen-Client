@@ -1,0 +1,165 @@
+# Multi-stage build reduces final image size
+name: CesiZen-Client - CI Pipeline
+
+on:
+  push:
+    branches: [develop, pipeline]
+  pull_request:
+    branches: [develop, main]
+
+env:
+  IMAGE_NAME: umhra/cesizen-client
+  VERSION: latest
+  app_version: ${{ github.sha }}
+
+jobs:
+  test:
+    name: Install dependencies - Run Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
+
+    defaults:
+      run:
+        working-directory: ./CesiZen-Client
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Step 2: Setup Node with Autot Cache for Node-modules
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: ./CesiZen-Client/package-lock.json
+      # Step 3: Dependencies Installation
+      - name: Dependencies Installation
+        run: npm ci
+      # Step 4: Quality : Lint
+      - name: lint Code
+        run: npm run lint
+      # Step 5: Unit Test
+      - name: Run Tests
+        run: npm run test:ci
+
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
+
+    defaults:
+      run:
+        working-directory: ./CesiZen-Client
+
+    needs: [test]
+    outputs:
+      app_version: ${{ steps.package-version.outputs.app_version }}
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout
+        uses: actions/checkout@v4
+      # # Step 2: Setup Node.js
+      # - name: Setup Node ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: "npm"
+      #     cache-dependency-path: ./CesiZen-Client/package-lock.json
+      # # Step 3: Dependencies Installation
+      - name: Dependencies Installation
+        run: npm ci
+      # # Step 3: Install Angular/Cli
+      - name: Angular/cli installation
+        run: npm install -g @angular/cli@latest
+      # Step 3: Build Project
+      - name: Build
+        run: npm run build -- --configuration production
+      # Step 4: Get and load Artifacts to preserfve build for Docker Step
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: ${{ github.workspace }}/CesiZen-Client/dist
+          retention-days: 1
+          if-no-files-found: error
+      - name: Extract Package Version
+        id: package-version
+        run: |
+          echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+  docker-image:
+    name: Build Docker Image and Push to Hub
+    runs-on: ubuntu-latest
+    needs: build
+    if: >
+      ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }} |
+      ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'refs/heads/develop' }}
+
+    steps:
+      # Step 1: Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Step 2: Download Build Artifact
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+      # Step 3: Setup Buildx
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker-container
+          install: true
+      # Step 3: Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Step 4: App Info Extraction
+      - name: Extract App Info
+        run: |
+          echo "app_version=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+          echo "build_time=$(TZ='Europe/Paris' date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV  # ISO-8601 format
+          # export app_name=$(node -p "require('./package.json').name")
+          # export app_version=$(node -p "require('./package.json').version")
+          # echo "app_name=$app_name" >> $GITHUB_ENV
+          # echo "app_version=$app_version" >> $GITHUB_ENV
+      # Step 5:
+      - name: Update index.html with Version Info
+        run: |
+          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" ${{ github.workspace }}/CesiZen-Client/src/index.html
+        # cache-from and cache-to directives in the GitHub Actions workflow
+        # enable Docker Layer Caching, which speeds up Docker builds by
+        # reusing unchanged layers from previous builds
+      # Step 6: build and push Docker image to DockerHub
+      - name: Docker Image - Build and push to Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: umhra/cesizen-client:latest
+          # This tells Docker Buildx to pull cached layers from the GitHub
+          # Actions cache storage backend
+          # If cached layers exist from previous builds, they will be used
+          # to speed up the current build
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          github-token: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Step 4: Check Image Exist
+      - name: Check Image
+        run: |
+          echo "Docker Image has been successfully pushed."
