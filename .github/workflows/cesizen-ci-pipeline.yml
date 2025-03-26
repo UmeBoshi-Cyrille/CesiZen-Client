@@ -133,7 +133,7 @@ jobs:
       # Step 5:
       - name: Update index.html with Version Info
         run: |
-          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" src/index.html
+          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" ${{ github.workspace }}/src/index.html
         # cache-from and cache-to directives in the GitHub Actions workflow
         # enable Docker Layer Caching, which speeds up Docker builds by
         # reusing unchanged layers from previous builds
