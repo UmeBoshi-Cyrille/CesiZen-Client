@@ -2,7 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN if [ ! -f package-lock.json ]; then npm install; else npm ci; fi
+RUN npm install
 COPY . .
 RUN npm run build -- --configuration production
 
@@ -15,8 +15,8 @@ ENV NGINX_ROOT_PATH=/etc/nginx \
   APP_ROOT_PATH=/usr/share/nginx/html \
   NGINX_CONF_PATH=/etc/nginx/conf.d/
 # Copy nginx configuration
-COPY docker/nginx/nginx.conf $NGINX_ROOT_PATH/nginx.conf
-COPY docker/nginx/default.conf $NGINX_CONF_PATH
+COPY nginx/nginx.conf $NGINX_ROOT_PATH/
+COPY nginx/default.conf $NGINX_CONF_PATH
 # Copy build artifacts from builder
 COPY --from=builder /app/dist $APP_ROOT_PATH
 
