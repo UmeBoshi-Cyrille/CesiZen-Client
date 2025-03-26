@@ -156,7 +156,7 @@ jobs:
           file: ./docker/Dockerfile
           push: ${{ github.event_name == 'push' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ env.IMAGE_NAME }}:${{ env.VERSION || 'latest'}}
             ${{ env.IMAGE_NAME }}:${{ env.app_version }}
           # This tells Docker Buildx to pull cached layers from the GitHub
           # Actions cache storage backend
