@@ -109,6 +109,8 @@ jobs:
       # Step 1: Checkout
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       # Step 2: Download Build Artifact
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
