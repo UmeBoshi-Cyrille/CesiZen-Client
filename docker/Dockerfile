@@ -2,7 +2,9 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm config set registry https://registry.npmjs.org/ && \
+  npm ci --omit=dev --prefer-offline || \
+  (npm install --omit=dev && npm cache clean --force)
 COPY . .
 RUN npm run build -- --configuration production
 
@@ -12,8 +14,8 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 # Configure environment
 ENV NGINX_ROOT_PATH=/etc/nginx \
-    APP_ROOT_PATH=/usr/share/nginx/html \
-    NGINX_CONF_PATH=/etc/nginx/conf.d/
+  APP_ROOT_PATH=/usr/share/nginx/html \
+  NGINX_CONF_PATH=/etc/nginx/conf.d/
 # Copy nginx configuration
 COPY docker/nginx/nginx.conf $NGINX_ROOT_PATH/nginx.conf
 COPY docker/nginx/default.conf $NGINX_CONF_PATH
@@ -22,8 +24,8 @@ COPY --from=builder /app/dist $APP_ROOT_PATH
 
 # Security hardening
 RUN chown -R nginx:nginx $APP_ROOT_PATH && \
-    chmod -R 755 $APP_ROOT_PATH && \
-    find $APP_ROOT_PATH -type f -exec chmod 644 {} \;
+  chmod -R 755 $APP_ROOT_PATH && \
+  find $APP_ROOT_PATH -type f -exec chmod 644 {} \;
 
 USER nginx:nginx
 
