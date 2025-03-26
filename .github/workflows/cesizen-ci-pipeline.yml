@@ -83,8 +83,6 @@ jobs:
       # Step 3: Build Project
       - name: Build
         run: npm run build -- --configuration production
-      - run: ls -R # Lists all files recursively
-
       # Step 4: Get and load Artifacts to preserfve build for Docker Step
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -133,7 +131,7 @@ jobs:
       # Step 5:
       - name: Update index.html with Version Info
         run: |
-          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" ${{ github.workspace }}/src/index.html
+          sed -i "s@<head>@<head>\n<!-- App Version: ${{ env.app_version }} | Build Time: ${{ env.build_time }} -->@" ./src/index.html
         # cache-from and cache-to directives in the GitHub Actions workflow
         # enable Docker Layer Caching, which speeds up Docker builds by
         # reusing unchanged layers from previous builds
