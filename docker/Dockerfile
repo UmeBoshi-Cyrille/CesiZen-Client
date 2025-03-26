@@ -2,9 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm config set registry https://registry.npmjs.org/ && \
-  npm ci --omit=dev --prefer-offline || \
-  npm install --omit=dev && npm cache clean --force
+RUN npm install
 COPY . ./
 RUN npm run build -- --configuration production
 
