@@ -3,9 +3,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm config set registry https://registry.npmjs.org/ && \
+  npm cache clean --force && \
   npm ci --omit=dev --prefer-offline || \
-  (npm install --omit=dev && npm cache clean --force)
-COPY . .
+  npm install --omit=dev && npm cache clean --force
+COPY . ./
 RUN npm run build -- --configuration production
 
 # Stage 2: Optimized production image
