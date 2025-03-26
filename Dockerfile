@@ -1,29 +1,29 @@
 # Stage 1: Build the application
 FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --omit=dev
-COPY . .
+WORKDIR /app/CesiZen-Client
+COPY CesiZen-Client/package*.json ./
+RUN npm install
+COPY CesiZen-Client ./
 RUN npm run build -- --configuration production
 
 # Stage 2: Optimized production image
 FROM nginx:alpine
 # Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 # Configure environment
 ENV NGINX_ROOT_PATH=/etc/nginx \
-    APP_ROOT_PATH=/usr/share/nginx/html \
-    NGINX_CONF_PATH=/etc/nginx/conf.d/
+  APP_ROOT_PATH=/usr/share/nginx/html \
+  NGINX_CONF_PATH=/etc/nginx/conf.d
 # Copy nginx configuration
-COPY docker/nginx/nginx.conf $NGINX_ROOT_PATH/nginx.conf
-COPY docker/nginx/default.conf $NGINX_CONF_PATH
+COPY nginx/nginx.conf $NGINX_ROOT_PATH/
+COPY nginx/default.conf $NGINX_CONF_PATH/
 # Copy build artifacts from builder
-COPY --from=builder /app/dist $APP_ROOT_PATH
+COPY --from=builder /app/CesiZen-Client/dist $APP_ROOT_PATH
 
 # Security hardening
 RUN chown -R nginx:nginx $APP_ROOT_PATH && \
-    chmod -R 755 $APP_ROOT_PATH && \
-    find $APP_ROOT_PATH -type f -exec chmod 644 {} \;
+  chmod -R 755 $APP_ROOT_PATH && \
+  find $APP_ROOT_PATH -type f -exec chmod 644 {} \;
 
 USER nginx:nginx
 

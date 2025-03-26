@@ -28,3 +28,15 @@ README.md
 !.git/config
 !.git/packed-refs
 !.git/refs/heads/**
+
+# Explicitly allow these critical files
+!package.json
+!package-lock.json
+!angular.json
+!tsconfig.json
+!src/
+!docker/
+
+# Optional: Add other files your build needs
+!*.md
+!LICENSE
