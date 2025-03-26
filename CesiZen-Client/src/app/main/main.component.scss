@@ -71,11 +71,19 @@ article{
 .home-button:hover {
   background-color: #444;
 }
+.home-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
 .home-content {
   border: solid 1px;
-  padding: 80px;
-  margin-left: 10%;
-  margin-right: 10%;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  padding-left: 120px;
+  padding-right: 120px;
+  margin-left: 7%;
+  margin-right: 7%;
   margin-top: 2rem;
   margin-bottom: 2rem;
   text-align: start;
