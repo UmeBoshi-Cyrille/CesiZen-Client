@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN ls -al
 RUN npm install
-COPY . ./
+COPY . .
 RUN npm run build -- --configuration production
 
 # Stage 2: Optimized production image
