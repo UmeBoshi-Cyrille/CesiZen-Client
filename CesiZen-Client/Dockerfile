@@ -15,10 +15,10 @@ ENV NGINX_ROOT_PATH=/etc/nginx \
   APP_ROOT_PATH=/usr/share/nginx/html \
   NGINX_CONF_PATH=/etc/nginx/conf.d
 # Copy nginx configuration
-COPY --chown=nginx:nginx nginx/nginx.conf $NGINX_ROOT_PATH/
-COPY --chown=nginx:nginx nginx/default.conf $NGINX_CONF_PATH/
+COPY --chown=nginx:nginx nginx/nginx.conf $NGINX_ROOT_PATH
+COPY --chown=nginx:nginx nginx/default.conf $NGINX_CONF_PATH
 # Copy build artifacts from builder
-COPY --from=builder --chown=nginx:nginx /app/dist $APP_ROOT_PATH/
+COPY --from=builder --chown=nginx:nginx /app/dist $APP_ROOT_PATH
 
 # Security hardening
 RUN chown -R nginx:nginx $APP_ROOT_PATH && \
