@@ -50,21 +50,22 @@ article{
     margin: 1.5rem;
     text-align: center;
 }
+.container {
+  margin-bottom: 3rem;
+}
 .home-intro {
-  border: solid 1px;
-  padding: 30px;
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  line-height: 1.5;
 }
 .home-button {
-  margin-bottom: 2rem; 
-  font-size: 15px;
+  font-size: 1rem;
   cursor: pointer;
   background-color: #111;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 30px;
   border: none;
   border-radius: 3px;
 }
@@ -91,4 +92,7 @@ article{
 .home-content-list {
   list-style: inside;
   list-style-position: outside;
+}
+li {
+  margin-bottom: 0.5rem;
 }
