@@ -1,23 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { CarousselComponent } from './caroussel.component';
 
 describe('CarousselComponent', () => {
-  let component: CarousselComponent;
-  let fixture: ComponentFixture<CarousselComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CarousselComponent]
+      imports: [CarousselComponent],
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(CarousselComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      .compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(CarousselComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
+
