@@ -12,7 +12,12 @@
   top: 0;
   z-index: 1;
 }
-
+.logo {
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  border-radius: 3px;
+}
 .home-container {
   width: 100%;
   height: 820px;
@@ -54,6 +59,7 @@ article{
   margin-bottom: 3rem;
 }
 .home-intro {
+  font-family: Bitter;
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 2rem;
@@ -73,8 +79,9 @@ article{
   background-color: #444;
 }
 .home-title {
+  font-family: Bitter;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 1.5rem;
 }
 .home-content {
