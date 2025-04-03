@@ -11,3 +11,12 @@ header{
     left: 0;
 }
 
+main {
+  height: 100%;
+  width: 76%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: 12%;
+  margin-right: 12%;
+}
