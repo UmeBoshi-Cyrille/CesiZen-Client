@@ -6,10 +6,10 @@ export class Article {
     public description: string,
     public author: string,
     public content: string,
-    public createdAt: Date,
-    public updatedAt: Date,
+    public createdAt: Date = new Date(),
+    public updatedAt: Date = new Date(),
     public imagePath: string,
-    public categories: number,
+    public categories: number = 0,
   ) {
   }
 }
