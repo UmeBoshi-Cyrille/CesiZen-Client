@@ -7,9 +7,12 @@ describe('Article', () => {
       'Sample Title',
       'This is the content of the article.', 
       'John Doe',
-      'This is the content of the article.'
+      'This is the content of the article.',
+      new Date('2023-10-01'),
+      new Date('2023-10-01'),
+      'path/to/image.jpg',
+      0
     );
     expect(article).toBeTruthy();
   });
 });
-//describe('Article', () => { it('should create an instance', () => { expect(new Article()).toBeTruthy(); }); });
