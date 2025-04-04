@@ -1,0 +1,31 @@
+.singlearticle-div {
+  width: 80%;
+  min-height: 80vh;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 7px 5px 7px #aaaaaa;
+  padding: 1rem 4rem;
+}
+h1 {
+  //h1 est pareille que celui de h1 title sauf with et margin
+  width: 500px;
+  color: #2a2a2a;
+  font-family: Bitter;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 20px;
+  margin: 1rem auto;
+  text-shadow: 1px 1px 1px #e0e0e0;
+}
+.content {
+  text-align: justify;
+}
+.signature {
+  justify-content: end;
+  text-align: end;
+}

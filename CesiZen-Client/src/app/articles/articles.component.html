@@ -8,18 +8,20 @@
          class="cards-articles"
          (mouseover)="activeIndex = i"
          (mouseleave)="activeIndex = null">
-      <a href="#">
+      <a (click)="onViewSingleArticle(article.id)">
         <img class="img-article" src="https://picsum.photos/200" alt="img-article" />
         <div class="article-div">
-          <div *ngIf="activeIndex === i" class="article-description">
+          <div *ngIf="activeIndex === i; else elseBlock" class="article-description">
             {{ article.description }}
           </div>
-          <div *ngIf="activeIndex !== i">
-            « {{ article.title }} »
-            <span class="article-author">
-              ~ {{ article.author }}
-            </span>
-          </div>
+          <ng-template #elseBlock>
+            <div>
+              « {{ article.title }} »
+              <span class="article-author">
+                ~ {{ article.author }}
+              </span>
+            </div>
+          </ng-template>
         </div>
       </a>
     </div>
