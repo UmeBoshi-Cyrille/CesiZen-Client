@@ -58,6 +58,13 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
+  .active {
+    transform: translateX(20px);
+    color: #FFFCF0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
   .nav-li {
     margin-top: 0.3rem;
   }

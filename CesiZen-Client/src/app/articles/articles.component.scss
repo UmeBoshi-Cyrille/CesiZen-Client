@@ -1,0 +1,75 @@
+h1 {
+  width: 300px;
+  color: #2a2a2a;
+  font-family: Bitter;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 20px;
+  margin: 2rem auto;
+  text-shadow: 1px 1px 1px #e0e0e0;
+}
+.latest-articles {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #ffeaa8;
+  height: 50vh;
+  grid-auto-flow: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  a {
+    text-decoration: none;
+  }
+}
+.articles-title {
+  font-family: Bitter;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-shadow: 1px 1px 1px #e0e0e0;
+  background-color: white;
+  width: 250px;
+  border-radius: 3px;
+  padding: 1.2rem;
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.cards-articles {
+  margin: auto;
+  border-radius: 3px;
+  position: relative;
+  overflow-wrap: break-word;
+}
+.img-article {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+.article-div {
+  font-family: Bitter;
+  font-style: italic;
+  position: absolute;
+  top: 0;
+  background: rgba(24, 24, 24);
+  opacity: 0.7;
+  color: white;
+  text-align: center;
+  border-radius: 3px;
+  padding: 1rem;
+  margin: auto;
+  width: 200px;
+}
+.article-author {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.article-div:hover {
+  height: 100%;
+}

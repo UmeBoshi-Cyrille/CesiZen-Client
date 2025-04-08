@@ -1,10 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { ArticlesComponent } from './articles.component';
+import { provideHttpClient } from '@angular/common/http';
+import { ArticleQueryService } from '../../services/article-query.service';
 
 describe('ArticlesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ArticlesComponent],
+      providers: [
+        provideHttpClient(), // Provide HttpClient
+        ArticleQueryService, // Provide any services used by the component
+      ],
     })
       .compileComponents();
   });

@@ -5,7 +5,9 @@
     <div class="nav-div">
       <ul class="nav-ul">
         <li class="nav-li">
-          <a class="nav-link" routerLink="/">
+          <a class="nav-link" routerLink="/"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
             <span class="material-symbols-outlined">
               home
             </span>
@@ -13,7 +15,7 @@
           </a>
         </li>
         <li class="nav-li">
-          <a class="nav-link" routerLink="/articles">
+          <a class="nav-link" routerLink="/articles" routerLinkActive="active">
             <span class="material-symbols-outlined">
               library_books
             </span>
@@ -21,7 +23,7 @@
           </a>
         </li>
         <li class="nav-li">
-          <a class="nav-link" routerLink="/exercises">
+          <a class="nav-link" routerLink="/exercises" routerLinkActive="active">
             <span class="material-symbols-outlined">
               cardiology
             </span>
@@ -29,12 +31,12 @@
           </a>
         </li>
         <li class="nav-li">
-          <a class="nav-link" routerLink="/diagnostics">
-            <span class="material-symbols-outlined">
-              prescriptions
-            </span>
-            Diagnostic
-          </a>
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+                <span class="material-symbols-outlined">
+                    prescriptions
+                </span>
+                Contactez-nous
+            </a>
         </li>
       </ul>
     </div>
