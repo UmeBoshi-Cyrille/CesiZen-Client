@@ -1,1 +1,93 @@
-<p>exercises works!</p>
+<article>
+    <div class="content-div">
+        <h1>Exercices d'aspiration</h1>
+        <div>
+            <h2>Explication et Fonctionnement : </h2>
+            <p>
+                Les exercices d'aspiration sont conçus pour améliorer votre respiration, réduire le stress et favoriser une meilleure concentration.<br />
+                Ces exercices se basent sur des rythmes respiratoires précis et peuvent être adaptés à vos besoins.<br />
+                Voici comment ils fonctionnent :
+            </p>
+
+            <h3>Les Différents Rythmes Respiratoires</h3>
+            <p>
+                Trois types de rythmes sont proposés,
+                chacun ayant des effets spécifiques sur le corps et l'esprit.<br />
+                Vous pouvez choisir celui qui vous convient le mieux ou alterner entre eux selon vos préférences :
+            </p>
+            <div class="grid grid-cols-3 rythme-div">
+                <img src="assets/exercise-aspirer.jpg" alt="Rythmes respiratoires" class="h-88 w-136 object-contain" />
+                <ol class="alphabet-ol col-span-2">
+                    <li>
+                        Rythme 7-4-8 :
+                        <ul>
+                            <li>Inspiration : 7 secondes</li>
+                            <li>Rétention (apnée) : 4 secondes</li>
+                            <li>Expiration : 8 secondes</li>
+                        </ul>
+                        <p>Ce rythme est idéal pour induire un état de relaxation profonde et calmer l'esprit.</p>
+                    </li>
+                    <li>
+                        Rythme 5-5 :
+                        <ul>
+                            <li>Inspiration : 5 secondes</li>
+                            <li>Expiration : 5 secondes</li>
+                        </ul>
+                        <p>Ce rythme équilibré favorise une respiration fluide et régulière, idéale pour maintenir un état de calme et de concentration.</p>
+                    </li>
+                    <li>
+                        Rythme 4-6 :
+                        <ul>
+                            <li>Inspiration : 4 secondes</li>
+                            <li>Expiration : 6 secondes</li>
+                        </ul>
+                        <p>Ce rythme met l'accent sur une expiration plus longue, ce qui aide à relâcher les tensions et à apaiser le système nerveux.</p>
+                    </li>
+                </ol>
+            </div>
+            <h2>Personnalisation des Durées</h2>
+            <p>
+                En plus des rythmes prédéfinis, vous avez la possibilité de créer vos propres durées personnalisées.<br />
+                Cela vous permet d’adapter l’exercice à votre niveau de confort ou à vos objectifs spécifiques (par exemple, relaxation, énergie ou méditation).
+            </p>
+            <h2>Fonctionnement avec le Chronomètre</h2>
+            <p>
+                Lorsque vous commencez un exercice, un chronomètre s’affiche pour guider votre respiration en temps réel.<br />
+                Il indique clairement les phases d’inspiration, de rétention (si applicable) et d’expiration en fonction du rythme choisi.<br />
+                Voici comment cela se déroule :
+            </p>
+            <div class="grid grid-cols-3 chrono-div">
+                <ol class="number-ol col-span-2">
+                    <li>Début de l'exercice : Le chronomètre démarre avec une indication visuelle ou sonore pour signaler le début de l’inspiration.</li>
+                    <li>Transition entre les phases : Chaque phase (inspiration, rétention, expiration) est clairement indiquée pour que vous puissiez suivre le rythme sans effort.</li>
+                    <li>Cycle continu : Le chronomètre répète les cycles jusqu’à la fin de la durée totale de l’exercice.</li>
+                </ol>
+                <img src="assets/chronometre-img.jpg" alt="race chronomettre" class="h-48 w-96 object-cover" />
+            </div>
+            <h2>Conseils pour Pratiquer</h2>
+            <ul>
+                <li>Installez-vous dans un endroit calme où vous ne serez pas dérangé.</li>
+                <li>Adoptez une posture confortable, assis(e) ou allongé(e), avec le dos droit.</li>
+                <li>Suivez les indications du chronomètre en respirant lentement et profondément.</li>
+                <li>Pratiquez régulièrement pour maximiser les bienfaits.</li>
+            </ul>
+            <h4>
+                Ces exercices sont simples à réaliser mais très puissants pour améliorer votre bien-être au quotidien.<br />
+                Alors, respirez profondément et laissez-vous guider !
+            </h4>
+        </div>
+        <div class="btn">
+            <button routerLink="/exercise-form">Créer votre exercice</button>
+        </div>
+    </div>
+    <!-- <div *ngIf="exercise | async as exercise; else notFound" class="box-div"> -->
+    <!--     <ng-template #notFound> -->
+    <!--         <p class="text-center">No list.</p> -->
+    <!--     </ng-template> -->
+    <!-- </div> -->
+    <div *ngFor="let exercise of exercises">
+        <div class="exercise-div">
+            <h2>{{ exercise.title }}</h2>
+        </div>
+     </div>
+</article>
