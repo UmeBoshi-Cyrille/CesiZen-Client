@@ -7,7 +7,7 @@ describe('Exercise', () => {
       'Sample Title',
       5,
       new Date('2023-10-01'),
-      0
+      57
     );
     expect(exercise).toBeTruthy();
   });

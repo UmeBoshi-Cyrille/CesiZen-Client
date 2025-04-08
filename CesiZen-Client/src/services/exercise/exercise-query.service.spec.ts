@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { ExerciseQueryServicesService } from './exercise-query-services.service';
+import { ExerciseQueryService } from './exercise-query.service';
 
-describe('ExerciseQueryServicesService', () => {
-  let service: ExerciseQueryServicesService;
+
+describe('ExerciseQueryService', () => {
+  let service: ExerciseQueryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -11,7 +12,7 @@ describe('ExerciseQueryServicesService', () => {
         provideHttpClient(), // Provide HttpClient
       ]
     });
-    service = TestBed.inject(ExerciseQueryServicesService);
+    service = TestBed.inject(ExerciseQueryService);
   });
 
   it('should be created', () => {
