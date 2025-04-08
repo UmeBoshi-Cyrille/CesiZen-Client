@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgFor, NgIf, NgStyle } from '@angular/common';
+import { CommonModule, NgFor, NgIf} from '@angular/common';
 import { ArticleQueryService } from '../../services/article-query.service';
 import { Article } from '../../models/article';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [CommonModule, NgFor, NgStyle, NgIf],
+  imports: [CommonModule, NgFor, NgIf],
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss'
 })

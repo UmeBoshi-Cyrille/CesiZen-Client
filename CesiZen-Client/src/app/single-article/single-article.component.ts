@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 import { Article } from '../../models/article';
 import { ArticleQueryService } from '../../services/article-query.service';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-single-article',
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
+  standalone: true,
   templateUrl: './single-article.component.html',
   styleUrl: './single-article.component.scss'
 })
