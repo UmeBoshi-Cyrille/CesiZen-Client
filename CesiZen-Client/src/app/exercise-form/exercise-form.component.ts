@@ -27,14 +27,14 @@ export class ExerciseFormComponent implements OnInit{
   onSubmit() {
     console.log(this.exerciseForm.value);
     if (this.exerciseForm.valid) {
-      this.exerciseQueryService.createExercise(this.exerciseForm.value).subscribe(
-        (response) => {
+      this.exerciseQueryService.createExercise(this.exerciseForm.value).subscribe({
+        next: (response) => {
           console.log('Exercise created successfully:', response);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error creating exercise:', error);
         }
-      );
+      });
     }
     console.log('ExerciseFormComponent initialized.');
   }

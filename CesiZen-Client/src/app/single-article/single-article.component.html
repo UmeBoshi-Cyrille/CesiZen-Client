@@ -1,6 +1,6 @@
 <article>
-    <div *ngIf="article$ | async as article; else notFound" class="box-div">
-        <h1>{{ article.title }}</h1>
+    <div *ngIf="article$ | async as article; else notFound" class="box-div-article">
+        <h1 class="h1-form-title">{{ article.title }}</h1>
         <div class="signature">
             <p>{{ article.createdAt | date : "dd MMMM yy, à HH:mm" }}</p>
             <span>Author: {{ article.author }}</span>
