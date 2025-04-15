@@ -42,9 +42,15 @@
     </div>
 
     <div class="nav-div-buttons">
-      <button class="nav-button" routerLink="/inscription">Inscription</button>
-      <button class="nav-button" routerLink="/se-connecter">Se connecter</button>
-      <img class="logo" src="/assets/logo_cesizen.jpg" alt="Logo" />
+        <div class="text-center" *ngIf="isLoggedIn">
+            <p>Bienvenue, {{ username }} !</p>
+            <button class="nav-button" (click)="logout()">Déconnexion</button>
+        </div>
+        <div class="text-center" *ngIf="!isLoggedIn">
+            <button class="nav-button" routerLink="/inscription" routerLinkActive="activeBtn">Inscription</button>
+            <button class="nav-button" routerLink="/se-connecter" routerLinkActive="activeBtn">Se connecter</button>
+        </div>
+        <img class="logo" src="/assets/logo_cesizen.jpg" alt="Logo" />
     </div>
   </nav>
 </header>
