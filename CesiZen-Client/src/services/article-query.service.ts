@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
@@ -17,7 +16,7 @@ export class ArticleQueryService {
       map((response) => response.value.data));
   }
 
-  getLimitArticles(limit: number = 4): Observable<Article[]> {
+  getLimitArticles(limit = 4): Observable<Article[]> {
     return this.http.get<ArticlesResponse>(this.apiUrl).pipe(
       map((response) => response.value.data
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())

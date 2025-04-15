@@ -5,7 +5,7 @@ export class Exercise {
     public time: number,
     public editeAt: Date = new Date(),
     public exerciseType: number,
-    public userId: number = 0,
+    public userId = 0,
   ) {
 
   }

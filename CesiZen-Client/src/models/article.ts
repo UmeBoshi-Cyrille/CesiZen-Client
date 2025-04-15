@@ -9,7 +9,7 @@ export class Article {
     public createdAt: Date = new Date(),
     public updatedAt: Date = new Date(),
     public imagePath: string,
-    public categories: number = 0,
+    public categories = 0,
   ) {
   }
 }

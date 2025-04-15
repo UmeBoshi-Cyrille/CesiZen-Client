@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ConnexionQueryService } from '../../services/connexion/connexion-query.service';
 
@@ -9,7 +9,7 @@ import { ConnexionQueryService } from '../../services/connexion/connexion-query.
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.scss'
 })
-export class ConnexionComponent implements OnInit{
+export class ConnexionComponent {
   passwordVisible = false;
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
@@ -23,8 +23,6 @@ export class ConnexionComponent implements OnInit{
   constructor(
     private connexionQueryService: ConnexionQueryService,
   ) { }
-
-  ngOnInit() { }
 
   onSubmit() {
     console.log(this.connexionForm.value);

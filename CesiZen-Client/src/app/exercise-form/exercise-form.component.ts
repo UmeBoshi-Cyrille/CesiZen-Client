@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
 
@@ -9,7 +9,7 @@ import { ExerciseQueryService } from '../../services/exercise/exercise-query.ser
   templateUrl: './exercise-form.component.html',
   styleUrl: './exercise-form.component.scss'
 })
-export class ExerciseFormComponent implements OnInit{
+export class ExerciseFormComponent {
   exerciseForm = new FormGroup({
     title: new FormControl(''),
     type: new FormControl(0),
@@ -20,9 +20,6 @@ export class ExerciseFormComponent implements OnInit{
   constructor(
     private exerciseQueryService: ExerciseQueryService,
   ) { }
-
-  ngOnInit() {
-  }
 
   onSubmit() {
     console.log(this.exerciseForm.value);

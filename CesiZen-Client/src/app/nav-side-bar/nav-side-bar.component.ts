@@ -12,14 +12,14 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 })
 export class NavSideBarComponent {
   username: string | null = null;
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
   constructor(
     private route: RouterModule
   ) {
     this.username = localStorage.getItem('username');
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 }
-  status: boolean = false;
+  status = false;
   clickEvent() {
     this.status = !this.status;
   }

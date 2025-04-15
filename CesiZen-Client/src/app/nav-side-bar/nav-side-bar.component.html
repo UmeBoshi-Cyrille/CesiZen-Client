@@ -1,7 +1,7 @@
 <header>
   <button class="openbtn" [ngStyle]="{ display: status ? 'none' : 'block' }" (click)="clickEvent()">☰ Menu</button>
   <nav class="nav" [ngStyle]="{ display: status ? 'block' : 'none' }">
-    <a class="closebtn" (click)="clickEvent()">×</a>
+      <a class="closebtn" (click)="clickEvent()" (keydown.enter)="clickEvent()" tabindex="0" role="button">×</a>
     <div class="nav-div">
       <ul class="nav-ul">
         <li class="nav-li">
@@ -44,7 +44,7 @@
     <div class="nav-div-buttons">
         <div class="text-center" *ngIf="isLoggedIn">
             <p>Bienvenue, {{ username }} !</p>
-            <button class="nav-button" (click)="logout()">Déconnexion</button>
+            <button class="nav-button" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
         </div>
         <div class="text-center" *ngIf="!isLoggedIn">
             <button class="nav-button" routerLink="/inscription" routerLinkActive="activeBtn">Inscription</button>
