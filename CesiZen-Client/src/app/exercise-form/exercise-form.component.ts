@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
 
@@ -9,7 +9,7 @@ import { ExerciseQueryService } from '../../services/exercise/exercise-query.ser
   templateUrl: './exercise-form.component.html',
   styleUrl: './exercise-form.component.scss'
 })
-export class ExerciseFormComponent implements OnInit{
+export class ExerciseFormComponent {
   exerciseForm = new FormGroup({
     title: new FormControl(''),
     type: new FormControl(0),
@@ -21,20 +21,17 @@ export class ExerciseFormComponent implements OnInit{
     private exerciseQueryService: ExerciseQueryService,
   ) { }
 
-  ngOnInit() {
-  }
-
   onSubmit() {
     console.log(this.exerciseForm.value);
     if (this.exerciseForm.valid) {
-      this.exerciseQueryService.createExercise(this.exerciseForm.value).subscribe(
-        (response) => {
+      this.exerciseQueryService.createExercise(this.exerciseForm.value).subscribe({
+        next: (response) => {
           console.log('Exercise created successfully:', response);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error creating exercise:', error);
         }
-      );
+      });
     }
     console.log('ExerciseFormComponent initialized.');
   }

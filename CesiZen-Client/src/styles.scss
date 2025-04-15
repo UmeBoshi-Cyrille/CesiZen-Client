@@ -2,34 +2,140 @@
 @use "reset";
 @use "tailwindcss";
 
-  * {
-    font-family: "Asap", Arial, Helvetica, sans-serif;
-  }
+//COLORS
+$primary-color: #FBD14B;//yellow-nav
+$secondary-color: #FFFCF0;//yellow-article
+$black-color: rgba(24, 24, 24);//footer, btn, etc..
+$black-shadow-color: rgba(24, 24, 24, 0.66);//title-shadow...
+$font-color: #2A2A2A; //text
+$btn-hover-color: #444; //btn hover
 
-  header {
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-  }
-  main {
-    height: 100%;
-    width: 76%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-left: 12%;
-    margin-right: 12%;
-  }
+//FONTS
+$font-primary: "Asap", Arial, Helvetica, sans-serif;
+$font-seconde: "Bitter", Arial, Helvetica, sans-serif;
 
-  article {
-    min-height: 100vh;
-    width: 76%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-left: 12%;
-    margin-right: 12%;
-    background-color: #FFFCF0;
-  }
+* {
+  font-family: $font-primary;
+}
+.font-seconde {
+  font-family: $font-seconde; //title, h1, etc..
+}
 
+//HEADER
+header {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+//flex-box center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+//MAIN
+@mixin main-center($size: 12%, $article: 0) {
+  height: 100%;
+  width: 76%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: $size;
+  margin-right: $size;
+
+  @if $article != 0 {
+    min-height: $article;
+  }
+}
+main {
+  @include main-center;
+}
+.main-content {
+  @include main-center;
+  background-color: $secondary-color;
+  position: relative;
+  top: 0;
+}
+
+//ARTICLE
+article {
+  @include main-center(12%, 100vh);
+  background-color: $secondary-color;
+}
+
+//H1 TITLE
+@mixin title-h1($margin) {
+  width: 300px;
+  color: #2a2a2a;
+  font-family: $font-seconde;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 20px;
+  margin: $margin;
+  text-shadow: 1px 1px 1px #e0e0e0;
+}
+
+.h1-primary {
+  @include title-h1(2rem auto);
+}
+.h1-articles-title {
+  @include title-h1(1rem auto);
+  width: 250px;
+  background-color: white;
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  border: none;
+  font-size: 1.2rem;
+}
+.h1-form-title {
+  @include title-h1(1.2rem auto);
+  font-size: 1.2rem;
+}
+
+//WHITE-BOX
+@mixin box-div {
+  width: 50%;
+  min-height: 50vh;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.66);
+  padding: 1rem 4rem;
+  margin: 3rem auto;
+}
+.box-div-article {
+  @include box-div;
+  width: 80%;
+  min-height: 80vh;
+}
+.box-div-connexion {
+  @include box-div;
+}
+.box-div {
+  @include box-div;
+  @include flex-center;
+}
+
+//BUTTON
+@mixin black-button {
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: $black-color;
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 3px;
+  margin-top: 2rem;
+}
+
+.B-btn {
+  @include black-button;
+}
+.B-btn:hover {
+  background-color: $btn-hover-color;
+}

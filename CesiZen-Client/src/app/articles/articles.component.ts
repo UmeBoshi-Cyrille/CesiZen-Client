@@ -24,6 +24,11 @@ export class ArticlesComponent implements OnInit {
       articles => this.articles = articles
     );
   }
+
+  onFocus() {
+    console.log('Focus event triggered!'); // Log to console
+  }
+
   trackById(index: number, article: Article): number {
     return article.id;
   }

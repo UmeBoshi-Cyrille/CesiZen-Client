@@ -5,7 +5,7 @@ import { SingleArticleComponent } from './single-article/single-article.componen
 import { ExercisesComponent } from './exercises/exercises.component';
 
 import { InscriptionComponent } from './inscription/inscription.component';
-import { SeConnecterComponent } from './se-connecter/se-connecter.component';
+import { ConnexionComponent } from './connexion/connexion.component';
 import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
 
 export const routes: Routes = [
@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'exercise-form', component: ExerciseFormComponent },
  
   { path: 'inscription', component: InscriptionComponent },
-  { path: 'se-connecter', component: SeConnecterComponent },
+  { path: 'se-connecter', component: ConnexionComponent },
 ];
 
 

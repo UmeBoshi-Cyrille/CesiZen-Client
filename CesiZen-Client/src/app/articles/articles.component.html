@@ -1,33 +1,37 @@
 <main>
-  <h1 class="title">Articles inspirants</h1>
+    <h1 class="h1-primary">Articles inspirants</h1>
   <p class="text-center">Une vie équilibrée Plongez dans nos articles pour des conseils et des astuces sur la santé mentale, la gestion du stress, l'anxiété, et bien plus encore.</p>
 
   <div class="latest-articles">
-    <p class="articles-title">Les dernières articles</p>
+    <p class="h1-articles-title">Les dernières articles</p>
     <div *ngFor="let article of articles; let i = index; trackBy: trackById"
          class="cards-articles"
          (mouseover)="activeIndex = i"
+         (focus)="onFocus()"
          (mouseleave)="activeIndex = null">
-      <a (click)="onViewSingleArticle(article.id)">
-        <img class="img-article" src="https://picsum.photos/200" alt="img-article" />
-        <div class="article-div">
-          <div *ngIf="activeIndex === i; else elseBlock" class="article-description">
-            {{ article.description }}
-          </div>
-          <ng-template #elseBlock>
-            <div>
-              « {{ article.title }} »
-              <span class="article-author">
-                ~ {{ article.author }}
-              </span>
+        <a (click)="onViewSingleArticle(article.id)"
+           (keydown.enter)="onViewSingleArticle(article.id)"
+           tabindex="0"
+           role="button">
+            <img class="img-article" src="https://picsum.photos/200" alt="img-article" />
+            <div class="article-div font-seconde">
+                <div *ngIf="activeIndex === i; else elseBlock" class="article-description">
+                    {{ article.description }}
+                </div>
+                <ng-template #elseBlock>
+                    <div>
+                        « {{ article.title }} »
+                        <span class="article-author">
+                            ~ {{ article.author }}
+                        </span>
+                    </div>
+                </ng-template>
             </div>
-          </ng-template>
-        </div>
-      </a>
+        </a>
     </div>
   </div>
 
-  <h1 class="title">Catégories</h1>
+  <h1 class="h1-primary">Catégories</h1>
   <!--<div *ngFor="let category of categories;">
     <a href="#">
       <img class="img-category" src="https://picsum.photos/200" alt="img-category" />
