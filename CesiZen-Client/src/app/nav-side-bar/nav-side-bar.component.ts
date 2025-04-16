@@ -1,6 +1,7 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { UserDataStorage } from '../../models/user/user-data-storage';
 
 
 @Component({
@@ -11,13 +12,17 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
   styleUrl: './nav-side-bar.component.scss'
 })
 export class NavSideBarComponent {
-  username: string | null = null;
+  userData: UserDataStorage | null = null;
   isLoggedIn = false;
   constructor(
     private route: RouterModule
   ) {
-    this.username = localStorage.getItem('username');
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const storedAccount = localStorage.getItem('userData');
+
+    if (storedAccount) {
+      this.userData = JSON.parse(storedAccount);
+      this.isLoggedIn = !!this.userData?.isActive;
+    }
 }
   status = false;
   clickEvent() {
@@ -31,8 +36,7 @@ export class NavSideBarComponent {
     }
   }
   logout() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userData');
     window.location.href = '/se-connecter';
   }
 }

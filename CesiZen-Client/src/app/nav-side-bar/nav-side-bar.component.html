@@ -43,7 +43,7 @@
 
     <div class="nav-div-buttons">
         <div class="text-center" *ngIf="isLoggedIn">
-            <p>Bienvenue, {{ username }} !</p>
+            <p>Bienvenue, {{ userData?.username }} !</p>
             <button class="nav-button" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
         </div>
         <div class="text-center" *ngIf="!isLoggedIn">

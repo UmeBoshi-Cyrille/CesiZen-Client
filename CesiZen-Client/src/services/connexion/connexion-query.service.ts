@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { UserDataStorage } from '../../models/user/user-data-storage';
+import { LoginData } from '../../models/connexion/login-data';
+import { UserData } from '../../models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,18 @@ export class ConnexionQueryService {
   private apiUrl = 'https://localhost:5001/api/authentication/authenticate';
 
   constructor(private http: HttpClient) { }
-  connecteUser(connexionData: unknown): Observable<unknown> {
-    return this.http.post(this.apiUrl, connexionData);
+  connecteUser(connexionData: LoginData): Observable<UserDataStorage> {
+    const result = this.http.post<UserData>(this.apiUrl, connexionData).pipe(
+      map(data => new UserDataStorage(
+        data.id,
+        data.username,
+        data.createdAt,
+        data.isActive,
+        data.role
+      )));
+    ////console.log('API Result:', result);
+    //const response = this.http.post(this.apiUrl, connexionData);
+    //console.log('API Response:', response);
+    return result;
   }
 }
