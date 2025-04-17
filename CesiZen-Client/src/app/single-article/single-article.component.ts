@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Article } from '../../models/article';
-import { ArticleQueryService } from '../../services/article-query.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
+import { Article } from '../../models/article/article';
+import { ArticleQueryService } from '../../services/article/article-query.service';
 
 @Component({
   selector: 'app-single-article',

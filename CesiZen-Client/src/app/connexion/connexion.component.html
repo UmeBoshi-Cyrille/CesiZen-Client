@@ -1,31 +1,31 @@
 <article>
     <div class="box-div-connexion">
-    <h1 class="h1-form-title mb">Connexion</h1>
-    <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="text-center">
-        <div class="grid grid-cols-4 items-center mb">
-            <label for="email" class="text-center font-medium col-span-1">Votre Email</label>
-            <input type="email" id="email" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="example@gmail.com" required formControlName="identifier" />
-        </div>
-        <div class="grid grid-cols-4 items-center mb">
-            <label for="password" class="text-sm font-medium col-span-1">Mot de passe</label>
-            <div class="col-span-3 relative">
-                <input [type]="passwordVisible ? 'text' : 'password'" id="password"
-                       class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                       placeholder="Password1234***..." required formControlName="password" />
-                <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
-                        (click)="togglePassword()">
-                    {{ passwordVisible ? '🙈' : '👁️' }}
-                </button>
+        <h1 class="h1-form-title mb">Se connecter</h1>
+        <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="text-center">
+            <div class="grid grid-cols-4 items-center mb">
+                <label for="email" class="text-center font-medium col-span-1">Votre Email</label>
+                <input type="email" id="email" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="example@gmail.com" required formControlName="identifier" />
             </div>
-        </div>
-        <div class="mb">
-            <a class="text-center font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                Oublier le mot de passe ?
-            </a>
-        </div>
-        <div>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connecter</button>
-        </div>
-    </form>
+            <div class="grid grid-cols-4 items-center mb">
+                <label for="password" class="text-sm font-medium col-span-1">Mot de passe</label>
+                <div class="col-span-3 relative">
+                    <input [type]="passwordVisible ? 'text' : 'password'" id="password"
+                           class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                           placeholder="Password1234***..." required formControlName="password" />
+                    <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            (click)="togglePassword()">
+                        {{ passwordVisible ? '🙈' : '👁️' }}
+                    </button>
+                </div>
+            </div>
+            <div class="mb">
+                <a class="text-center font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                    Oublier le mot de passe ?
+                </a>
+            </div>
+            <div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connecter</button>
+            </div>
+        </form>
     </div>
 </article>

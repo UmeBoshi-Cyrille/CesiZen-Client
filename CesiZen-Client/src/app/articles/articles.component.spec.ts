@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ArticlesComponent } from './articles.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ArticleQueryService } from '../../services/article-query.service';
+import { ArticleQueryService } from '../../services/article/article-query.service';
+
 
 describe('ArticlesComponent', () => {
   beforeEach(async () => {
