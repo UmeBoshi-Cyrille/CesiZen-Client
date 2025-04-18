@@ -3,16 +3,30 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NewExercise } from '@models/exercise/new-exercise';
 import { environment } from '@environments/environment';
+import { ExerciseDto } from '@models/exercise/exercise-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseCommandService {
-  private apiUrl = environment.exerciseCreateUrl;
+  private apiCreateUrl = environment.exerciseCreateUrl;
+  private apiCommandUrl = environment.exerciseCommandUrl;
   constructor(private http: HttpClient) { }
 
-  createExercise(exerciseData: NewExercise): Observable<unknown> {
-    return this.http.post(this.apiUrl, exerciseData, {
+  create(exerciseData: NewExercise): Observable<unknown> {
+    return this.http.post(this.apiCreateUrl, exerciseData, {
+      withCredentials: true,
+    });
+  }
+
+  update(id: number, exerciseData: ExerciseDto): Observable<unknown> {
+    return this.http.post(`${this.apiCommandUrl}/${id}/update`, exerciseData, {
+      withCredentials: true,
+    });
+  }
+
+  delete(id: number): Observable<unknown> {
+    return this.http.post(`${this.apiCommandUrl}/${id}/delete`, {
       withCredentials: true,
     });
   }

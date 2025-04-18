@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { UserDataStorage } from '../../models/user/user-data-storage';
-import { LoginData } from '../../models/connexion/login-data';
-import { UserData } from '../../models/user/user-data';
+import { UserDataStorage } from '@models/user/user-data-storage';
+import { LoginData } from '@models/connexion/login-data';
+import { UserData } from '@models/user/user-data';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnexionQueryService {
-  private apiUrl = 'https://localhost:5001/api/authentication/authenticate';
+  private readonly apiUrl = environment.loginUrl;
 
   constructor(private http: HttpClient) { }
   connecteUser(connexionData: LoginData): Observable<UserDataStorage> {
