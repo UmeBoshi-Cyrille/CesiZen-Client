@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ExercisesComponent } from './exercises.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
+import { ExerciseQueryService } from '../../../services/exercise/exercise-query.service';
 
 describe('ExercisesComponent', () => {
   beforeEach(async () => {
