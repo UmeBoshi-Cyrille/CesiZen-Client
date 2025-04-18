@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { ArticlesComponent } from './articles/articles.component';
-import { SingleArticleComponent } from './single-article/single-article.component';
-import { ExercisesComponent } from './exercises/exercises.component';
+import { MainComponent } from '@pages/main/main.component';
+import { ArticlesComponent } from '@pages/articles/articles.component';
+import { SingleArticleComponent } from '@pages/single-article/single-article.component';
+import { ExercisesComponent } from '@pages/exercises/exercises.component';
 
-import { InscriptionComponent } from './inscription/inscription.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
+import { InscriptionComponent } from '@pages/inscription/inscription.component';
+import { ConnexionComponent } from '@pages/connexion/connexion.component';
+import { ExerciseFormComponent } from '@pages/exercise-form/exercise-form.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
