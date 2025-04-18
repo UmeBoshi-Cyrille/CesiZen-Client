@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NextDirective } from '@directives/next.directive';
-import { PrevDirective } from '@directives/prev.directive';
+import { NextDirective } from 'app/common/directives/next.directive';
+import { PrevDirective } from 'app/common/directives/prev.directive';
 
 
 @Component({

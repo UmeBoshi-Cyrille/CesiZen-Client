@@ -3,12 +3,12 @@ import { CarousselComponent } from '@components/caroussel/caroussel.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-home',
   standalone: true,
   imports: [CarousselComponent, RouterModule],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss'
 })
-export class MainComponent {
+export class HomeComponent {
 
 }

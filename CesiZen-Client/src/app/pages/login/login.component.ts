@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
-import { LoginData } from "../../../models/connexion/login-data";
-import { LoginService } from "../../../services/login/login.service";
+import { LoginData } from "@models/login/login-data";
+import { LoginService } from "@services/login/login.service";
 
 
 @Component({

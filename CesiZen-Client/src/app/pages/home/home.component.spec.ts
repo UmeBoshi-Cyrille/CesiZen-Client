@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { MainComponent } from './main.component';
+import { HomeComponent } from './home.component';
 
 describe('MainComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainComponent],
+      imports: [HomeComponent],
     })
       .compileComponents();
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(MainComponent);
+    const fixture = TestBed.createComponent(HomeComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
