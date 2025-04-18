@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { RegistrationQueryService } from './registration-query.service';
+import { RegistrationService } from './registration.service';
 import { provideHttpClient } from '@angular/common/http';
 
 
 
 describe('RegistrationQueryService', () => {
-  let service: RegistrationQueryService;
+  let service: RegistrationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('RegistrationQueryService', () => {
         provideHttpClient(), // Provide HttpClient
       ],
     });
-    service = TestBed.inject(RegistrationQueryService);
+    service = TestBed.inject(RegistrationService);
   });
 
   it('should be created', () => {
