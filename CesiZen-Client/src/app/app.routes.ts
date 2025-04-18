@@ -3,13 +3,13 @@ import { ArticlesComponent } from '@pages/articles/articles.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { ExerciseFormComponent } from '@pages/exercise-form/exercise-form.component';
 import { ExercisesComponent } from '@pages/exercises/exercises.component';
-import { MainComponent } from '@pages/main/main.component';
+import { HomeComponent } from '@pages/home/home.component';
 import { RegistrationComponent } from '@pages/register/register.component';
 import { SingleArticleComponent } from '@pages/single-article/single-article.component';
 
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: HomeComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: SingleArticleComponent },
   { path: 'exercises', component: ExercisesComponent },
