@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseQueryService } from '@services/exercise/exercise-query.service';
+import { NewExercise } from '@models/exercise/new-exercise';
 
 @Component({
   selector: 'app-exercise-form',
@@ -22,9 +23,14 @@ export class ExerciseFormComponent {
   ) { }
 
   onSubmit() {
-    console.log(this.exerciseForm.value);
+    const exerciseData: NewExercise = {
+      title: this.exerciseForm.value.title ?? '',
+      time: this.exerciseForm.value.time ?? 0,
+      editeAt: new Date(),
+      exerciseType: this.exerciseForm.value.type ?? 0,
+    };
     if (this.exerciseForm.valid) {
-      this.exerciseQueryService.createExercise(this.exerciseForm.value).subscribe({
+      this.exerciseQueryService.createExercise(exerciseData).subscribe({
         next: (response) => {
           console.log('Exercise created successfully:', response);
         },

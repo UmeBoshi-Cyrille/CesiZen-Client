@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ArticlesComponent } from '@pages/articles/articles.component';
-import { ConnexionComponent } from '@pages/connexion/connexion.component';
+import { LoginComponent } from '@pages/login/login.component';
 import { ExerciseFormComponent } from '@pages/exercise-form/exercise-form.component';
 import { ExercisesComponent } from '@pages/exercises/exercises.component';
 import { MainComponent } from '@pages/main/main.component';
@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'exercise-form', component: ExerciseFormComponent },
 
   { path: 'inscription', component: RegistrationComponent },
-  { path: 'se-connecter', component: ConnexionComponent },
+  { path: 'se-connecter', component: LoginComponent },
 ];
 
 

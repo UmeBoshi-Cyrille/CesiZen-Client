@@ -15,11 +15,12 @@ export class ExercisesComponent implements OnInit{
   exercises: Exercise[] = [];
   constructor(
     private exerciseQueryService: ExerciseQueryService,
-  ) {}
+  ) { }
+
   ngOnInit() {
     this.exerciseQueryService.getAllExercises(58).subscribe(
       exercises => this.exercises = exercises
     );
-    }
+  }
 
 }
