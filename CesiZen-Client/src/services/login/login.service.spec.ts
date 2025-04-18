@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
-import { ConnexionQueryService } from './connexion.service';
+import { LoginService } from './login.service';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('ConnexionQueryService', () => {
-  let service: ConnexionQueryService;
+describe('LoginService', () => {
+  let service: LoginService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -12,7 +11,7 @@ describe('ConnexionQueryService', () => {
         provideHttpClient(), // Provide HttpClient
       ]
     });
-    service = TestBed.inject(ConnexionQueryService);
+    service = TestBed.inject(LoginService);
   });
 
   it('should be created', () => {

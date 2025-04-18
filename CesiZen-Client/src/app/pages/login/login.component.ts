@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ConnexionQueryService } from '@services/connexion/connexion-query.service';
-import { LoginData } from '@models/connexion/login-data';
+import { Component } from "@angular/core";
+import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
+import { LoginData } from "../../../models/connexion/login-data";
+import { LoginService } from "../../../services/login/login.service";
+
 
 @Component({
-  selector: 'app-connexion',
+  selector: 'app-login',
   standalone: true,
   imports: [ ReactiveFormsModule ],
-  templateUrl: './connexion.component.html',
-  styleUrl: './connexion.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class ConnexionComponent {
+export class LoginComponent {
   passwordVisible = false;
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
@@ -22,7 +23,7 @@ export class ConnexionComponent {
   })
 
   constructor(
-    private connexionQueryService: ConnexionQueryService,
+    private connexionQueryService: LoginService,
   ) { }
 
   onSubmit() {

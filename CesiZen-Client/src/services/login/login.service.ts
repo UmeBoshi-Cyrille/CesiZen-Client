@@ -9,7 +9,7 @@ import { environment } from '@environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ConnexionQueryService {
+export class LoginService {
   private readonly apiUrl = environment.loginUrl;
 
   constructor(private http: HttpClient) { }
@@ -22,9 +22,7 @@ export class ConnexionQueryService {
         data.isActive,
         data.role
       )));
-    ////console.log('API Result:', result);
-    //const response = this.http.post(this.apiUrl, connexionData);
-    //console.log('API Response:', response);
+
     return result;
   }
 }

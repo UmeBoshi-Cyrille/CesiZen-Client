@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
-import { ConnexionComponent } from './connexion.component';
+import { LoginComponent } from './login.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ConnexionQueryService } from '../../../services/connexion/connexion-query.service';
+import { LoginService } from '../../../services/login/login.service';
 
 describe('SeConnecterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConnexionComponent],
+      imports: [LoginComponent],
       providers: [
         provideHttpClient(), // Provide HttpClient
-        ConnexionQueryService, // Provide any services used by the component
+        LoginService, // Provide any services used by the component
       ],
     })
       .compileComponents();
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(ConnexionComponent);
+    const fixture = TestBed.createComponent(LoginComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
