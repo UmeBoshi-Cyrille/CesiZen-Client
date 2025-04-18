@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { InscriptionComponent } from './inscription.component';
+import { RegistrationComponent } from './register.component';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('InscriptionComponent', () => {
+describe('RegistrationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InscriptionComponent],
+      imports: [RegistrationComponent],
       providers: [
         provideHttpClient(),
       ],
@@ -14,7 +14,7 @@ describe('InscriptionComponent', () => {
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(InscriptionComponent);
+    const fixture = TestBed.createComponent(RegistrationComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });

@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RegistrationQueryService } from '@services/registration/registration-query.service';
+import { RegistrationService } from '@services/registration/registration.service';
 
 @Component({
-  selector: 'app-inscription',
+  selector: 'app-registration',
   standalone: true,
   imports: [ ReactiveFormsModule ],
-  templateUrl: './inscription.component.html',
-  styleUrl: './inscription.component.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class InscriptionComponent {
+export class RegistrationComponent {
   passwordVisible = false;
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
   }
-  inscriptionForm = new FormGroup({
+  registrationForm = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     username: new FormControl(''),
@@ -23,12 +23,12 @@ export class InscriptionComponent {
     confirmpassword: new FormControl(''),
   })
   constructor(
-    private registrationQueryService: RegistrationQueryService,
+    private registrationQueryService: RegistrationService,
   ) { }
   onSubmit() {
-    console.log(this.inscriptionForm.value);
-    if (this.inscriptionForm.valid) {
-      this.registrationQueryService.registerUser(this.inscriptionForm.value).subscribe({
+    console.log(this.registrationForm.value);
+    if (this.registrationForm.valid) {
+      this.registrationQueryService.registerUser(this.registrationForm.value).subscribe({
         next: (response) => {
           console.log('Registered successfully:', response);
           window.location.href = '/se-connecter';
