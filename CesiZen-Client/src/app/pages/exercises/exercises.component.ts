@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ExerciseQueryService } from '../../../services/exercise/exercise-query.service';
-import { Exercise } from '../../../models/exercise/exercise';
+import { ExerciseQueryService } from '@services/exercise/exercise-query.service';
+import { Exercise } from '@models/exercise/exercise';
 
 @Component({
   selector: 'app-exercises',

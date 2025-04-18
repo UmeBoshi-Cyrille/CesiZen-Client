@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ConnexionQueryService } from '../../../services/connexion/connexion-query.service';
-import { LoginData } from '../../../models/connexion/login-data';
+import { ConnexionQueryService } from '@services/connexion/connexion-query.service';
+import { LoginData } from '@models/connexion/login-data';
 
 @Component({
   selector: 'app-connexion',
