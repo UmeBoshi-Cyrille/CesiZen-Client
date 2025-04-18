@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseFormComponent } from './exercise-form.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
+import { ExerciseQueryService } from '../../../services/exercise/exercise-query.service';
 
 describe('ExerciseFormComponent', () => {
   let component: ExerciseFormComponent;

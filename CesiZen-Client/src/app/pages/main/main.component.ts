@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CarousselComponent } from '../caroussel/caroussel.component';
+import { CarousselComponent } from '@components/caroussel/caroussel.component';
 import { RouterModule } from '@angular/router';
 
 @Component({

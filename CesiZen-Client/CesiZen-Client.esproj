@@ -8,10 +8,15 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\CesiZen-Client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\services\common\**" />
+    <TypeScriptConfiguration Remove="src\services\common\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="src\models\user\user-datastorage.ts" />
     <None Remove="src\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\services\common\" />
+    <Folder Include="src\app\partials\" />
+    <Folder Include="src\common\interceptors\" />
   </ItemGroup>
 </Project>

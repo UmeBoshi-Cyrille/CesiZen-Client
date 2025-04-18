@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RegistrationQueryService } from '../../services/registration/registration-query.service';
+import { RegistrationQueryService } from '@services/registration/registration-query.service';
 
 @Component({
   selector: 'app-inscription',

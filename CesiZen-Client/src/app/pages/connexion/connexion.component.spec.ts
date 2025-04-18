@@ -1,24 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { ExercisesComponent } from './exercises.component';
+import { ConnexionComponent } from './connexion.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
+import { ConnexionQueryService } from '../../../services/connexion/connexion-query.service';
 
-describe('ExercisesComponent', () => {
+describe('SeConnecterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExercisesComponent],
+      imports: [ConnexionComponent],
       providers: [
         provideHttpClient(), // Provide HttpClient
-        ExerciseQueryService, // Provide any services used by the component
+        ConnexionQueryService, // Provide any services used by the component
       ],
     })
       .compileComponents();
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(ExercisesComponent);
+    const fixture = TestBed.createComponent(ConnexionComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
-

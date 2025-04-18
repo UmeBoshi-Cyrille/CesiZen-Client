@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { SingleArticleComponent } from './single-article.component';
-import { ArticleQueryService } from '../../services/article/article-query.service';
+import { ArticleQueryService } from '../../../services/article/article-query.service';
 
 describe('SingleArticleComponent', () => {
   let component: SingleArticleComponent;

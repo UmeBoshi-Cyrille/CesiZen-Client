@@ -1,7 +1,7 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import { UserDataStorage } from '../../models/user/user-data-storage';
+import { UserDataStorage } from '@models/user/user-data-storage';
 
 
 @Component({
