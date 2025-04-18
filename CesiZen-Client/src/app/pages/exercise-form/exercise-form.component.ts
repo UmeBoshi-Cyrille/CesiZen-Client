@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ExerciseQueryService } from '../../services/exercise/exercise-query.service';
+import { ExerciseQueryService } from '../../../services/exercise/exercise-query.service';
 
 @Component({
   selector: 'app-exercise-form',
