@@ -24,6 +24,7 @@
       "@services/*": [ "services/*" ],
       "@environments/*": [ "common/environments/*" ],
       "@interceptors/*": [ "common/interceptors/*" ],
+      "@directives/*": [ "common/directives/*" ],
       "@models/*": [ "models/*" ]
     }
   },

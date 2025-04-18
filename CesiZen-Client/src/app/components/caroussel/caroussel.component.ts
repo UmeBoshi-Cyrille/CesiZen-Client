@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NextDirective } from '../../next.directive';
-import { PrevDirective } from '../../prev.directive';
+import { NextDirective } from '@directives/next.directive';
+import { PrevDirective } from '@directives/prev.directive';
+
 
 @Component({
   selector: 'app-caroussel',

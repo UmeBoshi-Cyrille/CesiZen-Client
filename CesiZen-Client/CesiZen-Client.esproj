@@ -16,7 +16,7 @@
     <None Remove="src\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\app\pages\" />
+    <Folder Include="src\app\partials\" />
     <Folder Include="src\common\interceptors\" />
   </ItemGroup>
 </Project>
