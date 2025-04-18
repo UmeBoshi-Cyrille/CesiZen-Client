@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConnexionQueryService } from './connexion-query.service';
+import { ConnexionQueryService } from './connexion.service';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('ConnexionQueryService', () => {
