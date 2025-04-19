@@ -1,7 +1,7 @@
 <article>
     <div class="box-div-connexion">
         <h1 class="h1-form-title mb">Inscription</h1>
-        <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" class="text-center">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="text-center">
             <div class="grid grid-cols-4 items-center mb">
                 <label for="firstname" class="text-start font-medium col-span-1">Prénom</label>
                 <input type="text" id="firstname" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="Prénom" required formControlName="firstname" />
