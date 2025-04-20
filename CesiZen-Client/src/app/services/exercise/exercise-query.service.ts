@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Exercise } from '@models/exercise/exercise';
 import { environment } from '@environments/environment';
 import { ExerciseDto } from '../../models/exercise/exercise-dto';
@@ -15,14 +15,20 @@ export class ExerciseQueryService {
 
   getExercises(): Observable<ExerciseDto[]> {
     return this.http.get<{ value: ExerciseDto[] }>(this.apiUrlIndex, { withCredentials: true }).pipe(
-      map((response) => response.value)
+      map((response) => response.value),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
     );
   }
 
   getExercise(id: number): Observable<Exercise> {
     const url = `${this.apiUrlDetails}/${id}/details`
     return this.http.get<{ value: Exercise }>(url, { withCredentials: true }).pipe(
-      map((response) => response.value)
+      map((response) => response.value),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
     );
   }
 }

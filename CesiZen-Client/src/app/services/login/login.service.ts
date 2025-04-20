@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { UserDataStorage } from '@models/user/user-data-storage';
 import { LoginData } from '@models/login/login-data';
 import { environment } from '@environments/environment';
@@ -23,7 +23,11 @@ export class LoginService {
         data.createdAt,
         data.isActive,
         data.role
-      )));
+      )),
+      catchError((error: HttpErrorResponse) => {
+          return throwError(() => error);
+      })
+    );
 
     return result;
   }
@@ -31,13 +35,21 @@ export class LoginService {
   verifyEmail(email: string, token: string): Observable<unknown> {
     const params = this.setParams(email, token);
 
-    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true })
+    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   resendVerifyEmail(email: string, token: string): Observable<unknown> {
     const params = this.setParams(email, token);
 
-    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true })
+    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   private setParams(email: string, token: string): HttpParams {

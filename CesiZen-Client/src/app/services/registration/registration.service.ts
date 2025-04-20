@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
 import { RegistrationData } from '@models/login/registration-data.interface';
 
@@ -12,6 +12,10 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   registerUser(userData: RegistrationData): Observable<unknown> {
-    return this.http.post(this.registerUrl, userData);
+    return this.http.post(this.registerUrl, userData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );;
   }
 }
