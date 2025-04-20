@@ -19,10 +19,6 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     provideHttpClient(withInterceptors([errorInterceptor, successInterceptor])),
     provideAnimationsAsync(),
-    providePrimeNG({
-      theme: {
-        preset: Aura
-      }
-    })
+    providePrimeNG({ theme: { preset: Aura } }),
   ],
 };
