@@ -33,7 +33,7 @@ export class LoginComponent {
       password: this.connexionForm.value.password ?? '',
     };
     if (this.connexionForm.valid) {
-      this.connexionQueryService.connecteUser(loginData).subscribe({
+      this.connexionQueryService.authenticate(loginData).subscribe({
           next: (response) => {
             console.log('API Response:', response);
               if (isResponse(response)) {
