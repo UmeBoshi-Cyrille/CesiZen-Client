@@ -2,10 +2,7 @@ export class ExerciseDto {
   constructor(
     public id: number,
     public title: string,
-    public time: number,
+    public editedAt: Date,
     public exerciseType: number,
-    public userId = 0,
-  ) {
-
-  }
+  ) {}
 }
