@@ -1,26 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { ArticlesComponent } from './articles.component';
+import { LoginComponent } from './login.component';
 import { provideHttpClient } from '@angular/common/http';
-import { ArticleQueryService } from '@services/article/article-query.service';
+import { LoginService } from '@services/login/login.service';
 
-
-describe('ArticlesComponent', () => {
+describe('SeConnecterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticlesComponent],
+      imports: [LoginComponent],
       providers: [
         provideHttpClient(), // Provide HttpClient
-        ArticleQueryService, // Provide any services used by the component
+        LoginService, // Provide any services used by the component
       ],
     })
       .compileComponents();
   });
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(ArticlesComponent);
+    const fixture = TestBed.createComponent(LoginComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
-
-

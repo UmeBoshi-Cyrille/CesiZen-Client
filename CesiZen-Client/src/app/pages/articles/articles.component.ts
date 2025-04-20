@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgFor, NgIf} from '@angular/common';
-import { Router } from '@angular/router';
-import { Article } from '@models/article/article';
-import { ArticleQueryService } from '@services/article/article-query.service';
+import { CommonModule, NgFor, NgIf } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Article } from "@models/article/article";
+import { ArticleQueryService } from "@services/article/article-query.service";
+
 
 @Component({
   selector: 'app-articles',
