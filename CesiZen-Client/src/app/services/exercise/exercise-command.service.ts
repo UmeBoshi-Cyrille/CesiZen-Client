@@ -20,14 +20,12 @@ export class ExerciseCommandService {
   }
 
   update(id: number, exerciseData: ExerciseDto): Observable<unknown> {
-    return this.http.post(`${this.apiCommandUrl}/${id}/update`, exerciseData, {
-      withCredentials: true,
-    });
+    const url = `${this.apiCommandUrl}/${id}/update`;
+    return this.http.post(url, exerciseData, { withCredentials: true });
   }
 
   delete(id: number): Observable<unknown> {
-    return this.http.post(`${this.apiCommandUrl}/${id}/delete`, {
-      withCredentials: true,
-    });
+    const url = `${this.apiCommandUrl}/${id}/delete`;
+    return this.http.post(url, { withCredentials: true });
   }
 }

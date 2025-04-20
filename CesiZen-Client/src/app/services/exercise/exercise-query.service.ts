@@ -1,25 +1,27 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Exercise } from '@models/exercise/exercise';
 import { environment } from '@environments/environment';
+import { ExerciseDto } from '../../models/exercise/exercise-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseQueryService {
-  private urlGetAll = environment.exerciseGetAllUrl;
+  private apiUrlIndex = environment.exerciseIndexUrl;
+  private apiUrlDetails = environment.exercisesQueryUrl;
   constructor(private http: HttpClient) { }
 
-  getAllExercises(userId?: number): Observable<Exercise[]> {
-    // Build query parameters
-    let params = new HttpParams();
-    if (userId) {
-      params = params.set('userId', userId.toString());
-    }
+  getExercises(): Observable<ExerciseDto[]> {
+    return this.http.get<{ value: ExerciseDto[] }>(this.apiUrlIndex, { withCredentials: true }).pipe(
+      map((response) => response.value)
+    );
+  }
 
-    // Make the HTTP GET request with or without query parameters
-    return this.http.get<{ value: Exercise[] }>(this.urlGetAll, { params }).pipe(
+  getExercise(id: number): Observable<Exercise> {
+    const url = `${this.apiUrlDetails}/${id}/details`
+    return this.http.get<{ value: Exercise }>(url, { withCredentials: true }).pipe(
       map((response) => response.value)
     );
   }
