@@ -1,21 +1,22 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { UserDataStorage } from '@models/user/user-data-storage';
 import { LoginData } from '@models/login/login-data';
-import { UserData } from '@models/user/user-data';
 import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly apiUrl = environment.loginUrl;
+  private readonly apiUrlAuthenticate = environment.loginUrl;
+  private readonly apiUrlVerifyEmail = environment.verifyEmailUrl;
+  private readonly apiUrlResendEmailVerification = environment.resendEmailVerificationUrl;
 
   constructor(private http: HttpClient) { }
 
-  connecteUser(connexionData: LoginData): Observable<UserDataStorage> {
-    const result = this.http.post<UserData>(this.apiUrl, connexionData).pipe(
+  authenticate(authenticationData: LoginData): Observable<UserDataStorage> {
+    const result = this.http.post<UserDataStorage>(this.apiUrlAuthenticate, authenticationData).pipe(
       map(data => new UserDataStorage(
         data.id,
         data.username,
@@ -25,5 +26,23 @@ export class LoginService {
       )));
 
     return result;
+  }
+
+  verifyEmail(email: string, token: string): Observable<unknown> {
+    const params = this.setParams(email, token);
+
+    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true })
+  }
+
+  resendVerifyEmail(email: string, token: string): Observable<unknown> {
+    const params = this.setParams(email, token);
+
+    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true })
+  }
+
+  private setParams(email: string, token: string): HttpParams {
+    return new HttpParams()
+      .set('token', token)
+      .set('email', email);
   }
 }
