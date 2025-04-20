@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../common/environments/environment';
 import { Observable } from 'rxjs';
@@ -12,12 +12,6 @@ export class UserCommandService {
   private readonly apiUrlActivation = environment.accountActivationUrl;
 
   constructor(private http: HttpClient) { }
-
-  //updateUsername(id: number, username: string): Observable<unknown> {
-  //  const url = `${this.apiUrlCommand}/${id}/update-username`;
-  //  const params = new HttpParams().set('username', username);
-  //  return this.http.post(url, { params, withCredentials: true });
-  //}
 
   updateUsername(id: number, username: string): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/update-username`;
