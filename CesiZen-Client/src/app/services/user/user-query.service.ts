@@ -14,7 +14,6 @@ export class UserQueryService {
   private readonly apiUrlIndex = environment.userIndexUrl;
   private readonly apiUrlDetailsByUsername = environment.userGetbyUsernameUrl;
   private readonly apiUrlProfile = environment.userGetProfileUrl;
-  private readonly apiUrlMinimumProfile = environment.userGetMinimumProfileUrl;
   private readonly apiUrlQuery = environment.userQueryUrl;
 
   constructor(private http: HttpClient) { }

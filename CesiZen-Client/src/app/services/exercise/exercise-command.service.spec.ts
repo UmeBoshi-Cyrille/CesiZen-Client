@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ExerciseCommandService } from './exercise-command.service';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 
 describe('ExerciseCommandService', () => {
@@ -9,7 +10,8 @@ describe('ExerciseCommandService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideHttpClient(), // Provide HttpClient
+        provideHttpClient(),
+        provideHttpClientTesting(),
       ]
     });
     service = TestBed.inject(ExerciseCommandService);

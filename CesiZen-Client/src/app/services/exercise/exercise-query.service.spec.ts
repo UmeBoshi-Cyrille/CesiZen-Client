@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ExerciseQueryService } from './exercise-query.service';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 
 describe('ExerciseQueryService', () => {
@@ -9,7 +10,8 @@ describe('ExerciseQueryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideHttpClient(), // Provide HttpClient
+        provideHttpClient(),
+        provideHttpClientTesting(),
       ]
     });
     service = TestBed.inject(ExerciseQueryService);

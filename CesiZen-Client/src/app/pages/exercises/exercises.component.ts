@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ExerciseQueryService } from '@services/exercise/exercise-query.service';
-import { Exercise } from '@models/exercise/exercise';
+import { ExerciseDto } from '@models/exercise/exercise-dto';
 
 @Component({
   selector: 'app-exercises',
@@ -12,14 +12,14 @@ import { Exercise } from '@models/exercise/exercise';
   styleUrl: './exercises.component.scss'
 })
 export class ExercisesComponent implements OnInit{
-  exercises: Exercise[] = [];
+  exercises: ExerciseDto[] = [];
   constructor(
     private exerciseQueryService: ExerciseQueryService,
   ) { }
 
   ngOnInit() {
     this.exerciseQueryService.getExercises().subscribe(
-      exercises => this.exercises = exercises
+      (exercises) => this.exercises = exercises
     );
   }
 

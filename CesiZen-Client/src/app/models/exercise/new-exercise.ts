@@ -4,7 +4,5 @@ export class NewExercise {
     public time: number,
     public editeAt: Date = new Date(),
     public exerciseType: number
-  ) {
-
-  }
+  ) {}
 }

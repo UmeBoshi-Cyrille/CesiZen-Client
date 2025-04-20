@@ -9,12 +9,8 @@ describe('User', () => {
       'johndoe',
       new Date('2023-10-01'),
       new Date('2023-10-01'),
-      new Date('2023-10-01'),
       true,
       'user',
-      undefined,
-      undefined,
-      undefined,
     );
     expect(user).toBeTruthy();
   });

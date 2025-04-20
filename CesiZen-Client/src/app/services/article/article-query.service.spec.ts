@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { ArticleQueryService } from './article-query.service';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('ArticleQueryServicesService', () => {
   let service: ArticleQueryService;
@@ -8,7 +9,8 @@ describe('ArticleQueryServicesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideHttpClient(), // Provide HttpClient
+        provideHttpClient(),
+        provideHttpClientTesting(),
       ],
 });
     service = TestBed.inject(ArticleQueryService);
