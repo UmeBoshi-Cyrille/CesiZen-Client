@@ -3,7 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Article } from '@models/article/article';
 import { ArticlesResponse } from '@models/article/articles-response';
-import { environment } from '../../common/environments/environment';
+import { environment } from '@environments/environment';
+import { PaginationData } from '@models/pagination/pagination-data.interface';
+import { ArticleDto } from '@models/article/article-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,7 @@ export class ArticleQueryService {
   getArticlesByCategory(
     categoryId: number,
     pageNumber: number,
-    pageSize: number): Observable<Article[]> {
+    pageSize: number): Observable<PaginationData<ArticleDto>> {
     const params = new HttpParams()
       .set('categoryId', categoryId.toString())
       .set('pageNumber', pageNumber.toString())
