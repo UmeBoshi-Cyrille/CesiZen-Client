@@ -4,6 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { UserDataStorage } from '@models/user/user-data-storage';
 import { LoginData } from '@models/login/login-data';
 import { environment } from '@environments/environment';
+import { UserData } from '@models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,13 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   authenticate(authenticationData: LoginData): Observable<UserDataStorage> {
-    const result = this.http.post<UserDataStorage>(this.apiUrlAuthenticate, authenticationData).pipe(
+    const result = this.http.post<{ user: UserData }>(this.apiUrlAuthenticate, authenticationData, { withCredentials: true }).pipe(
       map(data => new UserDataStorage(
-        data.id,
-        data.username,
-        data.createdAt,
-        data.isActive,
-        data.role
+        data.user.id,
+        data.user.username,
+        data.user.createdAt,
+        data.user.isActive,
+        data.user.role
       )),
       catchError((error: HttpErrorResponse) => {
           return throwError(() => error);
@@ -45,7 +46,7 @@ export class LoginService {
   resendVerifyEmail(email: string, token: string): Observable<unknown> {
     const params = this.setParams(email, token);
 
-    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true }).pipe(
+    return this.http.post(this.apiUrlResendEmailVerification, { params, withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
