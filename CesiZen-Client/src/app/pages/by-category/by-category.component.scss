@@ -21,11 +21,12 @@ img {
 }
 
 .description-box {
-    display: inline-block;
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 12px;
 }
 
 .author {
   text-align: right;
   font-size: 0.8em;
-  bottom: 0;
 }
