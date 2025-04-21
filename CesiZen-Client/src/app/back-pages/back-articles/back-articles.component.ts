@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+//import { ArticleQueryService } from '@services/article/article-query.service';
 
 @Component({
   selector: 'app-back-articles',
@@ -6,6 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './back-articles.component.html',
   styleUrl: './back-articles.component.scss'
 })
-export class BackArticlesComponent {
+export class BackArticlesComponent  {
+  //articles: Article[] = [];
 
+  //constructor(private articleQueryService: ArticleQueryService) { }
+
+  //ngOnInit() {
+  //}
 }

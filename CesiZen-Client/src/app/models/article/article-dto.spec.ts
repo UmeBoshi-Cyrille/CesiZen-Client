@@ -1,4 +1,10 @@
+import { CategoryDto } from '../category/category-dto';
 import { ArticleDto } from './article-dto';
+
+const categories: CategoryDto[] = [
+  { id: 1, name: 'Tech', imagePath: 'tech.png' },
+  { id: 2, name: 'Design', imagePath: 'design.png' }
+];
 
 describe('ArticleDto', () => {
   it('should create an instance', () => {
@@ -7,10 +13,9 @@ describe('ArticleDto', () => {
       'title',
       'description',
       'author',
+      new Date(),
       'content',
-      new Date(),
-      new Date(),
-      'image.png',
+      categories,
     );
     expect(article).toBeTruthy();
   });

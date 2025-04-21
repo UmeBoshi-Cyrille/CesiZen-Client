@@ -5,6 +5,7 @@ import { Pagination } from '@models/pagination/pagination.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { PaginationData } from '@models/pagination/pagination-data.interface';
 import { User } from '@models/user/user';
+import { UserData } from '@models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,10 @@ export class UserQueryService {
 
   constructor(private http: HttpClient) { }
 
-  search(term: string, pagination: Pagination): Observable<PaginationData> {
+  search(term: string, pagination: Pagination): Observable<PaginationData<UserData>> {
     const params = new HttpParams({ fromObject: { ...pagination } })
-                      .set('searchTerm', term);
-    return this.http.get<{ value: PaginationData }>(this.apiUrlSearch, { params, withCredentials: true }).pipe(
+      .set('searchTerm', term);
+    return this.http.get<{ value: PaginationData<UserData> }>(this.apiUrlSearch, { params, withCredentials: true }).pipe(
       map((response) => response.value),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
@@ -29,9 +30,9 @@ export class UserQueryService {
     );
   }
 
-  index(pagination: Pagination): Observable<PaginationData> {
+  index(pagination: Pagination): Observable<PaginationData<UserData>> {
     const params = new HttpParams({ fromObject: { ...pagination } });
-    return this.http.get<{ value: PaginationData }>(this.apiUrlIndex, { params, withCredentials: true }).pipe(
+    return this.http.get<{ value: PaginationData<UserData> }>(this.apiUrlIndex, { params, withCredentials: true }).pipe(
       map((response) => response.value),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
