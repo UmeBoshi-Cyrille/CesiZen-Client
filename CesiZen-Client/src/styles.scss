@@ -30,12 +30,11 @@ header {
   left: 0;
 }
 
-
 main {
   @include main-center;
 }
+
 .main-content {
-  @include main-center;
   background-color: $secondary-color;
   position: relative;
   top: 0;
