@@ -1,13 +1,17 @@
-import { ExerciseDto } from './article-dto';
+import { ArticleDto } from './article-dto';
 
-describe('Exercise', () => {
+describe('ArticleDto', () => {
   it('should create an instance', () => {
-    const exercise = new ExerciseDto(
+    const article = new ArticleDto(
       1,
-      'Sample Title',
+      'title',
+      'description',
+      'author',
+      'content',
       new Date(),
-      57
+      new Date(),
+      'image.png',
     );
-    expect(exercise).toBeTruthy();
+    expect(article).toBeTruthy();
   });
 });

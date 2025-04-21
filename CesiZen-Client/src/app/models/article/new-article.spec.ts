@@ -1,14 +1,17 @@
-import { NewExercise } from "./new-article";
+import { NewArticle } from "./new-article";
 
 
-describe('Exercise', () => {
+describe('Article', () => {
   it('should create an instance', () => {
-    const exercise = new NewExercise(
-      'Sample Title',
-      5,
-      new Date('2023-10-01'),
-      1,
+    const article = new NewArticle(
+      'title',
+      'description',
+      'author',
+      'content',
+      new Date(),
+      new Date(),
+      'image.png',
     );
-    expect(exercise).toBeTruthy();
+    expect(article).toBeTruthy();
   });
 });
