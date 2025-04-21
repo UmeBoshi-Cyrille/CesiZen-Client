@@ -21,6 +21,7 @@
     "paths": {
       "@components/*": [ "app/components/*" ],
       "@pages/*": [ "app/pages/*" ],
+      "@back-pages/*": [ "app/back-pages/*" ],
       "@services/*": [ "app/services/*" ],
       "@environments/*": [ "app/common/environments/*" ],
       "@interceptors/*": [ "app/common/interceptors/*" ],

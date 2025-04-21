@@ -45,7 +45,7 @@ export class LoginComponent {
               }
          
           // Redirect to homepage
-          window.location.href = '/';
+          window.location.href = '/email-verification';
         },
         error: (error) => {
           console.error('Error connexion:', error);
