@@ -20,7 +20,7 @@ export const environment = {
   resetPasswordUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/reset-password`,
   resetForgottenPasswordUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/reset-forgotten-password`,
   refreshAccessTokenUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/refresh-access-token`,
-  verifyEmailUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/verify`,
+  verifyEmailUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/verify-email`,
   resendEmailVerificationUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/resend-verify-email`,
 
   registrationUrl: `${baseEnv.apiUrl}/${baseEnv.registration}/register`,

@@ -34,7 +34,7 @@ export const routes: Routes = [
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
   { path: 'reset-password', component: ResetPassordComponent },
-  { path: 'verify-email', component: EmailVerifiedComponent },
+  { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'error', component: Error404Component },
 

@@ -7,7 +7,7 @@ import { ResetPassword } from '@models/password/reset-password.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class ForgetPasswordService {
+export class PasswordService {
   private readonly apiUrlForgetPassword = environment.forgetPasswordUrl;
   private readonly apiUrlForgetPasswordResponse = environment.forgetPasswordresponseUrl;
   private readonly apiUrlResetPassword = environment.resetPasswordUrl;
