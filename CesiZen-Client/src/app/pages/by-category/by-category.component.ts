@@ -3,7 +3,7 @@ import { ArticleQueryService } from '@services/article/article-query.service';
 import { from, map, Observable, switchMap, forkJoin, } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ImageService } from '@services/image/image.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleDto } from '@models/article/article-dto';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
@@ -19,14 +19,17 @@ export class ByCategoryComponent implements OnInit {
   pageNumber = 1;
   pageSize = 12;
   totalCount = 0;
+  categoryName = '';
 
   constructor(
     private route: ActivatedRoute,
     private articleQueryService: ArticleQueryService,
     private imageService: ImageService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    this.categoryName = this.route.snapshot.queryParamMap.get('name') || '';
     this.loadArticles();
   }
 
@@ -68,5 +71,9 @@ export class ByCategoryComponent implements OnInit {
 
   onImgError(event: Event) {
     (event.target as HTMLImageElement).src = '/assets/default.jpg';
+  }
+
+  onViewSingleArticle(articleId: number): void {
+    this.router.navigateByUrl(`articles/${articleId}`);
   }
 }

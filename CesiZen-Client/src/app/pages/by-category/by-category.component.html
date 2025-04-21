@@ -1,26 +1,31 @@
 <div>
+  <h1 class="h1-primary">{{ categoryName }}</h1>
   <ng-container *ngIf="(articles$ | async) as articles; else notFound">
     <div *ngIf="articles!.length > 0; else notFound" class="container grid grid-cols-3 md:grid-cols-3 gap-3">
       <div *ngFor="let article of articles" class="box-div-articles article-wrapper">
-        <div class="img-container">
-          <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" />
-        </div>
-        <h1 class="h1-articleByCategory-title">{{ article.title }}</h1>
-        <div class="description-box">
-          <div>
-            <h2>Description :</h2>
+        <a (click)="onViewSingleArticle(article.id)"
+           (keydown.enter)="onViewSingleArticle(article.id)"
+           tabindex="0"
+           role="button">
+          <div class="img-container">
+            <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" />
           </div>
-          <div class="author">
-            <span class="">Author: {{ article.author }}</span>
-          </div>
+          <h1 class="h1-articleByCategory-title">{{ article.title }}</h1>
+          <div class="description-box">
+            <div>
+              <h2>Description :</h2>
+            </div>
+            <div class="author">
+              <span class="">Author: {{ article.author }}</span>
+            </div>
           </div>
           <div class="content mb">
             <p>
               {{ article.description }}
             </p>
           </div>
-
-        </div>
+        </a>
+      </div>
     </div>
   </ng-container>
   <ng-template #notFound>
