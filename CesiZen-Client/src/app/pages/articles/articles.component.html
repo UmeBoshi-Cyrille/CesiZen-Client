@@ -7,6 +7,7 @@
         <div *ngFor="let article of articles; let i = index; trackBy: trackById"
              class="cards-articles"
              (mouseover)="activeIndex = i"
+             (focus)="onFocus()"
              (mouseleave)="activeIndex = null">
             <a (click)="onViewSingleArticle(article.id)"
                (keydown.enter)="onViewSingleArticle(article.id)"

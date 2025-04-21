@@ -41,6 +41,10 @@ export class ArticlesComponent implements OnInit {
     );
   }
 
+  onFocus() {
+    console.log("");
+  }
+
     trackById(index: number, article: Article): number {
       return article.id;
     }
