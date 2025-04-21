@@ -4,6 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { UserDataStorage } from '@models/user/user-data-storage';
 import { LoginData } from '@models/login/login-data';
 import { environment } from '@environments/environment';
+import { UserData } from '@models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   authenticate(authenticationData: LoginData): Observable<UserDataStorage> {
-    const result = this.http.post<UserDataStorage>(this.apiUrlAuthenticate, authenticationData).pipe(
+    const result = this.http.post<UserData>(this.apiUrlAuthenticate, authenticationData).pipe(
       map(data => new UserDataStorage(
         data.id,
         data.username,

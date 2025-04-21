@@ -1,50 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticleQueryService } from '@services/article/article-query.service';
-import { Article } from '../../models/article/article';
-import { from, map, Observable } from 'rxjs';
+import { from, map, Observable, switchMap, forkJoin, } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ImageService } from '@services/image/image.service';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleDto } from '@models/article/article-dto';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-by-category',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatPaginatorModule],
   templateUrl: './by-category.component.html',
   styleUrl: './by-category.component.scss'
 })
-export class ByCategoryComponent {
-  articles: ArticleDto[] = [];
+export class ByCategoryComponent implements OnInit {
+  articles$!: Observable<(ArticleDto & { imageSrc: string })[]>;
   pageNumber = 1;
   pageSize = 12;
   totalCount = 0;
-
 
   constructor(
     private route: ActivatedRoute,
     private articleQueryService: ArticleQueryService,
     private imageService: ImageService,
   ) { }
-  //ngOnInit() {
-    
-    
-  //}
+
+  ngOnInit() {
+    this.loadArticles();
+  }
 
   loadArticles() {
     const categoryId = Number(this.route.snapshot.params['id']);
-    this.articleQueryService.getArticlesByCategory(categoryId, this.pageNumber, this.pageSize)
-      .subscribe({
-        next: (response) => {
-          this.articles = response.data;
-          this.totalCount = response.length;
-          console.log('Articles:', this.articles);
-        }
-      })
+
+    this.articles$ = this.articleQueryService.getArticlesByCategory(categoryId, this.pageNumber, this.pageSize)
+      .pipe(
+        switchMap(response => {
+          this.totalCount = response.totalCount;
+          const data = response.data || []
+          return forkJoin(
+            data.map(article =>
+              this.processArticleImage(article))
+          )
+        })
+      );
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.loadArticles();
   }
 
 
-    private processArticleImage(article: Article): Observable<Article & { imageSrc: string }> {
+  private processArticleImage(article: ArticleDto): Observable<ArticleDto & { imageSrc: string }> {
     const imagePath = article.imagePath
       ? `assets/${article.imagePath}`
       : '/assets/default.jpg';

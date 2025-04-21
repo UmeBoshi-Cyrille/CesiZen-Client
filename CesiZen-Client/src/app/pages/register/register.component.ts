@@ -47,7 +47,7 @@ export class RegistrationComponent {
         next: (response) => {
           console.log('Registered successfully:', response);
           setTimeout(() => {
-            window.location.href = '/se-connecter';
+            window.location.href = '/email-verification';
 
           }, 3000);
         },

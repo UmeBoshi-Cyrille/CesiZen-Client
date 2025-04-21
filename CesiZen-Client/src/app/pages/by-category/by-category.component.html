@@ -1,24 +1,31 @@
-<article>
-    <!-- <ng-container *ngIf="articles$ | async as articles; else notFound"> -->
-    <!--     <div *ngIf="articles.length > 0; else notFound" class="container grid grid-cols-3 md:grid-cols-3 gap-3"> -->
-    <!--         <div *ngFor="let article of articles" class="box-div-articles"> -->
-    <!--             <div class="img-container"> -->
-    <!--                 <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" /> -->
-    <!--             </div> -->
-    <!--             <h1 class="h1-articleByCategory-title">{{ article.title }}</h1> -->
-    <!--             <div class="mb"> -->
-    <!--                 <span class="">Author: {{ article.author }}</span> -->
-    <!--             </div> -->
-    <!--             <div class="content mb"> -->
-    <!--                 <p>Description :</p> -->
-    <!--                 <p> -->
-    <!--                     {{ article.description }} -->
-    <!--                 </p> -->
-    <!--             </div> -->
-    <!--         </div> -->
-    <!--     </div> -->
-    <!-- </ng-container> -->
-    <!-- <ng-template #notFound> -->
-    <!--     <p>Articles not found.</p> -->
-    <!-- </ng-template> -->
-</article>
+<div>
+  <ng-container *ngIf="(articles$ | async) as articles; else notFound">
+    <div *ngIf="articles!.length > 0; else notFound" class="container grid grid-cols-3 md:grid-cols-3 gap-3">
+      <div *ngFor="let article of articles" class="box-div-articles">
+        <div class="img-container">
+          <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" />
+        </div>
+        <h1 class="h1-articleByCategory-title">{{ article.title }}</h1>
+        <div class="mb">
+          <span class="">Author: {{ article.author }}</span>
+        </div>
+        <div class="content mb">
+          <p>Description :</p>
+          <p>
+            {{ article.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #notFound>
+    <p>Articles not found.</p>
+  </ng-template>
+
+  <mat-paginator [length]="totalCount"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageNumber - 1"
+                 [pageSizeOptions]="[12, 24, 48]"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

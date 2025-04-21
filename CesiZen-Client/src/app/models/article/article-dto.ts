@@ -1,3 +1,5 @@
+import { CategoryDto } from "../category/category-dto";
+
 export class ArticleDto {
   constructor(
     public id: number,
@@ -6,8 +8,7 @@ export class ArticleDto {
     public author: string,
     public createdAt: Date = new Date(),
     public imagePath: string,
-    public imageSrc?: string,
-    public categories = 0,
+    public categories: CategoryDto[],
   ) {
   }
 }

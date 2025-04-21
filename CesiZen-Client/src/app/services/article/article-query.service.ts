@@ -58,7 +58,16 @@ export class ArticleQueryService {
       .set('categoryId', categoryId.toString())
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
-    return this.http.get<ArticlesResponse>(this.apiUrlByCategory, {params}).pipe(
-      map((response) => response.value.data));
+
+    const result = this.http.get <{ value: PaginationData<ArticleDto> } >(this.apiUrlByCategory, { params }).pipe(
+      map(response => ({
+        data: response.value.data as ArticleDto[],
+        pageNumber: response.value.pageNumber,
+        pageSize: response.value.pageSize,
+        totalCount: response.value.totalCount
+      }))
+    );
+
+    return result;
   }
 }
