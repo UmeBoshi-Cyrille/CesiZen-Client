@@ -1,12 +1,12 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { ToastNotifierService } from '../../services/toast/toast-notifier.service';
 import { inject } from '@angular/core';
+import { ToastService } from '@services/toast/toast.service';
+import { errorMessage } from '../environments/message-environment';
 
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const toast = inject(ToastNotifierService);
-
+  const toast = inject(ToastService);
     return next(req).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -20,62 +20,40 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     );
 };
 
-function HandleErrorEvent(error: HttpErrorResponse, toast: ToastNotifierService): void {
+function HandleErrorEvent(error: HttpErrorResponse, toast: ToastService): void {
   if (error.error instanceof ErrorEvent) {
     console.error('Client-site error', error.error.message);
     toast.showError(error.error.message);
   }
 }
 
-function handleHttpStatus(error: HttpErrorResponse, toast: ToastNotifierService): void {
+function handleHttpStatus(error: HttpErrorResponse, toast: ToastService): void {
   switch (error.status) {
+    case 400: // BadRequest
+      handleError(error, toast, errorMessage.badRequest);
+      break;
     case 401: // Unauthorized
-      handleUnauthorizedError(error, toast);
+      handleError(error, toast, errorMessage.unauthorized);
       break;
     case 403: // Forbidden
-      handleForbiddenError(error, toast);
+      handleError(error, toast, errorMessage.forbidden);
       break;
     case 404: // Not Found
-      handleNotFoundError(error, toast);
+      handleError(error, toast, errorMessage.notFound);
       break;
     case 500: // Server error
-      handleServerError(error, toast);
+      handleError(error, toast, errorMessage.serverError);
       break;
     default:
-      handleGenericError(error, toast);
+      handleError(error, toast, errorMessage.httpError);
   }
 }
 
-function handleUnauthorizedError(error: HttpErrorResponse, toast: ToastNotifierService) {
+function handleError(error: HttpErrorResponse, toast: ToastService, errorMessage: string) {
   const message = getErrorMessage(error);
-  console.error('Unauthorized: ', message);
-  toast.showError(`Unauthorized: ${message}`);
+  console.error(message);
+  toast.showError(errorMessage);
 }
-
-function handleForbiddenError(error: HttpErrorResponse, toast: ToastNotifierService) {
-  const message = getErrorMessage(error);
-  console.error('Forbidden: ', message);
-  toast.showError(`Unauthorized: ${message}`);
-}
-
-function handleNotFoundError(error: HttpErrorResponse, toast: ToastNotifierService) {
-  const message = getErrorMessage(error);
-  console.error('Not Found: ', message);
-  toast.showError(`Unauthorized: ${message}`);
-}
-
-function handleServerError(error: HttpErrorResponse, toast: ToastNotifierService) {
-  const message = getErrorMessage(error);
-  console.error('Server Error: ', message);
-  toast.showError(`Unauthorized: ${message}`);
-}
-
-function handleGenericError(error: HttpErrorResponse, toast: ToastNotifierService) {
-  const message = getErrorMessage(error);
-  console.error('Http Error: ', message);
-  toast.showError(`Unauthorized: ${message}`);
-}
-
 function getErrorMessage(error: HttpErrorResponse): string {
   return error.error?.message || error.message || error.statusText || 'Unknown error';
 }

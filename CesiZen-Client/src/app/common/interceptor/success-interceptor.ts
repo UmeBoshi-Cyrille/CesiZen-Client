@@ -1,11 +1,11 @@
 import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { ToastNotifierService } from '../../services/toast/toast-notifier.service';
 import { inject } from '@angular/core';
+import { ToastService } from '@services/toast/toast.service';
 
 
 export const successInterceptor: HttpInterceptorFn = (req, next) => {
-  const toast = inject(ToastNotifierService);
+  const toast = inject(ToastService);
 
   return next(req).pipe(
     tap((event) => {
@@ -20,7 +20,7 @@ function isSuccessResponse(event: HttpResponse<unknown>): boolean {
   return event.status >= 200 && event.status < 300;
 }
 
-function handleSuccessResponse(response: HttpResponse<unknown>, toast: ToastNotifierService): void {
+function handleSuccessResponse(response: HttpResponse<unknown>, toast: ToastService): void {
   const message = getSuccessMessage(response);
   if (message) {
     toast.showSuccess(message);

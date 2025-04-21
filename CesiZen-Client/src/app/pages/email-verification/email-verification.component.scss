@@ -1,0 +1,32 @@
+@import '../../abstract-styles/mixins';
+
+.content {
+    height: 100vh;
+}
+
+.content,
+.info {
+    @include flex-center;
+}
+
+.info {
+  height: 200px;
+  width: 70%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  flex-direction: column;
+  //margin-top: 20%;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 2%;
+  word-break: break-word;
+}
+
+.info > h1 {
+    margin-bottom: 20px;
+}
+
+.info > p {
+    font-size: 1em;
+}
+
