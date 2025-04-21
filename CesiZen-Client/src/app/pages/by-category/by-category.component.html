@@ -1,21 +1,26 @@
 <div>
   <ng-container *ngIf="(articles$ | async) as articles; else notFound">
     <div *ngIf="articles!.length > 0; else notFound" class="container grid grid-cols-3 md:grid-cols-3 gap-3">
-      <div *ngFor="let article of articles" class="box-div-articles">
+      <div *ngFor="let article of articles" class="box-div-articles article-wrapper">
         <div class="img-container">
           <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" />
         </div>
         <h1 class="h1-articleByCategory-title">{{ article.title }}</h1>
-        <div class="mb">
-          <span class="">Author: {{ article.author }}</span>
+        <div class="description-box">
+          <div>
+            <h2>Description :</h2>
+          </div>
+          <div class="author">
+            <span class="author">Author: {{ article.author }}</span>
+          </div>
+          </div>
+          <div class="content mb">
+            <p>
+              {{ article.description }}
+            </p>
+          </div>
+
         </div>
-        <div class="content mb">
-          <p>Description :</p>
-          <p>
-            {{ article.description }}
-          </p>
-        </div>
-      </div>
     </div>
   </ng-container>
   <ng-template #notFound>
@@ -25,7 +30,7 @@
   <mat-paginator [length]="totalCount"
                  [pageSize]="pageSize"
                  [pageIndex]="pageNumber - 1"
-                 [pageSizeOptions]="[12, 24, 48]"
+                 [pageSizeOptions]="[]"
                  (page)="onPageChange($event)">
   </mat-paginator>
 </div>

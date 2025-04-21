@@ -3,10 +3,29 @@
 }
 .mb {
   margin-bottom: 0.5rem;
+  text-align: justify;
 }
+
+.mb > h2 {
+    font-size: 1.2em;
+}
+
 img {
   width: 100%;
   height: 12rem;
   object-fit: contain;
 }
 
+.article-wrapper {
+    padding-top: 20px;
+}
+
+.description-box {
+    display: inline-block;
+}
+
+.author {
+  text-align: right;
+  font-size: 0.8em;
+  bottom: 0;
+}
