@@ -34,8 +34,8 @@
     <h1 class="h1-primary">Catégories</h1>
     <div class="category-div grid grid-cols-2 md:grid-cols-5 gap-4">
         <div class="s" *ngFor="let category of categories">
-            <a (click)="onViewByCategory(category.id)"
-               (keydown.enter)="onViewByCategory(category.id)"
+            <a (click)="onViewByCategory(category.id, category.name)"
+               (keydown.enter)="onViewByCategory(category.id, category.name)"
                tabindex="0"
                role="button">
                 <img class="h-auto max-w-full rounded-lg cards-categories" [src]="category.imageSrc" onerror="/assets/default.jpg" alt="img-category" />

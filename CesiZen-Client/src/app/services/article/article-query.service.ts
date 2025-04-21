@@ -3,7 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Article } from '@models/article/article';
 import { ArticlesResponse } from '@models/article/articles-response';
-import { environment } from '../../common/environments/environment';
+import { environment } from '@environments/environment';
+import { PaginationData } from '@models/pagination/pagination-data.interface';
+import { ArticleDto } from '@models/article/article-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -51,12 +53,21 @@ export class ArticleQueryService {
   getArticlesByCategory(
     categoryId: number,
     pageNumber: number,
-    pageSize: number): Observable<Article[]> {
+    pageSize: number): Observable<PaginationData<ArticleDto>> {
     const params = new HttpParams()
       .set('categoryId', categoryId.toString())
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
-    return this.http.get<ArticlesResponse>(this.apiUrlByCategory, {params}).pipe(
-      map((response) => response.value.data));
+
+    const result = this.http.get <{ value: PaginationData<ArticleDto> } >(this.apiUrlByCategory, { params }).pipe(
+      map(response => ({
+        data: response.value.data as ArticleDto[],
+        pageNumber: response.value.pageNumber,
+        pageSize: response.value.pageSize,
+        totalCount: response.value.totalCount
+      }))
+    );
+
+    return result;
   }
 }

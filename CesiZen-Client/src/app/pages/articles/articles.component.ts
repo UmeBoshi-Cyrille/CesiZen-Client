@@ -45,15 +45,17 @@ export class ArticlesComponent implements OnInit {
     console.log("");
   }
 
-    trackById(index: number, article: Article): number {
-      return article.id;
-    }
+  trackById(index: number, article: Article): number {
+    return article.id;
+  }
 
-    onViewSingleArticle(articleId: number): void {
-      this.router.navigateByUrl(`articles/${articleId}`);
-    }
-  onViewByCategory(categoryId: number): void {
-    this.router.navigateByUrl(`articles/category/${categoryId}`);
+  onViewSingleArticle(articleId: number): void {
+    this.router.navigateByUrl(`articles/${articleId}`);
+  }
+
+  onViewByCategory(categoryId: number, name: string): void {
+    const encodedName = encodeURIComponent(name);
+    this.router.navigateByUrl(`articles/category/${categoryId}?name=${encodedName}`);
     }
   }
 

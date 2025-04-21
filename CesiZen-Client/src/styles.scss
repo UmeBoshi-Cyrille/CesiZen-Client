@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "reset";
 @use "tailwindcss";
-@import 'app/abstract-styles/_mixins.scss';
+@import "app/abstract-styles/_mixins.scss";
 
 //COLORS
 $primary-color: #FBD14B;//yellow-nav
@@ -66,12 +66,25 @@ article {
   @include title-h1(1.2rem auto);
   font-size: 1.2rem;
 }
-
+.h1-articleByCategory-title {
+  @include title-h1(1.2rem auto);
+  width: 250px;
+  font-size: 1rem;
+}
 
 .box-div-article {
   @include box-div;
   width: 80%;
   min-height: 80vh;
+}
+.box-div-articles {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 1rem 1rem;
+  margin: 1.5rem auto;
 }
 .box-div-connexion {
   @include box-div;
