@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Article } from '@models/article/article';
 import { ArticleQueryService } from '@services/article/article-query.service';
+import { ImageService } from '@services/image/image.service';
 
 @Component({
   selector: 'app-single-article',
@@ -13,11 +14,12 @@ import { ArticleQueryService } from '@services/article/article-query.service';
   styleUrl: './single-article.component.scss'
 })
 export class SingleArticleComponent implements OnInit {
-  article$: Observable<Article> | undefined;  // Adjust the type
+  article$!: Observable<Article & { imageSrc: string }>;
 
   constructor(
     private route: ActivatedRoute,
-    private articleQueryService: ArticleQueryService
+    private articleQueryService: ArticleQueryService,
+    private imageService: ImageService,
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,19 @@ export class SingleArticleComponent implements OnInit {
 
   private getSingleArticle(): void {
     const articleId = Number(this.route.snapshot.params['id']);
-    this.article$ = this.articleQueryService.getArticleDetails(articleId);
-    this.articleQueryService.getArticleDetails(articleId)
+    this.article$ = this.articleQueryService.getArticleDetails(articleId).pipe(
+      switchMap(article => {
+        const imagePath = article.imagePath ? `assets/${article.imagePath}` : '/assets/default.jpg';
+        return from(this.imageService.checkImageExists(imagePath)).pipe(
+          map(exists => ({
+            ...article,
+            imageSrc: exists ? imagePath : '/assets/default.jpg'
+          }))
+        );
+      })
+    );
+  }
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = '/assets/default.jpg';
   }
 }

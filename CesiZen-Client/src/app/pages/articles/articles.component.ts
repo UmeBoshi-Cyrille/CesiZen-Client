@@ -1,9 +1,11 @@
-import { CommonModule, NgFor, NgIf } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Article } from "@models/article/article";
-import { ArticleQueryService } from "@services/article/article-query.service";
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
+import { Article } from '@models/article/article';
+import { ArticleQueryService } from '@services/article/article-query.service';
+import { CategoryQueryService } from '@services/category/category-query.service';
+import { Category } from '@models/category/category';
+import { ImageService } from '@services/image/image.service';
 
 @Component({
   selector: 'app-articles',
@@ -14,26 +16,40 @@ import { ArticleQueryService } from "@services/article/article-query.service";
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[] = [];
+  categories: Category[] = [];
   activeIndex: number | null = null;
 
   constructor(
     private articleQueryService: ArticleQueryService,
-    private router: Router
+    private categoryQueryService: CategoryQueryService,
+    private imageService: ImageService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
+
   ngOnInit() {
-    this.articleQueryService.getLimitArticles().subscribe(
-      articles => this.articles = articles
+    this.imageService.fetchAndProcessItems(
+      this.cdr,
+      () => this.articleQueryService.getLimitArticles(10, 4),
+      (articles) => this.articles = articles,
+    );
+
+    this.imageService.fetchAndProcessItems(
+      this.cdr,
+      () => this.categoryQueryService.getAllCategories(),
+      (categories) => this.categories = categories,
     );
   }
 
-  onFocus() {
-    console.log('Focus event triggered!'); // Log to console
+    trackById(index: number, article: Article): number {
+      return article.id;
+    }
+
+    onViewSingleArticle(articleId: number): void {
+      this.router.navigateByUrl(`articles/${articleId}`);
+    }
+  onViewByCategory(categoryId: number): void {
+    this.router.navigateByUrl(`articles/category/${categoryId}`);
+    }
   }
 
-  trackById(index: number, article: Article): number {
-    return article.id;
-  }
-  onViewSingleArticle(articleId: number): void {
-    this.router.navigateByUrl(`articles/${articleId}`);
-  }
-}
