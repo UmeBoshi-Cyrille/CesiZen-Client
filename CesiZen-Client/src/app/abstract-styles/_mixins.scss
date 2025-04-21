@@ -1,0 +1,78 @@
+@import 'variables';
+
+//WHITE-BOX
+@mixin box-div {
+  width: 50%;
+  min-height: 50vh;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.66);
+  padding: 1rem 4rem;
+  margin: 3rem auto;
+}
+
+//flex-box center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin title-h1($margin) {
+  width: 300px;
+  color: #2a2a2a;
+  font-family: $font-seconde;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 20px;
+  margin: $margin;
+  text-shadow: 1px 1px 1px #e0e0e0;
+}
+
+//flex-box center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+//MAIN
+@mixin main-center($size: 12%, $article: 0) {
+  height: 100%;
+  width: 76%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-left: $size;
+  margin-right: $size;
+
+  @if $article != 0 {
+    min-height: $article;
+  }
+}
+
+//WHITE-BOX
+@mixin box-div {
+  width: 50%;
+  min-height: 50vh;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.66);
+  padding: 1rem 4rem;
+  margin: 3rem auto;
+}
+
+//BUTTON
+@mixin black-button {
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: $black-color;
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 3px;
+  margin-top: 2rem;
+}

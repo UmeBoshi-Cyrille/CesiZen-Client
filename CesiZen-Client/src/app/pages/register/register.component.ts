@@ -46,7 +46,10 @@ export class RegistrationComponent {
       this.registrationQueryService.registerUser(registrationData).subscribe({
         next: (response) => {
           console.log('Registered successfully:', response);
-          window.location.href = '/se-connecter';
+          setTimeout(() => {
+            window.location.href = '/se-connecter';
+
+          }, 3000);
         },
         error: (error) => {
           console.error('Error registration:', error);

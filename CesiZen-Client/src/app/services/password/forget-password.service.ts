@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
 import { ResetPassword } from '@models/password/reset-password.interface';
 
@@ -16,7 +16,11 @@ export class ForgetPasswordService {
   constructor(private http: HttpClient) { }
 
   forgetPassword(email: string): Observable<unknown> {
-    return this.http.post(this.apiUrlForgetPassword, email);
+    return this.http.post(this.apiUrlForgetPassword, email).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );;
   }
 
   forgetPasswordResponse(email: string, token: string): Observable<unknown> {
@@ -24,16 +28,28 @@ export class ForgetPasswordService {
       .set('email', email)
       .set('token', token);
       
-    return this.http.post(this.apiUrlForgetPasswordResponse, { params })
+    return this.http.post(this.apiUrlForgetPasswordResponse, { params }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   resetForgottenPassword(userId: number, resetPasswordData: ResetPassword): Observable<unknown> {
-    return this.http.post(this.apiUrlResetForgottenPassword, { userId, resetPasswordData }); 
+    return this.http.post(this.apiUrlResetForgottenPassword, { userId, resetPasswordData }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );; 
   }
 
   resetPassword(resetPasswordData: ResetPassword): Observable<unknown> {
     return this.http.post(this.apiUrlResetPassword, resetPasswordData, {
       withCredentials: true
-    })
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 }

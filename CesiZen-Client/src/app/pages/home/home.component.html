@@ -1,19 +1,20 @@
-<main class="main-content">
+<div class="main-content">
   <div class="home-container" title="Image d'accueil">
-    <img class="logo" src="/assets/logo_cesizen.jpg" alt="Logo"/>
+    <img class="logo" src="/assets/logo_cesizen.jpg" alt="Logo" />
     <!--<div class="search-bar"></div>-->
     <div class="home-theme-div">
-        <span class="home-theme font-seconde">CesiZen</span>
+      <span class="home-theme font-seconde">CesiZen</span>
     </div>
   </div>
   <div class="container">
-      <div class="home-intro font-seconde">
-          <p class="">
-              Évaluez votre bien-être :<br />
-              Remplissez notre diagnostic en ligne pour mieux comprendre votre état mental.
-          </p>
-          <button class="B-btn" routerLink="/diagnostics">Click</button>
-      </div>
+    <div class="home-intro font-seconde">
+      <p class="">
+        Évaluez votre bien-être :<br />
+        Remplissez notre diagnostic en ligne pour mieux comprendre votre état mental.
+      </p>
+      <app-toast></app-toast>
+      <button class="B-btn" routerLink="/diagnostics">Click</button>
+    </div>
   </div>
   <div class="home-content">
     <p class="home-title font-seconde">Bienvenue sur Cesizen</p>
@@ -41,5 +42,4 @@
     </ul>
   </div>
   <app-caroussel></app-caroussel>
-
-</main>
+</div>
