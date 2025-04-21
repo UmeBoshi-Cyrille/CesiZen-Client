@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,7 +6,7 @@ import { EmailService } from '@services/email/email.service';
 
 @Component({
   selector: 'app-email-verified',
-  imports: [],
+  imports: [CommonModule],
   standalone: true,
   //templateUrl: './email-verified.component.html',
   template: `
