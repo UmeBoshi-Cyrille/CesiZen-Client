@@ -1,5 +1,4 @@
-export class Article {
-  
+export class NewArticle {
   constructor(
     public id: number,
     public title: string,

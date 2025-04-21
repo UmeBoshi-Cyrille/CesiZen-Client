@@ -1,5 +1,4 @@
-export class Article {
-  
+export class ArticleDto {
   constructor(
     public id: number,
     public title: string,

@@ -11,6 +11,7 @@ describe('Article', () => {
       new Date('2023-10-01'),
       new Date('2023-10-01'),
       'path/to/image.jpg',
+      'path/to/image.jpg',
       0
     );
     expect(article).toBeTruthy();
