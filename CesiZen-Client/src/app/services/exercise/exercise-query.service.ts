@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Exercise } from '@models/exercise/exercise';
 import { environment } from '@environments/environment';
-import { ExerciseDto } from '../../models/exercise/exercise-dto';
+import { ExerciseDto } from '@models/exercise/exercise-dto';
 
 @Injectable({
   providedIn: 'root'
