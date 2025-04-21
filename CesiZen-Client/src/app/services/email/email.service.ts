@@ -1,37 +1,16 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { UserDataStorage } from '@models/user/user-data-storage';
-import { LoginData } from '@models/login/login-data';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
-import { UserData } from '@models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-  private readonly apiUrlAuthenticate = environment.loginUrl;
+export class EmailService {
   private readonly apiUrlVerifyEmail = environment.verifyEmailUrl;
   private readonly apiUrlResendEmailVerification = environment.resendEmailVerificationUrl;
 
   constructor(private http: HttpClient) { }
-
-  authenticate(authenticationData: LoginData): Observable<UserDataStorage> {
-    const result = this.http.post<{ user: UserData }>(this.apiUrlAuthenticate, authenticationData, { withCredentials: true }).pipe(
-      map(data => new UserDataStorage(
-        data.user.id,
-        data.user.username,
-        data.user.createdAt,
-        data.user.isActive,
-        data.user.role
-      )),
-      catchError((error: HttpErrorResponse) => {
-          return throwError(() => error);
-      })
-    );
-
-    return result;
-  }
 
   verifyEmail(email: string, token: string): Observable<unknown> {
     const params = this.setParams(email, token);
