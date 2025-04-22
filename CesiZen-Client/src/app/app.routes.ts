@@ -19,17 +19,19 @@ import { BackUsersComponent } from '@back-pages/back-users/back-users.component'
 import { ArticleFormComponent } from '@back-pages/article-form/article-form.component';
 import { BackLoginComponent } from '@back-pages/back-login/back-login.component';
 import { EmailVerifiedComponent } from '@pages/email-verified/email-verified.component';
+import { authGuard } from '@services/auth/auth.guard';
 
 
 
 export const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: SingleArticleComponent },
   { path: 'articles/category/:id', component: ByCategoryComponent },
-  { path: 'exercises/:id', component: ExerciseComponent },
-  { path: 'exercises', component: ExercisesComponent },
-  { path: 'exercise-form', component: ExerciseFormComponent },
+  { path: 'exercises/:id', component: ExerciseComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
+  { path: 'exercises', component: ExercisesComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
+  { path: 'exercise-form', component: ExerciseFormComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
 
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
