@@ -1,1 +1,66 @@
-<p>back-articles works!</p>
+<!-- article-list.component.html -->
+<div class="wrapper">
+  <h1>Articles</h1>
+  <div class="table-container">
+    <!-- Loading indicator -->
+    <mat-spinner *ngIf="loading" diameter="40" class="loading-spinner"></mat-spinner>
+
+    <div class="table-scroll-wrapper">
+      <div class="scroll-wrapper">
+        <!-- Table -->
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td class="row-line" mat-cell *matCellDef="let article"> {{article.id}} </td>
+          </ng-container>
+
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td class="row-line" mat-cell *matCellDef="let article"> {{article.title}} </td>
+          </ng-container>
+
+          <!-- Author Column -->
+          <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef> Author </th>
+            <td class="row-line" mat-cell *matCellDef="let article"> {{article.author}} </td>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td class="row-line" mat-cell *matCellDef="let article">
+              {{article.createdAt | date:'mediumDate'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let article" class="row-line actions-cell">
+              <button mat-icon-button color="primary" (click)="viewDetails(article.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <!--<button mat-icon-button color="warn" (click)="$event.stopPropagation(); deleteArticle(article.id)">
+                <mat-icon>delete</mat-icon>
+              </button>-->
+            
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+     
+    <!-- Paginator -->
+    <mat-paginator [length]="totalCount"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onPageChange($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

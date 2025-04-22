@@ -19,6 +19,7 @@ import { BackUsersComponent } from '@back-pages/back-users/back-users.component'
 import { ArticleFormComponent } from '@back-pages/article-form/article-form.component';
 import { BackLoginComponent } from '@back-pages/back-login/back-login.component';
 import { EmailVerifiedComponent } from '@pages/email-verified/email-verified.component';
+import { BackCategoryComponent } from './back-pages/back-category/back-category.component';
 
 
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
 
   { path: 'back-office', component: BackHomeComponent },
   { path: 'back-articles', component: BackArticlesComponent },
+  { path: 'back-categories', component: BackCategoryComponent },
   { path: 'back-articles/:id', component: BackArticleComponent },
   { path: 'article-form', component: ArticleFormComponent },
   { path: 'users/:id', component: BackUserComponent },
