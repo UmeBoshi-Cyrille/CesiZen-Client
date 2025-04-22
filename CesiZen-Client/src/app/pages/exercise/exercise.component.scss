@@ -1,0 +1,29 @@
+@import '../../abstract-styles/variables';
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.play-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2ecc40;
+  border-radius: 3px;
+  border: 1px solid grey;
+  margin: 0 15px;
+}
+
+.play-arrow:hover {
+  color: $primary-color;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.B-btn {
+  margin-left: auto;
+  margin-right: auto;
+}

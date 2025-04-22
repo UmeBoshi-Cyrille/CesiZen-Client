@@ -25,7 +25,7 @@ export class ExerciseCommandService {
 
   update(id: number, exerciseData: ExerciseDto): Observable<unknown> {
     const url = `${this.apiCommandUrl}/${id}/update`;
-    return this.http.post(url, exerciseData, { withCredentials: true }).pipe(
+    return this.http.put(url, exerciseData, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       }
@@ -34,7 +34,7 @@ export class ExerciseCommandService {
 
   delete(id: number): Observable<unknown> {
     const url = `${this.apiCommandUrl}/${id}/delete`;
-    return this.http.post(url, { withCredentials: true }).pipe(
+    return this.http.delete(url, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       }
