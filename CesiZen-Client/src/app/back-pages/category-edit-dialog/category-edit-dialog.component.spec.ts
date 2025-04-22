@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryEditDialogComponent } from './category-edit-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('CategoryEditDialogComponent', () => {
   let component: CategoryEditDialogComponent;
@@ -8,7 +9,8 @@ describe('CategoryEditDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryEditDialogComponent]
+      imports: [CategoryEditDialogComponent],
+      providers: [MatDialogRef]
     })
     .compileComponents();
 
