@@ -1,16 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryEditDialogComponent } from './category-edit-dialog.component';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('CategoryEditDialogComponent', () => {
   let component: CategoryEditDialogComponent;
   let fixture: ComponentFixture<CategoryEditDialogComponent>;
 
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
+  const mockDialogData = {}; 
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CategoryEditDialogComponent],
-      providers: [MatDialogRef]
+      providers: [
+        { provide: MatDialogRef, useValue: mockDialogRef },
+        { provide: MAT_DIALOG_DATA, useValue: mockDialogData }]
     })
     .compileComponents();
 
