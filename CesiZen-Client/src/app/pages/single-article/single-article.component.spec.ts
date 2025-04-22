@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { SingleArticleComponent } from './single-article.component';
 import { ArticleQueryService } from '@services/article/article-query.service';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('SingleArticleComponent', () => {
   let component: SingleArticleComponent;
@@ -11,7 +12,8 @@ describe('SingleArticleComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SingleArticleComponent],
       providers: [
-        provideHttpClient(), // Provide HttpClient
+        provideHttpClient(),
+        provideHttpClientTesting(),// Provide HttpClient
         ArticleQueryService, // Provide any services used by the component
       ],
     })

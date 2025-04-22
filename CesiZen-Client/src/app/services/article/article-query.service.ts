@@ -2,28 +2,42 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Article } from '@models/article/article';
-import { ArticlesResponse } from '@models/article/articles-response';
 import { environment } from '@environments/environment';
 import { PaginationData } from '@models/pagination/pagination-data.interface';
 import { ArticleDto } from '@models/article/article-dto';
+import { ArticleMinimumDto } from '@models/article/article-minimum-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleQueryService {
-  private apiUrl = environment.articleGetLastUrl;
+  private apiUrlLast = environment.articleGetLastUrl;
+  private apiUrlIndex = environment.articleIndexUrl;
   private readonly apiUrlByCategory = environment.articleGetByCategoryUrl;
   private readonly apiUrlDetails = environment.articleQueryUrl;
   constructor(private http: HttpClient) { }
 
-  getAllArticles(): Observable<Article[]> {
-    return this.http.get<ArticlesResponse>(this.apiUrl).pipe(
-      map((response) => response.value.data));
+  getAllArticles(
+    pageNumber: number,
+    pageSize: number): Observable<PaginationData<ArticleMinimumDto>> {
+
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<{ value: PaginationData<ArticleMinimumDto> }>(this.apiUrlIndex, { params }).pipe(
+      map(response => ({
+        data: response.value.data as ArticleMinimumDto[],
+        pageNumber: response.value.pageNumber,
+        pageSize: response.value.pageSize,
+        totalCount: response.value.totalCount
+      }))
+    );
   }
 
   getLimitArticles(amount: number, limit = 4): Observable<Article[]> {
     const params = new HttpParams().set('amount', amount.toString());
-    return this.http.get<{ value: Article[] }>(this.apiUrl, { params }).pipe(
+    return this.http.get<{ value: Article[] }>(this.apiUrlLast, { params }).pipe(
       map((response) => response.value
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(0, limit)));

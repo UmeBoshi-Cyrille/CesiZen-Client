@@ -1,14 +1,12 @@
-import { User } from './user';
+import { UserDto } from './user-dto';
 
-describe('User', () => {
+describe('UserDto', () => {
   it('should create an instance', () => {
-    const user = new User(
+    const user = new UserDto(
       1,
       'John',
       'Doe',
       'johndoe',
-      'email@gmail.com',
-      true,
       new Date('2023-10-01'),
       new Date('2023-10-01'),
       true,

@@ -1,11 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { Pagination } from '@models/pagination/pagination.interface';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { PaginationData } from '@models/pagination/pagination-data.interface';
+import { UserDto } from '@models/user/user-dto';
 import { User } from '@models/user/user';
-import { UserData } from '@models/user/user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,17 @@ export class UserQueryService {
 
   constructor(private http: HttpClient) { }
 
-  search(term: string, pagination: Pagination): Observable<PaginationData<UserData>> {
-    const params = new HttpParams({ fromObject: { ...pagination } })
+  search(
+    term: string,
+    pageNumber: number,
+    pageSize: number): Observable<PaginationData<UserDto>> {
+
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString())
       .set('searchTerm', term);
-    return this.http.get<{ value: PaginationData<UserData> }>(this.apiUrlSearch, { params, withCredentials: true }).pipe(
+
+    return this.http.get<{ value: PaginationData<UserDto> }>(this.apiUrlSearch, { params, withCredentials: true }).pipe(
       map((response) => response.value),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
@@ -30,9 +36,14 @@ export class UserQueryService {
     );
   }
 
-  index(pagination: Pagination): Observable<PaginationData<UserData>> {
-    const params = new HttpParams({ fromObject: { ...pagination } });
-    return this.http.get<{ value: PaginationData<UserData> }>(this.apiUrlIndex, { params, withCredentials: true }).pipe(
+  index(
+    pageNumber: number,
+    pageSize: number): Observable<PaginationData<UserDto>> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<{ value: PaginationData<UserDto> }>(this.apiUrlIndex, { params, withCredentials: true }).pipe(
       map((response) => response.value),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
