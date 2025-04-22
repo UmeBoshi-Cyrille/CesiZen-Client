@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackLoginComponent } from './back-login.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('BackLoginComponent', () => {
   let component: BackLoginComponent;
@@ -10,7 +11,7 @@ describe('BackLoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BackLoginComponent],
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     })
     .compileComponents();
 

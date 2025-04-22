@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseComponent } from './exercise.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('ExerciseComponent', () => {
   let component: ExerciseComponent;
@@ -11,7 +12,8 @@ describe('ExerciseComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExerciseComponent],
       providers: [
-        provideHttpClient(), // Provide HttpClient
+        provideHttpClient(),
+        provideHttpClientTesting(),// Provide HttpClient
       ],
     })
     .compileComponents();

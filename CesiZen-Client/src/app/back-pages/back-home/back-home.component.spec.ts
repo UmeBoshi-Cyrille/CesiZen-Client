@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackHomeComponent } from './back-home.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('BackHomeComponent', () => {
   let component: BackHomeComponent;
@@ -10,7 +11,7 @@ describe('BackHomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BackHomeComponent],
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     })
     .compileComponents();
 

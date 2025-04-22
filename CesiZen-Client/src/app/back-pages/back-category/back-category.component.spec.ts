@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackCategoryComponent } from './back-category.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('BackCategoryComponent', () => {
   let component: BackCategoryComponent;
@@ -10,7 +11,7 @@ describe('BackCategoryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BackCategoryComponent],
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     })
     .compileComponents();
 
