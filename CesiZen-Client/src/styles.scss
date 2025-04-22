@@ -40,14 +40,11 @@ main {
   top: 0;
 }
 
-//ARTICLE
-article {
+//yellow-box
+.main-box {
   @include main-center(12%, 100vh);
   background-color: $secondary-color;
 }
-
-//H1 TITLE
-
 
 .h1-primary {
   @include title-h1(2rem auto);

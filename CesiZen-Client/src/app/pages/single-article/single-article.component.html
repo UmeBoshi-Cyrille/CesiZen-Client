@@ -1,5 +1,5 @@
-<article>
-    <div *ngIf="article$ | async as article; else notFound" class="box-div-article">
+<div class="main-box">
+    <article *ngIf="article$ | async as article; else notFound" class="box-div-article">
         <h1 class="h1-form-title">{{ article.title }}</h1>
         <div class="signature">
             <p>{{ article.createdAt | date : "dd MMMM yy, à HH:mm" }}</p>
@@ -14,11 +14,11 @@
                 {{ article.content }}
             </p>
         </div>
-    </div>
+    </article>
     <ng-template #notFound>
         <p>Article not found.</p>
     </ng-template>
-</article>
+</div>
 
 
 
