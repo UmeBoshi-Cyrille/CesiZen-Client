@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackArticleComponent } from './back-article.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('BackArticleComponent', () => {
   let component: BackArticleComponent;
@@ -8,7 +9,8 @@ describe('BackArticleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BackArticleComponent]
+      imports: [BackArticleComponent],
+      providers: [provideHttpClient()]
     })
     .compileComponents();
 
