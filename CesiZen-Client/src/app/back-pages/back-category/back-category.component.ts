@@ -38,15 +38,11 @@ export class BackCategoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadArticles();
+    this.loadCategories();
   }
 
-  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
-  private loadArticles(): void {
+  private loadCategories(): void {
     this.loading = true;
     this.categoryQueryService.getCategories(this.pageNumber, this.pageSize).subscribe({
       next: (response) => {
@@ -64,20 +60,20 @@ export class BackCategoryComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageSize = event.pageSize;
     this.pageNumber = event.pageIndex + 1;
-    this.loadArticles();
+    this.loadCategories();
   }
 
-  viewDetails(articleId: number): void {
-    this.router.navigateByUrl(`back-categories/${articleId}`);
+  viewDetails(caegoryId: number): void {
+    this.router.navigateByUrl(`back-categories/${caegoryId}`);
   }
 
-  deleteCategory(articleId: number): void {
+  deleteCategory(categoryId: number): void {
     // Confirmation dialog
     if (confirm('Delete this category permanently?')) {
-      this.categoryCommandService.delete(articleId).subscribe({
+      this.categoryCommandService.delete(categoryId).subscribe({
         next: () => {
           // Remove from local data
-          this.dataSource.data = this.dataSource.data.filter(a => a.id !== articleId);
+          this.dataSource.data = this.dataSource.data.filter(a => a.id !== categoryId);
           // Update pagination
           this.totalCount -= 1;
           // Reset paginator if needed
@@ -88,21 +84,6 @@ export class BackCategoryComponent implements OnInit {
       });
     }
   }
-
-  //updateCategory(categoryId: number): void {
-  //  const dialogRef = this.dialog.open(CategoryEditDialogComponent, {
-  //    width: '400px',
-  //    data: { category: this.dataSource.data.find(cat => cat.id === categoryId) }
-  //  });
-
-  //  dialogRef.afterClosed().subscribe(updatedCategory => {
-  //    if (updatedCategory) {
-  //      const index = this.dataSource.data.findIndex(cat => cat.id === categoryId);
-  //      this.dataSource.data[index] = updatedCategory;
-  //      this.dataSource._updateChangeSubscription(); // Force table refresh
-  //    }
-  //  });
-  //}
 
   updateCategory(categoryId: number): void {
     const category = this.dataSource.data.find(cat => cat.id === categoryId);

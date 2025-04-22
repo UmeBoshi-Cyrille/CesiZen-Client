@@ -3,7 +3,7 @@
   <h1>Articles</h1>
   <div class="table-container">
     <!-- Loading indicator -->
-    <mat-spinner *ngIf="loading" diameter="40" class="loading-spinner"></mat-spinner>
+    <!--<mat-spinner *ngIf="loading" diameter="40" class="loading-spinner"></mat-spinner>-->
 
     <div class="table-scroll-wrapper">
       <div class="scroll-wrapper">
@@ -58,9 +58,10 @@
     <!-- Paginator -->
     <mat-paginator [length]="totalCount"
                    [pageSize]="pageSize"
-                   [pageSizeOptions]="pageSizeOptions"
-                   (page)="onPageChange($event)"
-                   aria-label="Select page">
+                   [pageIndex]="pageNumber - 1"
+                   [pageSizeOptions]="[]"
+                   (page)="onPageChanged($event)"
+                   >
     </mat-paginator>
   </div>
 </div>

@@ -2,16 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArticleQueryService } from '@services/article/article-query.service';
 import { ArticleMinimumDto } from '@models/article/article-minimum-dto';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ArticleCommandService } from '@services/article/article-command.service';
 
 @Component({
   selector: 'app-back-articles',
-  imports: [MatPaginatorModule, MatTableModule, CommonModule, MatProgressSpinnerModule, MatIconModule],
+  imports: [MatPaginatorModule, MatTableModule, CommonModule, MatIconModule],
   templateUrl: './back-articles.component.html',
   styleUrl: './back-articles.component.scss'
 })
@@ -22,7 +21,6 @@ export class BackArticlesComponent implements OnInit {
   pageNumber = 1;
   pageSize = 12;
   totalCount = 0;
-  loading = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -36,29 +34,22 @@ export class BackArticlesComponent implements OnInit {
     this.loadArticles();
   }
 
-  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
   private loadArticles(): void {
-    this.loading = true;
     this.articleQueryService.getAllArticles(this.pageNumber, this.pageSize).subscribe({
       next: (response) => {
         this.dataSource.data = response.data;
         this.totalCount = response.totalCount;
-        this.loading = false;
+        console.log(this.totalCount);
       },
       error: (err) => {
         console.error(err);
-        this.loading = false;
       } 
     })
   }
 
-  onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
+  onPageChanged(event: { pageIndex: number; pageSize: number }): void {
     this.pageNumber = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
     this.loadArticles();
   }
 
