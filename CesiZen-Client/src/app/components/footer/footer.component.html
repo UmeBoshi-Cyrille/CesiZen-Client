@@ -12,8 +12,8 @@
     <ul>
       <li><a routerLink="/">Accueil</a></li>
       <li><a routerLink="/articles">Articles</a></li>
-      <li><a routerLink="/exercises">Execises</a></li>
-      <li><a routerLink="/diagnostics">Diagnostics</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/exercises">Execises</a></li>
+      <li><a routerLink="/contact">Contactez-nous</a></li>
     </ul>
     <div>
       <a href="https://sante.gouv.fr/" target="_blank"><img src="/assets/logo_gouv.png" alt="logo de gouvernement" title="logo de gouvernement"/></a>
