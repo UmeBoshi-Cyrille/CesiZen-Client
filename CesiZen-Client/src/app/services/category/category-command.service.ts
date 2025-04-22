@@ -21,11 +21,11 @@ export class CategoryCommandService {
 
   update(id: number, categoryData: CategoryDto): Observable<unknown> {
     const url = `${this.apiCommandUrl}/${id}/update`;
-    return this.http.post(url, categoryData, { withCredentials: true });
+    return this.http.put(url, categoryData, { withCredentials: true });
   }
 
   delete(id: number): Observable<unknown> {
     const url = `${this.apiCommandUrl}/${id}/delete`;
-    return this.http.post(url, { withCredentials: true });
+    return this.http.delete(url, { withCredentials: true });
   }
 }

@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../common/environments/environment';
+import { environment } from '@environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AccountActivation } from '../../models/login/account-activation.inerface';
+import { AccountActivation } from '@models/login/account-activation.inerface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserCommandService {
 
   updateUsername(id: number, username: string): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/update-username`;
-    return this.http.post(url, username, { withCredentials: true }).pipe(
+    return this.http.patch(url, username, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
@@ -24,7 +24,7 @@ export class UserCommandService {
 
   updateEmail(id: number, email: string): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/update-email`;
-    return this.http.post(url, email, { withCredentials: true }).pipe(
+    return this.http.patch(url, email, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
@@ -32,7 +32,7 @@ export class UserCommandService {
   }
 
   accountActivation(account: AccountActivation): Observable<unknown> {
-    return this.http.post(this.apiUrlActivation, account, { withCredentials: true }).pipe(
+    return this.http.patch(this.apiUrlActivation, account, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
@@ -41,7 +41,7 @@ export class UserCommandService {
 
   delete(id: number): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/delete`;
-    return this.http.post(url, id, { withCredentials: true }).pipe(
+    return this.http.delete(url, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
