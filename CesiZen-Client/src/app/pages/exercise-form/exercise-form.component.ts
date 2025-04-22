@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NewExercise } from '@models/exercise/new-exercise';
 import { ExerciseCommandService } from '@services/exercise/exercise-command.service';
 
 @Component({
   selector: 'app-exercise-form',
   standalone: true,
-  imports: [ ReactiveFormsModule ],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './exercise-form.component.html',
   styleUrl: './exercise-form.component.scss'
 })
@@ -14,8 +15,7 @@ export class ExerciseFormComponent {
   exerciseForm = new FormGroup({
     title: new FormControl(''),
     type: new FormControl(0),
-    time: new FormControl(0),
-    userId: new FormControl(57),
+    time: new FormControl(0)
   })
 
   constructor(
@@ -32,6 +32,7 @@ export class ExerciseFormComponent {
     if (this.exerciseForm.valid) {
       this.exerciseCommandService.create(exerciseData).subscribe({
         next: (response) => {
+          window.location.href = '/exercises';
           console.log('Exercise created successfully:', response);
         },
         error: (error) => {

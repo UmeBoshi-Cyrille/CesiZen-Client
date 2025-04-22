@@ -1,1 +1,19 @@
-<p>exercise works!</p>
+<div class="main-box">
+    <div class="box-div-connexion">
+        <h1 class="h1-form-title" *ngIf="exercise">{{ exercise.title }}</h1>
+        <div class="row">
+            <p>Le temps de l'exercice - {{ overallTime() }}</p>
+            <button (click)="startCountdown()" [disabled]="isRunning()">
+                <mat-icon class="play-arrow">play_arrow</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="showGif()">
+            <img [src]="gifSrc"
+                 alt="Image de l'exercice"
+                 class="exercise-image" />
+        </div>
+    </div>
+    <button class="B-btn" routerLink="/exercises">
+        Retourner à la liste des exercices
+    </button>
+</div>

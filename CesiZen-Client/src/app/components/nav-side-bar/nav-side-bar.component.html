@@ -3,42 +3,44 @@
   <nav class="nav" [ngStyle]="{ display: status ? 'block' : 'none' }">
       <a class="closebtn" (click)="clickEvent()" (keydown.enter)="clickEvent()" tabindex="0" role="button">×</a>
     <div class="nav-div">
-      <ul class="nav-ul">
-        <li class="nav-li">
-          <a class="nav-link" routerLink="/"
-             routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: true }">
-            <span class="material-symbols-outlined">
-              home
-            </span>
-            Accueil
-          </a>
-        </li>
-        <li class="nav-li">
-          <a class="nav-link" routerLink="/articles" routerLinkActive="active">
-            <span class="material-symbols-outlined">
-              library_books
-            </span>
-            Articles
-          </a>
-        </li>
-        <li class="nav-li">
-          <a class="nav-link" routerLink="/exercises" routerLinkActive="active">
-            <span class="material-symbols-outlined">
-              cardiology
-            </span>
-            Exercises
-          </a>
-        </li>
-        <li class="nav-li">
-            <a class="nav-link" routerLink="/contact" routerLinkActive="active">
-                <span class="material-symbols-outlined">
-                    prescriptions
-                </span>
-                Contactez-nous
-            </a>
-        </li>
-      </ul>
+        <ul class="nav-ul">
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ exact: true }">
+                    <span class="material-symbols-outlined">
+                        home
+                    </span>
+                    Accueil
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/articles" routerLinkActive="active">
+                    <span class="material-symbols-outlined">
+                        library_books
+                    </span>
+                    Articles
+                </a>
+            </li>
+            <div class="text-center" *ngIf="isLoggedIn">
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/exercises" routerLinkActive="active">
+                    <span class="material-symbols-outlined">
+                        cardiology
+                    </span>
+                    Exercices
+                </a>
+            </li>
+            </div>
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+                    <span class="material-symbols-outlined">
+                        prescriptions
+                    </span>
+                    Contactez-nous
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="nav-div-buttons">

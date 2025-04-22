@@ -5,8 +5,8 @@ describe('Exercise', () => {
     const exercise = new ExerciseDto(
       1,
       'Sample Title',
-      new Date(),
-      57
+      57,
+      60,
     );
     expect(exercise).toBeTruthy();
   });

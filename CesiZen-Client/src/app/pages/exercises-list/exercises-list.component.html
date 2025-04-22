@@ -1,0 +1,19 @@
+<div *ngFor="let exercise of exercises$ | async" class="exercise-row">
+    <div class="exercise-item">{{ exercise.title }}</div>
+    <div class="exercise-item">{{ exercise.time }} s</div>
+    <ng-container [ngSwitch]="exercise.exerciseType">
+        <span class="exercise-item" *ngSwitchCase="1">7-4-8</span>
+        <span class="exercise-item" *ngSwitchCase="2">5-5</span>
+        <span class="exercise-item" *ngSwitchCase="3">4-6</span>
+        <span class="exercise-item" *ngSwitchDefault>Unknown</span>
+    </ng-container>
+    <div class="exercise-item">
+        <button class="btn-play" (click)="playExercise(exercise.id)" matTooltip="Play">
+            <mat-icon class="play-arrow" routerLink="/exercise">play_arrow</mat-icon>
+        </button>
+        <button class="delete" (click)="deleteExercise(exercise.id)" mat-icon-button matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>
+

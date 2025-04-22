@@ -1,5 +1,5 @@
-<article>
-    <div class="content-div">
+<div class="main-box">
+    <article class="content-div">
         <h1 class="h1-primary">Exercices d'aspiration</h1>
         <div>
             <h2>Explication et Fonctionnement : </h2>
@@ -79,15 +79,6 @@
         <div class="btn">
             <button class="B-btn" routerLink="/exercise-form">Créer votre exercice</button>
         </div>
-    </div>
-    <!-- <div *ngIf="exercise | async as exercise; else notFound" class="box-div"> -->
-    <!--     <ng-template #notFound> -->
-    <!--         <p class="text-center">No list.</p> -->
-    <!--     </ng-template> -->
-    <!-- </div> -->
-    <div *ngFor="let exercise of exercises">
-        <div class="exercise-div">
-            <h2>{{ exercise.title }}</h2>
-        </div>
-     </div>
-</article>
+    </article>
+ <app-exercises-list></app-exercises-list> 
+</div>
