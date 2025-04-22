@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryEditDialogComponent } from './category-edit-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder } from '@angular/forms';
 
 describe('CategoryEditDialogComponent', () => {
   let component: CategoryEditDialogComponent;
@@ -11,9 +12,11 @@ describe('CategoryEditDialogComponent', () => {
     close: jasmine.createSpy('close')
   };
   const mockDialogData = {
-    id: 123,
-    name: 'Test Category',
-    imagePath: 'test-path.jpg'
+    category: {
+      id: 123,
+      name: 'Test Category',
+      imagePath: 'test-path.jpg'
+    }
   }; 
 
   beforeEach(async () => {
@@ -21,7 +24,9 @@ describe('CategoryEditDialogComponent', () => {
       imports: [CategoryEditDialogComponent],
       providers: [
         { provide: MatDialogRef, useValue: mockDialogRef },
-        { provide: MAT_DIALOG_DATA, useValue: mockDialogData }]
+        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
+        FormBuilder
+      ]
     })
     .compileComponents();
 
