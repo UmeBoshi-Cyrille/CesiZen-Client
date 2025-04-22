@@ -11,7 +11,7 @@ describe('CategoryEditDialogComponent', () => {
     close: jasmine.createSpy('close')
   };
   const mockDialogData = {
-    id: 123;
+    id: 123
   }; 
 
   beforeEach(async () => {
