@@ -76,7 +76,13 @@
               "buildTarget": "CesiZen-Client:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200,
+            "ssl": true,
+            "sslCert": "./sign/localhost.crt",
+            "sslKey": "./sign/localhost.key"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
