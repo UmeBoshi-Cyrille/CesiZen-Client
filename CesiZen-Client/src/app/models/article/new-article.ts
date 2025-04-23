@@ -1,3 +1,5 @@
+import { NewImage } from "../image/new-image";
+
 export class NewArticle {
   constructor(
     public title: string,
@@ -8,6 +10,7 @@ export class NewArticle {
     public updatedAt: Date = new Date(),
     public imagePath: string,
     public imageSrc?: string,
+    public images?: NewImage[],
     public categories = 0,
   ) {
   }
