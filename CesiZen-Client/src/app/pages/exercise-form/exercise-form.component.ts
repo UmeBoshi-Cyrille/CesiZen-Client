@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,14 +8,15 @@ import { ExerciseCommandService } from '@services/exercise/exercise-command.serv
 @Component({
   selector: 'app-exercise-form',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './exercise-form.component.html',
   styleUrl: './exercise-form.component.scss'
 })
 export class ExerciseFormComponent {
+  apiErrors: Record<string, string[]> = {};
   exerciseForm = new FormGroup({
     title: new FormControl(''),
-    type: new FormControl(0),
+    type: new FormControl(1),
     time: new FormControl(0)
   })
 
@@ -23,6 +25,7 @@ export class ExerciseFormComponent {
   ) { }
 
   onSubmit() {
+    this.apiErrors = {};
     const exerciseData: NewExercise = {
       title: this.exerciseForm.value.title ?? '',
       time: this.exerciseForm.value.time ?? 0,
@@ -37,6 +40,9 @@ export class ExerciseFormComponent {
         },
         error: (error) => {
           console.error('Error creating exercise:', error);
+          if (error?.error?.errors) {
+            this.apiErrors = error.error.errors; // keys: Title, Time... etc.
+          }
         }
       });
     }

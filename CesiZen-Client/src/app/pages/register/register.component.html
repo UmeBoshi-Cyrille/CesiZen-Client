@@ -1,24 +1,43 @@
 <div class="main-box">
     <div class="box-div-connexion">
         <h1 class="h1-form-title mb">Inscription</h1>
-        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="text-center">
-            <div class="grid grid-cols-4 items-center mb">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="grid grid-cols-4 items-center">
                 <label for="firstname" class="text-start font-medium col-span-1">Prénom</label>
                 <input type="text" id="firstname" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="Prénom" required formControlName="firstname" />
             </div>
-            <div class="grid grid-cols-4 items-center mb">
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('firstname')?.hasError('required') && (registrationForm.get('firstname')?.touched || registrationForm.get('firstname')?.dirty)">
+                Votre prénom n'est pas requis.
+            </span>
+            <div class="grid grid-cols-4 items-center mt">
                 <label for="lastname" class="text-start font-medium col-span-1">Nom</label>
                 <input type="text" id="lastname" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="Nom" required formControlName="lastname" />
             </div>
-            <div class="grid grid-cols-4 items-center mb">
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('lastname')?.hasError('required') && (registrationForm.get('lastname')?.touched || registrationForm.get('lastname')?.dirty)">
+                Votre nom n'est pas requis.
+            </span>
+            <div class="grid grid-cols-4 items-center mt">
                 <label for="username" class="text-start font-medium col-span-1">Nom de l'utilisateur</label>
                 <input type="text" id="username" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="Pseudonyme" required formControlName="username" />
             </div>
-            <div class="grid grid-cols-4 items-center mb">
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('username')?.hasError('required') && (registrationForm.get('username')?.touched || registrationForm.get('username')?.dirty)">
+                Votre nom de l'utilisateur n'est pas requis.
+            </span>
+            <div class="grid grid-cols-4 items-center mt">
                 <label for="email" class="text-start font-medium col-span-1">E-mail</label>
                 <input type="email" id="email" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 col-span-3" placeholder="example@gmail.com" required formControlName="email" />
             </div>
-            <div class="grid grid-cols-4 items-center mb">
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('email')?.hasError('required') && (registrationForm.get('email')?.touched || registrationForm.get('email')?.dirty)">
+                Votre E-mail n'est pas requis.
+            </span>
+            <span *ngFor="let err of apiErrors['Email']" class="text-red-600">
+                {{ err }}
+            </span>
+            <div class="grid grid-cols-4 items-center mt">
                 <label for="password" class="text-start font-medium col-span-1">Mot de passe</label>
                 <div class="col-span-3 relative">
                     <input [type]="passwordVisible ? 'text' : 'password'" id="password"
@@ -30,7 +49,14 @@
                     </button>
                 </div>
             </div>
-            <div class="grid grid-cols-4 items-center mb">
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('password')?.hasError('password') && (registrationForm.get('password')?.touched || registrationForm.get('password')?.dirty)">
+                Votre password n'est pas requis.
+            </span>
+            <span *ngFor="let err of apiErrors['Password']" class="text-red-600">
+                {{ err }}
+            </span>
+            <div class="grid grid-cols-4 items-center mt">
                 <label for="confirmpassword" class="text-start font-medium col-span-1">Mot de passe pour confirmer</label>
                 <div class="col-span-3 relative">
                     <input [type]="passwordVisible ? 'text' : 'password'" id="confirmpassword"
@@ -42,9 +68,15 @@
                     </button>
                 </div>
             </div>
-
-            <div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb">Connecter</button>
+            <span class="text-red-600 text-sm"
+                  *ngIf="registrationForm.get('confirmpassword')?.hasError('confirmpassword') && (registrationForm.get('confirmpassword')?.touched || registrationForm.get('confirmpassword')?.dirty)">
+                Votre password n'est pas confirmé.
+            </span>
+            <span *ngFor="let err of apiErrors['ConfirmPassword']" class="text-red-600">
+                {{ err }}
+            </span>
+            <div class="text-center">
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt">Connecter</button>
             </div>
         </form>
     </div>

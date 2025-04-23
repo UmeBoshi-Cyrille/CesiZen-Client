@@ -2,21 +2,25 @@ form {
   width: 100%;
   min-height: 100%;
 
-  .title-form {
-    margin-bottom: 2rem;
-  }
   .checkbox-form {
     display: flex;
     flex-direction: column;
+    margin-top: 2rem;
   }
   .box-row {
     display: flex;
-    margin-bottom: 2rem;
     flex-direction: row;
   }
   .div-type {
     margin: 1rem;
   }
+}
+.time-form {
+  margin-top: 2rem;
+}
+
+.send-btn {
+  margin-top: 2rem;
 }
 .B-btn {
   margin-left: auto;
