@@ -1,36 +1,43 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrationService } from '@services/registration/registration.service';
 import { RegistrationData } from '../../models/login/registration-data.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ ReactiveFormsModule ],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegistrationComponent {
   passwordVisible = false;
+  apiErrors: Record<string, string[]> = {};
 
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
   }
 
   registrationForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmpassword: new FormControl(''),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    confirmpassword: new FormControl('', Validators.required),
   })
 
   constructor(
     private registrationQueryService: RegistrationService,
   ) { }
 
-  onSubmit() {
+onSubmit() {
+  this.apiErrors = {};
     console.log(this.registrationForm.value);
 
     const registrationData: RegistrationData = {
@@ -53,6 +60,9 @@ export class RegistrationComponent {
         },
         error: (error) => {
           console.error('Error registration:', error);
+        if(error?.error?.errors) {
+          this.apiErrors = error.error.errors; // keys: Email, Password, ConfirmPassword, etc.
+        }
         }
       });
     }

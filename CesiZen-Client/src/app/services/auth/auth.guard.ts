@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
     const userData = JSON.parse(userDataString);
     const allowedRoles = route.data['roles'] as string[] | undefined;
     if (allowedRoles && allowedRoles.length > 0) {
-      if (allowedRoles && !allowedRoles.includes(userData.role)) {
+      if (!allowedRoles.includes(userData.role)) {
         return router.createUrlTree(['/login']);
       }
     }
