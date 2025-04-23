@@ -11,7 +11,7 @@ export class NewArticle {
     public imagePath: string,
     public imageSrc?: string,
     public images?: NewImage[],
-    public categories = 0,
+    public categories?: number[],
   ) {
   }
 }
