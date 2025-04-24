@@ -5,7 +5,7 @@ import { ExerciseFormComponent } from '@pages/exercise-form/exercise-form.compon
 import { ExercisesComponent } from '@pages/exercises/exercises.component';
 import { HomeComponent } from '@pages/home/home.component';
 import { RegistrationComponent } from '@pages/register/register.component';
-import { SingleArticleComponent } from '@pages/single-article/single-article.component';
+import { ArticleComponent } from '@pages/article/article.component';
 import { ByCategoryComponent } from '@pages/by-category/by-category.component';
 import { EmailVerificationComponent } from '@pages/email-verification/email-verification.component';
 import { Error404Component } from '@pages/error-404/error-404.component';
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent },
   { path: 'articles', component: ArticlesComponent },
-  { path: 'articles/:id', component: SingleArticleComponent },
+  { path: 'articles/:id', component: ArticleComponent },
   { path: 'articles/category/:id', component: ByCategoryComponent },
   { path: 'exercises/:id', component: ExerciseComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
   { path: 'exercises', component: ExercisesComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
