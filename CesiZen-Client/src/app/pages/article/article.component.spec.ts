@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { SingleArticleComponent } from './single-article.component';
+import { ArticleComponent } from './article.component';
 import { ArticleQueryService } from '@services/article/article-query.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-describe('SingleArticleComponent', () => {
-  let component: SingleArticleComponent;
-  let fixture: ComponentFixture<SingleArticleComponent>;
+describe('ArticleComponent', () => {
+  let component: ArticleComponent;
+  let fixture: ComponentFixture<ArticleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SingleArticleComponent],
+      imports: [ArticleComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),// Provide HttpClient
@@ -19,7 +19,7 @@ describe('SingleArticleComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SingleArticleComponent);
+    fixture = TestBed.createComponent(ArticleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

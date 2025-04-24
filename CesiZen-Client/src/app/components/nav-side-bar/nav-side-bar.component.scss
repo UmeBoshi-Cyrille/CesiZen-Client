@@ -3,10 +3,11 @@
   cursor: pointer;
   background-color: #111;
   color: white;
-  padding: 10px 15px;
+  padding: 12px 12px;
   border: none;
   position: sticky;
-  top: 0;
+  border-radius: 50%;
+  top: -20;
   left: 0;
   z-index: 1;
 }
@@ -118,6 +119,14 @@
   border-radius: 3px;
   margin: auto;
   margin-top: 8rem;
+}
+
+.square {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    margin-top: 100px;
 }
 
 .icon {

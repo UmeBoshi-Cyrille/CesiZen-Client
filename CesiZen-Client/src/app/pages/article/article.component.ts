@@ -7,13 +7,13 @@ import { ArticleQueryService } from '@services/article/article-query.service';
 import { ImageService } from '@services/image/image.service';
 
 @Component({
-  selector: 'app-single-article',
+  selector: 'app-article',
   imports: [CommonModule, DatePipe],
   standalone: true,
-  templateUrl: './single-article.component.html',
-  styleUrl: './single-article.component.scss'
+  templateUrl: './article.component.html',
+  styleUrl: './article.component.scss'
 })
-export class SingleArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit {
   article$!: Observable<Article & { imageSrc: string }>;
 
   constructor(

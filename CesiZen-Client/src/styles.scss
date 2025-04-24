@@ -26,8 +26,8 @@ $font-seconde: "Bitter", Arial, Helvetica, sans-serif;
 header {
   position: fixed;
   z-index: 2;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
 }
 
 main {
@@ -145,4 +145,10 @@ main {
 
 .toast-message {
   font-size: 0.98em;
+}
+
+.custom-select-panel {
+  background: #fff !important;
+  color: #222 !important;
+  // Add any other styling you want
 }

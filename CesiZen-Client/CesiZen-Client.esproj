@@ -15,4 +15,7 @@
     <None Remove="src\app\models\user\user-datastorage.ts" />
     <None Remove="src\NewFile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\assets\static-images\" />
+  </ItemGroup>
 </Project>
