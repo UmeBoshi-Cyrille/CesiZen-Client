@@ -137,44 +137,21 @@ form {
   }
 }
 
-.category-selector {
-  margin-bottom: 1.5rem;
-
-  > label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #333;
-    font-size: 1.1rem;
-  }
-
-  .category-option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    transition: background 0.2s;
-
-    &:hover {
-      background: #f7f7f7;
-      border-radius: 4px;
-    }
-
-    input[type="checkbox"] {
-      accent-color: #007bff; // Modern browsers support this for checkbox color
-      width: 18px;
-      height: 18px;
-      margin-right: 0.7em;
-      cursor: pointer;
-    }
-
-    label {
-      cursor: pointer;
-      user-select: none;
-      font-size: 1rem;
-      color: #444;
-      transition: color 0.2s;
-    }
-  }
+mat-form-field,
+mat-select {
+  border: none !important
 }
 
+button.selected {
+  background: #1976d2;
+  color: #fff;
+}
+
+.cat-image-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.image-path-btn {
+    cursor: pointer;
+}
