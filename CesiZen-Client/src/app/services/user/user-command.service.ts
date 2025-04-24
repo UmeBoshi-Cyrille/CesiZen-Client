@@ -15,7 +15,7 @@ export class UserCommandService {
 
   updateUsername(id: number, username: string): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/update-username`;
-    return this.http.patch(url, username, { withCredentials: true }).pipe(
+    return this.http.put(url, username, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
@@ -24,7 +24,7 @@ export class UserCommandService {
 
   updateEmail(id: number, email: string): Observable<unknown> {
     const url = `${this.apiUrlCommand}/${id}/update-email`;
-    return this.http.patch(url, email, { withCredentials: true }).pipe(
+    return this.http.put(url, email, { withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })

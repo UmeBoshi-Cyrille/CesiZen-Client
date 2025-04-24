@@ -75,8 +75,18 @@ export class UserQueryService {
   }
 
   getProfile(): Observable<User> {
-    return this.http.get<{ value: User }>(this.apiUrlProfile, { withCredentials: true }).pipe(
-      map((response) => response.value),
+    return this.http.get<User>(this.apiUrlProfile, { withCredentials: true }).pipe(
+      map((response) => new User(
+        response.id,
+        response.firstname,
+        response.lastname,
+        response.username,
+        new Date(response.createdAt),
+        new Date(response.updatedAt),
+        response.isActive,
+        response.role,
+        response.login
+      )),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })

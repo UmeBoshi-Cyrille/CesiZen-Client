@@ -1,0 +1,45 @@
+<div class="container">
+    <mat-card class="profile-card">
+        <div *ngIf="user$ | async as user; else loading">
+            <div class="avatar-container">
+                <img class="avatar"
+                     src="/assets/badman.png"
+                     alt="Photo de profil" />
+            </div>
+            <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+            <form *ngIf="editing; else viewMode" [formGroup]="editForm" (ngSubmit)="onSubmit(user)">
+                <mat-form-field appearance="outline" class="edit-field">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="email" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="edit-field">
+                    <mat-label>Nom d'utilisateur</mat-label>
+                    <input matInput formControlName="username" />
+                </mat-form-field>
+                <div class="edit-actions">
+                    <button mat-stroked-button color="primary" type="submit">
+                        Confirmer
+                    </button>
+                    <button mat-stroked-button type="button" (click)="cancelEdit()">
+                        Annuler
+                    </button>
+                </div>
+            </form>
+            <ng-template #viewMode>
+                <p><strong>E-mail:</strong> {{ user.login.email }}</p>
+                <p><strong>Nom d'utilisateur:</strong> {{ user.username }}</p>
+                <p><strong>Créé le:</strong> {{ user.createdAt | date:'dd/MM/yyyy' }}</p>
+                <button mat-stroked-button color="primary" (click)="startEdit(user)">
+                    Modifier
+                </button>
+            </ng-template>
+        </div>
+        <ng-template #loading>
+            <div class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Chargement du profil...</p>
+            </div>
+        </ng-template>
+    </mat-card>
+</div>
+

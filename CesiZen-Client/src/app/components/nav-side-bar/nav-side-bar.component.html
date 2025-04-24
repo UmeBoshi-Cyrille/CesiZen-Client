@@ -8,44 +8,49 @@
                 <a class="nav-link" routerLink="/"
                    routerLinkActive="active"
                    [routerLinkActiveOptions]="{ exact: true }">
-                    <span class="material-symbols-outlined">
+                    <mat-icon class="home icon">
                         home
-                    </span>
+                    </mat-icon>
                     Accueil
                 </a>
             </li>
             <li class="nav-li">
                 <a class="nav-link" routerLink="/articles" routerLinkActive="active">
-                    <span class="material-symbols-outlined">
+                    <mat-icon class="library_books icon">
                         library_books
-                    </span>
+                    </mat-icon>
                     Articles
                 </a>
             </li>
-            <div class="text-center" *ngIf="isLoggedIn">
-            <li class="nav-li">
+            <li class="nav-li" *ngIf="isLoggedIn">
                 <a class="nav-link" routerLink="/exercises" routerLinkActive="active">
-                    <span class="material-symbols-outlined">
-                        cardiology
-                    </span>
+                    <mat-icon class="free_breakfast icon">
+                        free_breakfast
+                    </mat-icon>
                     Exercices
                 </a>
             </li>
-            </div>
             <li class="nav-li">
-                <a class="nav-link" routerLink="/contact" routerLinkActive="active">
-                    <span class="material-symbols-outlined">
-                        prescriptions
-                    </span>
-                    Contactez-nous
+                <a class="nav-link" routerLink="/about" routerLinkActive="active">
+                    <mat-icon class="face icon">
+                        face
+                    </mat-icon>
+                    A propos de nous
+                </a>
+            </li>
+            <li class="nav-li" *ngIf="isLoggedIn">
+                <a class="nav-link" routerLink="/profile/{{ userData?.id }}" routerLinkActive="active">
+                    <mat-icon class="person icon">
+                        person
+                    </mat-icon>
+                    Votre profil
                 </a>
             </li>
         </ul>
     </div>
-
     <div class="nav-div-buttons">
         <div class="text-center" *ngIf="isLoggedIn">
-            <p>Bienvenue, {{ userData?.username }} !</p>
+            <p class="font-seconde username">Bienvenue, {{ userData?.username }}</p>
             <button class="nav-button" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
         </div>
         <div class="text-center" *ngIf="!isLoggedIn">
