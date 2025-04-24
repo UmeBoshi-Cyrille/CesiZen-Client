@@ -1,47 +1,56 @@
-<article>
+<div class="article-container">
     <h1 class="h1-primary">Articles inspirants</h1>
     <p class="text-center">Une vie équilibrée Plongez dans nos articles pour des conseils et des astuces sur la santé mentale, la gestion du stress, l'anxiété, et bien plus encore.</p>
 
     <div class="latest-articles">
-        <p class="h1-articles-title">Les dernières articles</p>
-        <div *ngFor="let article of articles; let i = index; trackBy: trackById"
-             class="cards-articles"
-             (mouseover)="activeIndex = i"
-             (focus)="onFocus()"
-             (mouseleave)="activeIndex = null">
+        <h2 class="h1-articles-title">Les derniers articles</h2>
+        <div class="latestarticles-grid">
+          <div *ngFor="let article of articles; let i = index; trackBy: trackById"
+               class="cards-articles"
+               (mouseover)="activeIndex = i"
+               (focus)="onFocus()"
+               (mouseleave)="activeIndex = null">
             <a (click)="onViewSingleArticle(article.id)"
                (keydown.enter)="onViewSingleArticle(article.id)"
                tabindex="0"
                role="button">
-                <img class="img-article" [src]="article.imageSrc" alt="img-article" />
-                <div class="article-div font-seconde">
-                    <div *ngIf="activeIndex === i; else elseBlock" class="article-description">
-                        {{ article.description }}
-                    </div>
-                    <ng-template #elseBlock>
-                        <div>
-                            « {{ article.title }} »<br>
-                            <span class="article-author">
-                                ~ {{ article.author }}
-                            </span>
-                        </div>
-                    </ng-template>
+              <img class="img-article" [src]="article.imageSrc" alt="img-article" />
+              <div class="article-div font-seconde">
+                <div *ngIf="activeIndex === i; else elseBlock" class="article-description">
+                  {{ article.description }}
                 </div>
+                <ng-template #elseBlock>
+                  <div>
+                    « {{ article.title }} »<br>
+                    <span class="article-author">
+                      auteur: {{ article.author }}
+                    </span>
+                  </div>
+                </ng-template>
+              </div>
             </a>
+          </div>
         </div>
     </div>
 
     <h1 class="h1-primary">Catégories</h1>
-    <div class="category-div grid grid-cols-2 md:grid-cols-5 gap-4">
+    <div class="category-div">
         <div class="s" *ngFor="let category of categories">
             <a (click)="onViewByCategory(category.id, category.name)"
                (keydown.enter)="onViewByCategory(category.id, category.name)"
                tabindex="0"
                role="button">
-                <img class="h-auto max-w-full rounded-lg cards-categories" [src]="category.imageSrc" onerror="/assets/default.jpg" alt="img-category" />
-                <p class="category-name">{{ category.name }}</p>
+              <div class="card-category">
+                <div class="img-card">
+                   <!--<img class="h-auto max-w-full rounded-lg cards-categories" [src]="category.imageSrc" onerror="/assets/default.jpg" alt="img-category" />-->
+                   <img class="h-auto max-w-full rounded-lg cards-categories" [src]="category.imageSrc" onerror="/assets/default.jpg" alt="img-category" />
+                </div>
+                <div class="category-name-box">
+                  <h3 class="category-name">{{ category.name }}</h3>
+                </div>
+              </div>
             </a>
         </div>
     </div>
-</article>
+</div>
    
