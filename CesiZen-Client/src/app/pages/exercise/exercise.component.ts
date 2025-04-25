@@ -82,11 +82,11 @@ export class ExerciseComponent implements OnInit{
     if (!this.exercise) return '';
     switch (this.exercise.exerciseType) {
       case 1:
-        return 'assets/breath-exercise(7-4-8).gif';
+        return 'assets/static-images/exercise/breath-exercise(7-4-8).gif';
       case 2:
-        return 'assets/breath-exercise(5-5).gif';
+        return 'assets/static-images/exercise/breath-exercise(5-5).gif';
       case 3:
-        return 'assets/breath-exercise(4-6).gif';
+        return 'assets/static-images/exercise/breath-exercise(4-6).gif';
       default:
         return '';
     }

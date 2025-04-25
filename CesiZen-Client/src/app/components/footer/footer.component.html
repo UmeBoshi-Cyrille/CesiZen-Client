@@ -4,19 +4,20 @@
       <li></li>
     </ul>
     <ul>
-      <li><a routerLink="#">Contact us</a></li>
+      <li><a routerLink="#">Contactez-nous</a></li>
       <li><a routerLink="#">Mentions légales</a></li>
       <li><a routerLink="#">Privacy Policy</a></li>
       <li><a routerLink="#">Politique de confidentialité</a></li>
     </ul>
     <ul>
-      <li><a routerLink="/">Accueil</a></li>
-      <li><a routerLink="/articles">Articles</a></li>
-      <li *ngIf="isLoggedIn"><a routerLink="/exercises">Execices</a></li>
-      <li><a routerLink="/contact">Contactez-nous</a></li>
+        <li><a routerLink="/">Accueil</a></li>
+        <li><a routerLink="/articles">Articles</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/exercises">Execices</a></li>
+        <li><a routerLink="/about">A propos de nous</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/profile/{{ userData?.id }}">Profil</a></li>
     </ul>
     <div>
-      <a href="https://sante.gouv.fr/" target="_blank"><img src="/assets/logo_gouv.png" alt="logo de gouvernement" title="logo de gouvernement"/></a>
+      <a href="https://sante.gouv.fr/" target="_blank"><img src="/assets/static-images/footer/logo_gouv.png" alt="logo de gouvernement" title="logo de gouvernement" /></a>
       <p>© Neque porro quisquam est qui dolorem ipsum</p>
     </div>
   </div>
