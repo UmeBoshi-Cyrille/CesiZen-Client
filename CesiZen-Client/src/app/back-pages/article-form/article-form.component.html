@@ -54,7 +54,7 @@
         <button type="button"
                 class="image-path-btn"
                 [class.selected]="mainImagePath!.path === image.file.name"
-                (click)="setMainImage(image.file.name, image.url)">
+                (click)="setMainImage(image.file.name, image.url, image.alternative)">
           Définir comme image principale
         </button>
       </div>
@@ -65,7 +65,7 @@
 
   <div *ngIf="mainImagePath">
     <p>Image principale sélectionnée :</p>
-    <img [src]="mainImagePath.url" alt="image choisie de présentation" class="main-thumb" />
+    <img [src]="mainImagePath.url" alt="mainImagePath.alt" class="main-thumb" />
   </div>
 
   <button type="submit" [disabled]="isSubmitDisabled()">Créer l'article</button>

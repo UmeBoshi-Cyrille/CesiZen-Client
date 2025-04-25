@@ -38,7 +38,7 @@ export class ArticleFormComponent implements OnInit {
   newImages: NewImage[] = [];
   uploading = false;
   categories: Category[] = [];
-  mainImagePath: { url: string, path: string } = { url: '', path: '' };
+  mainImagePath: { url: string, path: string, alt: string } = { url: '', path: '', alt: '' };
 ;
   uploadError?: string = '';
   pageNumber = 1;
@@ -110,9 +110,10 @@ export class ArticleFormComponent implements OnInit {
     this.uploadedImages.splice(index, 1);
   }
 
-  setMainImage(path: string, url: string): void {
+  setMainImage(path: string, url: string, alt: string): void {
     this.mainImagePath!.path = path;
     this.mainImagePath!.url = url;
+    this.mainImagePath!.alt = 
   }
 
   async uploadAndProcessImages(): Promise<NewImage[]> {
