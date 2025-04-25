@@ -99,9 +99,12 @@ mat-card-actions {
   gap: 12px;
   margin-top: 8px;
 }
+.contact-btn {
+  border-radius: 3px;
+}
 
 .contact-btn:hover {
-  background-color: black;
+  background-color: rgba(24, 24, 24);
   color: white;
 }
 @media (max-width: 700px) {

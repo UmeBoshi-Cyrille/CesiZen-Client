@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '@models/user/user';
+import { finalize, forkJoin, Observable } from 'rxjs';
 import { UserQueryService } from '@services/user/user-query.service';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
-import { UserDataStorage } from '../../models/user/user-data-storage';
+import { UserDataStorage } from '@models/user/user-data-storage';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { UserCommandService } from '../../services/user/user-command.service';
-import { firstValueFrom } from 'rxjs';
+import { UserCommandService } from '@services/user/user-command.service';
+import { UserProfile } from '@models/user/user-profile';
+import { PasswordService } from '@services/password/password.service';
+import { ResetPassword } from '@models/password/reset-password.interface';
 
 @Component({
   selector: 'app-profile',
@@ -36,16 +37,26 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
-  user$!: Observable<User>;
+  apiErrors: Record<string, string[]> = {};
+  passwordForm = new FormGroup({
+    currentpassword: new FormControl('', Validators.required),
+    newpassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    confirmpassword: new FormControl('', Validators.required)
+  });
+
+  user$!: Observable<UserProfile>;
   userData: UserDataStorage | null = null;
   editing = false;
+  editingPassword = false
   loadingUpdate = false;
   editForm!: FormGroup;
+  userId!: number;
   constructor(
     private userQueryService: UserQueryService,
     private userCommandService: UserCommandService,
+    private passwordService: PasswordService,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     const storedAccount = localStorage.getItem('userData');
 
@@ -53,19 +64,19 @@ export class ProfileComponent implements OnInit{
       this.userData = JSON.parse(storedAccount);
     }
   }
-    ngOnInit(): void {
-      this.getUser();
+  ngOnInit(): void {
+    this.getUser();
   }
 
   private getUser(): void {
     this.user$ = this.userQueryService.getProfile();
   }
 
-  startEdit(user: User) {
+  startEdit(userprofile: UserProfile) {
     this.editing = true;
     this.editForm = this.fb.group({
-      username: [user.username, [Validators.required, Validators.email]],
-      email: [user.login.email, [Validators.required, Validators.minLength(3)]]
+      email: [userprofile.email, [Validators.email]],
+      username: [userprofile.username, [Validators.minLength(3)]]
     });
   }
 
@@ -73,41 +84,90 @@ export class ProfileComponent implements OnInit{
     this.editing = false;
   }
 
-  onSubmit(user: User) {
+  startEditPassword() {
+    this.editingPassword = true;
+  }
+
+  cancelEditPassword() {
+    this.editingPassword = false;
+  }
+
+  onSubmit(userprofile: UserProfile) {
     console.log('Submit clicked', this.editForm.value);
     if (this.editForm.invalid) return;
     this.loadingUpdate = true;
     const { username, email } = this.editForm.value;
-    const updateEmail$ = email !== user.login.email
-      ? this.userCommandService.updateEmail(user.id, email)
-      : null;
-    const updateUsername$ = username !== user.username
-      ? this.userCommandService.updateUsername(user.id, username)
-      : null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updates: Observable<any>[] = [];
 
-    const updates = [];
-    if (updateEmail$) updates.push(updateEmail$);
-    if (updateUsername$) updates.push(updateUsername$);
+    if (email !== userprofile.email) {
+      const { email } = this.editForm.value;
+      updates.push(this.userCommandService.updateEmail(email));
+    }
+    if (username !== userprofile.username) {
+      const { username } = this.editForm.value;
+      updates.push(this.userCommandService.updateUsername(username));
+    }
+
     if (updates.length === 0) {
       this.loadingUpdate = false;
-      this.snackBar.open('No changes made', 'Close', { duration: 3000 });
+      this.snackBar.open('No changes made', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center', 
+        verticalPosition: 'top'
+});
       return;
     }
 
-    Promise.all(updates.map(obs => firstValueFrom(obs)))
-      .then(() => {
-        this.snackBar.open('Profile updated successfully', 'Close', { duration: 3000 });
+  forkJoin(updates)
+    .pipe(
+      finalize(() => {
         this.loadingUpdate = false;
+      })
+    )
+    .subscribe({
+      next: () => {
+        this.snackBar.open('Profile updated successfully', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top' });
         this.editing = false;
         this.getUser();
-      })
-      .catch((error) => {
+      },
+      error: (error) => {
         console.error('Error updating profile:', error);
-        this.snackBar.open('Error updating profile', 'Close', { duration: 3000 });
-        this.loadingUpdate = false;
-      })
-      .finally(() => {
-        this.loadingUpdate = false;
-      })
+        this.snackBar.open('Error updating profile', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      }
+    });
+  }
+
+  onPasswordChange() {
+    this.apiErrors = {};
+    const resetPasswordData: ResetPassword = {
+      currentPassword: this.passwordForm.value.currentpassword ?? '',
+      newPassword: this.passwordForm.value.newpassword ?? '',
+      confirmPassword: this.passwordForm.value.confirmpassword ?? ''
+    };
+    if (this.passwordForm.valid) {
+      this.passwordService.resetPassword(resetPasswordData).subscribe({
+        next: (response) => {
+          window.location.href = '/profile/:id';
+          console.log('Password updated successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error updating password:', error);
+          if (error?.error?.errors) {
+            this.apiErrors = error.error.errors; // keys: Title, Time... etc.
+          } else {
+            this.apiErrors = { general: ['An unexpected error occurred.'] };
+          }
+        }
+      });
+    }
+    console.log('ExerciseFormComponent initialized.');
   }
 }

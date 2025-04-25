@@ -5,6 +5,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { PaginationData } from '@models/pagination/pagination-data.interface';
 import { UserDto } from '@models/user/user-dto';
 import { User } from '@models/user/user';
+import { UserProfile } from '@models/user/user-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -74,18 +75,14 @@ export class UserQueryService {
     );
   }
 
-  getProfile(): Observable<User> {
-    return this.http.get<User>(this.apiUrlProfile, { withCredentials: true }).pipe(
-      map((response) => new User(
-        response.id,
+  getProfile(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(this.apiUrlProfile, { withCredentials: true }).pipe(
+      map((response) => new UserProfile(
         response.firstname,
         response.lastname,
         response.username,
-        new Date(response.createdAt),
-        new Date(response.updatedAt),
-        response.isActive,
-        response.role,
-        response.login
+        response.email,
+        new Date(response.createdAt)
       )),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);

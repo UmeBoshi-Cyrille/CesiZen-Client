@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -13,18 +13,19 @@ export class UserCommandService {
 
   constructor(private http: HttpClient) { }
 
-  updateUsername(id: number, username: string): Observable<unknown> {
-    const url = `${this.apiUrlCommand}/${id}/update-username`;
-    return this.http.put(url, username, { withCredentials: true }).pipe(
+  updateUsername(username: string): Observable<unknown> {
+    const url = `${this.apiUrlCommand}/update-username`;
+    return this.http.patch(url, JSON.stringify(username), {
+      headers: { 'Content-Type': 'application/json' }, withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
     );
   }
 
-  updateEmail(id: number, email: string): Observable<unknown> {
-    const url = `${this.apiUrlCommand}/${id}/update-email`;
-    return this.http.put(url, email, { withCredentials: true }).pipe(
+  updateEmail(email: string): Observable<unknown> {
+    const url = `${this.apiUrlCommand}/update-email`;
+    return this.http.patch(url, JSON.stringify(email), { headers: { 'Content-Type': 'application/json' }, withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
