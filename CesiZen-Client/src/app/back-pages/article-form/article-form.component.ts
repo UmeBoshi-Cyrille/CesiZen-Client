@@ -113,7 +113,7 @@ export class ArticleFormComponent implements OnInit {
   setMainImage(path: string, url: string, alt: string): void {
     this.mainImagePath!.path = path;
     this.mainImagePath!.url = url;
-    this.mainImagePath!.alt = 
+    this.mainImagePath!.alt = alt;
   }
 
   async uploadAndProcessImages(): Promise<NewImage[]> {
