@@ -1,6 +1,7 @@
 export const baseEnv = {
   production: false,
   apiUrl: 'https://localhost:5001/api',
+  apiUrlshorten: 'https://localhost:5001',
   query: 'query',
   command: 'command',
   articles: 'articles',
@@ -32,6 +33,8 @@ export const environment = {
   articleCreateUrl: `${baseEnv.apiUrl}/${baseEnv.articles}/${baseEnv.command}/create`,
   articleQueryUrl: `${baseEnv.apiUrl}/${baseEnv.articles}/${baseEnv.query}`,
   articleCommandUrl: `${baseEnv.apiUrl}/${baseEnv.articles}/${baseEnv.command}`,
+  imageUploadUrl: `${baseEnv.apiUrl}/${baseEnv.articles}/${baseEnv.command}/upload-image`,
+  imageDisplayUrl: `${baseEnv.apiUrlshorten}`,
 
   categoryIndexUrl: `${baseEnv.apiUrl}/${baseEnv.categories}/${baseEnv.query}/index`,
   categoryCreateUrl: `${baseEnv.apiUrl}/${baseEnv.categories}/${baseEnv.command}/create`,

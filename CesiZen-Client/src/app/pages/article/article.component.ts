@@ -30,7 +30,7 @@ export class ArticleComponent implements OnInit {
     const articleId = Number(this.route.snapshot.params['id']);
     this.article$ = this.articleQueryService.getArticleDetails(articleId).pipe(
       switchMap(article => {
-        const imagePath = article.imagePath ? `assets/${article.imagePath}` : '/assets/default.jpg';
+        const imagePath = this.imageService.getImageUrl(article.imagePath);
         return from(this.imageService.checkImageExists(imagePath)).pipe(
           map(exists => ({
             ...article,

@@ -125,19 +125,19 @@ export class ArticleFormComponent implements OnInit {
       for (const image of this.uploadedImages) {
         if (image.title && image.file) {
 
+          const apiPath = await firstValueFrom(this.imageService.uploadImage(image.file));
           if (this.mainImagePath!.path === image.file.name) {
-            this.mainImagePath!.path = `${Date.now()}-${image.file.name}`;
+            this.mainImagePath!.path = apiPath;
             filename = this.mainImagePath!.path;
           }
           else {
-            filename = `${Date.now()}-${image.file.name}`;
+            filename = apiPath;
           }
             // Générer un nom de fichier unique
           
           // Créer l'objet NewImage pour la base de données
           uploadedNewImages.push({ title: image.title, path: filename, alternative: image.alternative });
 
-          await firstValueFrom(this.imageService.uploadImage(image.file));
 
           // Upload the image to the server
           image.path = filename;
