@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-back-category',
+  standalone: true,
   imports: [MatPaginatorModule, MatTableModule, CommonModule, MatProgressSpinnerModule, MatIconModule, MatDialogModule],
   templateUrl: './back-category.component.html',
   styleUrl: './back-category.component.scss'

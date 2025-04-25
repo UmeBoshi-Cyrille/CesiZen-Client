@@ -65,7 +65,7 @@
 
   <div *ngIf="mainImagePath">
     <p>Image principale sélectionnée :</p>
-    <img [src]="mainImagePath.url" class="main-thumb" />
+    <img [src]="mainImagePath.url" alt="image choisie de présentation" class="main-thumb" />
   </div>
 
   <button type="submit" [disabled]="isSubmitDisabled()">Créer l'article</button>
