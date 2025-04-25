@@ -7,13 +7,18 @@ describe('User', () => {
       'John',
       'Doe',
       'johndoe',
-      'email@gmail.com',
-      true,
       new Date('2023-10-01'),
       new Date('2023-10-01'),
       true,
-      'user',
+      'user', // role
+      {
+        id: 1,
+        email: 'john.doe@example.com',
+        emailVerified: true
+      }
     );
     expect(user).toBeTruthy();
+    expect(user.firstname).toBe('John');
+    expect(user.login.email).toBe('john.doe@example.com');
   });
 });
