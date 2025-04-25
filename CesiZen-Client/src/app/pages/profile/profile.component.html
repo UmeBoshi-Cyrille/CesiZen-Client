@@ -34,7 +34,13 @@
                 </button>
             </ng-template>
         </div>
-        <a mat-raised-button color="primary" (click)="startEditPassword()" class="resetPW-btn">
+        <a mat-raised-button
+           color="primary"
+           (click)="startEditPassword()"
+           class="resetPW-btn"
+           (keydown.enter)="startEditPassword()"
+           (keydown.space)="startEditPassword()"
+           tabindex="0">
             Changer le mot de passe ?
         </a>
         <form *ngIf="editingPassword" [formGroup]="passwordForm" (ngSubmit)="onPasswordChange()">
