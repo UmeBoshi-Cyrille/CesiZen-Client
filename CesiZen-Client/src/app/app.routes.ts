@@ -21,6 +21,8 @@ import { BackLoginComponent } from '@back-pages/back-login/back-login.component'
 import { EmailVerifiedComponent } from '@pages/email-verified/email-verified.component';
 import { BackCategoryComponent } from './back-pages/back-category/back-category.component';
 import { authGuard } from '@services/auth/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AboutComponent } from './pages/about/about.component';
 
 
 
@@ -33,6 +35,8 @@ export const routes: Routes = [
   { path: 'exercises/:id', component: ExerciseComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
   { path: 'exercises', component: ExercisesComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
   { path: 'exercise-form', component: ExerciseFormComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
+  { path: 'about', component: AboutComponent },
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
 
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },

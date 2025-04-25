@@ -1,5 +1,6 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { UserDataStorage } from '@models/user/user-data-storage';
 
@@ -7,7 +8,7 @@ import { UserDataStorage } from '@models/user/user-data-storage';
 @Component({
   selector: 'app-nav-side-bar',
   standalone: true,
-  imports: [NgStyle, NgIf, RouterLink, RouterModule, RouterLinkActive],
+  imports: [NgStyle, NgIf, RouterLink, RouterModule, RouterLinkActive, MatIconModule],
   templateUrl: './nav-side-bar.component.html',
   styleUrl: './nav-side-bar.component.scss'
 })

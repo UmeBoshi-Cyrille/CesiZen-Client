@@ -4,12 +4,16 @@ export class User {
     public firstname: string,
     public lastname: string,
     public username: string,
-    public email: string,
-    public emailVerified: boolean,
     public createdAt: Date,
     public updatedAt: Date,
     public isActive: boolean,
     public role: string,
-  ) {
-  }
+    public login: {
+      id: number;
+      email: string;
+      emailVerified: boolean;
+    } 
+  ) { }
 }
+
+

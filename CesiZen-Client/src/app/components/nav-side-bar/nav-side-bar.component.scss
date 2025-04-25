@@ -93,6 +93,10 @@
     background-color: #bca251;
   }
 
+  .username {
+    margin-bottom: 1rem;
+  }
+
   .closebtn {
     position: absolute;
     top: 0;
@@ -123,4 +127,8 @@
     height: 50px;
     margin: auto;
     margin-top: 100px;
+}
+
+.icon {
+  margin-right: 10px;
 }
