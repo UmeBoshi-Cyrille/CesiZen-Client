@@ -10,6 +10,8 @@ import { CategoryQueryService } from '@services/category/category-query.service'
 import { Category } from '@models/category/category';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ImageService } from '@services/image/image.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-article-form',
@@ -32,10 +34,12 @@ export class ArticleFormComponent implements OnInit {
     content: new FormControl('', Validators.required),
     categories:new FormControl<number[]>([], Validators.required)
 });
-  uploadedImages: { file: File, url: string, title: string, alternative: string }[] = [];
+  uploadedImages: { file: File, url: string, path: string, title: string, alternative: string }[] = [];
   newImages: NewImage[] = [];
   uploading = false;
   categories: Category[] = [];
+  mainImagePath: { url: string, path: string, alt: string } = { url: '', path: '', alt: '' };
+;
   uploadError?: string = '';
   pageNumber = 1;
   pageSize = 12;
@@ -44,6 +48,7 @@ export class ArticleFormComponent implements OnInit {
     private fb: FormBuilder,
     private articleService: ArticleCommandService,
     private categoryQueryService: CategoryQueryService,
+    private imageService: ImageService,
     private router: Router,
   ) { }
 
@@ -78,7 +83,6 @@ export class ArticleFormComponent implements OnInit {
     }
   }
 
-
   onFileSelected(event: any): void {
     const files: FileList = event.target.files;
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -86,7 +90,7 @@ export class ArticleFormComponent implements OnInit {
       const file = files[i];
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.uploadedImages.push({ file: file, url: e.target.result, title: '', alternative: '' }); 
+        this.uploadedImages.push({ file: file, url: e.target.result, path: '', title: '', alternative: '' }); 
       };
       reader.readAsDataURL(file);
     }
@@ -106,24 +110,38 @@ export class ArticleFormComponent implements OnInit {
     this.uploadedImages.splice(index, 1);
   }
 
+  setMainImage(path: string, url: string, alt: string): void {
+    this.mainImagePath!.path = path;
+    this.mainImagePath!.url = url;
+    this.mainImagePath!.alt = alt;
+  }
+
   async uploadAndProcessImages(): Promise<NewImage[]> {
     this.uploading = true;
     this.uploadError = '';
     const uploadedNewImages: NewImage[] = [];
+    let filename = '';
 
     try {
       for (const image of this.uploadedImages) {
         if (image.title && image.file) {
-          const filename = `${Date.now()}-${image.file.name}`; // Générer un nom de fichier unique
-          // Simuler le déplacement vers le dossier assets (en réalité, vous le ferez côté serveur)
-          const imagePath = `assets/images/${filename}`;
 
+          const apiPath = await firstValueFrom(this.imageService.uploadImage(image.file));
+          if (this.mainImagePath!.path === image.file.name) {
+            this.mainImagePath!.path = apiPath;
+            filename = this.mainImagePath!.path;
+          }
+          else {
+            filename = apiPath;
+          }
+            // Générer un nom de fichier unique
+          
           // Créer l'objet NewImage pour la base de données
           uploadedNewImages.push({ title: image.title, path: filename, alternative: image.alternative });
 
-          // Ici, dans une application réelle, vous devriez uploader le fichier vers votre serveur
-          // et obtenir le chemin de stockage réel. Pour cet exemple, nous simulons le chemin.
-          console.log(`Image "${image.title}" simulée comme sauvegardée sous: ${imagePath}`);
+
+          // Upload the image to the server
+          image.path = filename;
         } else if (!image.title) {
           this.uploadError = 'Veuillez ajouter un titre pour chaque image.';
           this.uploading = false;
@@ -149,6 +167,7 @@ export class ArticleFormComponent implements OnInit {
           const author = this.articleForm.value.author ? this.articleForm.value.author : '';
           const content = this.articleForm.value.content ? this.articleForm.value.content : '';
           const categories = this.articleForm.value.categories ? this.articleForm.value.categories : [];
+          const imagePath = this.mainImagePath!.path ?? '';
 
           const newArticle = new NewArticle(
             title,
@@ -157,7 +176,7 @@ export class ArticleFormComponent implements OnInit {
             content,
             new Date(),
             new Date(),
-            '',
+            imagePath,
             undefined,
             processedImages,
             categories

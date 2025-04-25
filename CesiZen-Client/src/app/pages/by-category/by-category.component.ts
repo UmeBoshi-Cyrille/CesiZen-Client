@@ -58,13 +58,16 @@ export class ByCategoryComponent implements OnInit {
 
   private processArticleImage(article: ArticleDto): Observable<ArticleDto & { imageSrc: string }> {
     const imagePath = article.imagePath
-      ? `assets/${article.imagePath}`
+      ? article.imagePath
       : '/assets/default.jpg';
+    console.log(imagePath);
+    const backendImageUrl = this.imageService.getImageUrl(article.imagePath);
+    console.log(backendImageUrl);
 
-    return from(this.imageService.checkImageExists(imagePath)).pipe(
+    return from(this.imageService.checkImageExists(backendImageUrl)).pipe(
       map(exists => ({
         ...article,
-        imageSrc: exists ? imagePath : '/assets/default.jpg'
+        imageSrc: exists ? backendImageUrl : '/assets/default.jpg',
       }))
     );
   }
