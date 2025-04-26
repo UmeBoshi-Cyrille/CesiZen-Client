@@ -16,7 +16,7 @@ export class PasswordService {
   constructor(private http: HttpClient) { }
 
   forgetPassword(email: string): Observable<unknown> {
-    return this.http.post(this.apiUrlForgetPassword, email).pipe(
+    return this.http.post(this.apiUrlForgetPassword, { email }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
