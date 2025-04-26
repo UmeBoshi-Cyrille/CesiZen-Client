@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PasswordService } from '@services/password/password.service';
 
@@ -11,7 +11,7 @@ import { PasswordService } from '@services/password/password.service';
   styleUrl: './forget-password.component.scss'
 })
 export class ForgetPasswordComponent {
-  @Input() email = '';
+  email = '';
   successMessage = '';
   errorMessage = '';
 

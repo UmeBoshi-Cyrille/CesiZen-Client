@@ -3,20 +3,18 @@ import { Component } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { LoginData } from "@models/login/login-data";
 import { LoginService } from "@services/login/login.service";
-import { ForgetPasswordComponent } from "@components/forget-password/forget-password.component";
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ForgetPasswordComponent],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   passwordVisible = false;
   loginError: string | null = null;
-  email = '';
 
   connexionForm = new FormGroup({
     identifier: new FormControl('', [Validators.required, Validators.email]),
@@ -29,10 +27,6 @@ export class LoginComponent {
 
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
-  }
-
-  get currentEmail(): string {
-    return this.connexionForm.get('identifier')?.value || '';
   }
 
   onSubmit() {

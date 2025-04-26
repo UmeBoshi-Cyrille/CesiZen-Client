@@ -23,12 +23,13 @@ import { BackCategoryComponent } from './back-pages/back-category/back-category.
 import { authGuard } from '@services/auth/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: ArticleComponent },
   { path: 'articles/category/:id', component: ByCategoryComponent },
@@ -40,7 +41,7 @@ export const routes: Routes = [
 
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
-  { path: 'reset-password', component: ResetPassordComponent },
+  { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'error', component: Error404Component },
