@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    ReactiveFormsModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

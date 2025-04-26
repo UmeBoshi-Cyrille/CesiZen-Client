@@ -10,7 +10,7 @@ import { ByCategoryComponent } from '@pages/by-category/by-category.component';
 import { EmailVerificationComponent } from '@pages/email-verification/email-verification.component';
 import { Error404Component } from '@pages/error-404/error-404.component';
 import { ExerciseComponent } from '@pages/exercise/exercise.component';
-import { ResetPassordComponent } from '@pages/reset-passord/reset-passord.component';
+import { ResetPasswordComponent } from '@pages/reset-passord/reset-password.component';
 import { BackHomeComponent } from '@back-pages/back-home/back-home.component';
 import { BackArticlesComponent } from '@back-pages/back-articles/back-articles.component';
 import { BackArticleComponent } from '@back-pages/back-article/back-article.component';
@@ -42,6 +42,7 @@ export const routes: Routes = [
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'error', component: Error404Component },

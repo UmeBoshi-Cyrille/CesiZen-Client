@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PasswordService } from '@services/password/password.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class ForgetPasswordComponent {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private passwordService: PasswordService) { }
+  constructor(
+    private passwordService: PasswordService,
+    private router: Router,) { }
 
   onForgetPassword() {
     this.successMessage = '';
@@ -23,6 +26,7 @@ export class ForgetPasswordComponent {
     this.passwordService.forgetPassword(this.email).subscribe({
       next: () => {
         this.successMessage = 'Un lien de réinitialisation a été envoyé à votre adresse e-mail.';
+        setTimeout(() => this.router.navigate(['/reset-password']), 2000);
       },
       error: (err) => {
         console.error(err);
