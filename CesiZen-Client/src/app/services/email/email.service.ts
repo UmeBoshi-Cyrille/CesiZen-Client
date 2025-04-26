@@ -15,7 +15,7 @@ export class EmailService {
   verifyEmail(email: string, token: string): Observable<unknown> {
     const params = this.setParams(email, token);
 
-    return this.http.post(this.apiUrlVerifyEmail, { params, withCredentials: true }).pipe(
+    return this.http.post(this.apiUrlVerifyEmail, null, { params, withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })
