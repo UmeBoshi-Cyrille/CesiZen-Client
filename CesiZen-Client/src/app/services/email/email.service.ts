@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '@environments/environment';
@@ -12,10 +12,11 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  verifyEmail(email: string, token: string): Observable<unknown> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  verifyEmail(email: string, token: string): Observable<HttpResponse<any>> {
     const params = this.setParams(email, token);
 
-    return this.http.post(this.apiUrlVerifyEmail, null, { params, withCredentials: true }).pipe(
+    return this.http.post(this.apiUrlVerifyEmail, null, { params, observe: 'response', withCredentials: true }).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error);
       })

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EmailService } from '@services/email/email.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { EmailService } from '@services/email/email.service';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   templateUrl: './email-verified.component.html',
   styleUrl: './email-verified.component.scss'
@@ -47,21 +49,19 @@ export class EmailVerifiedComponent implements OnInit {
   verifyEmail() {
     this.emailService.verifyEmail(this.email, this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      next: (response: any) => {
+      next: (response: HttpResponse<any>) => {
         this.isLoading = false;
         
         if (response.status === 200) {
-          this.message = response?.message || 'Votre email a été vérifié avec succès !';
-          this.isSuccess = true;
+          this.message = response.body?.message || 'Votre email a été vérifié avec succès !';
           // Optional: Redirect after delay
-          
+          //this.router.navigate(['/login'])
+          setTimeout(() => this.router.navigate(['/login']), 3000);
         } else {
           this.error = 'Invalid or expired verification link';
         }
 
-        if (this.isSuccess) {
-          setTimeout(() => this.router.navigate(['/login']), 4000);
-        }
+        
       },
       error: () => {
         this.isLoading = false;
