@@ -10,7 +10,6 @@ import { NewCategory } from '@models/category/new-category';
 import { Router } from '@angular/router';
 import { ImageService } from '@services/image/image.service';
 import { firstValueFrom } from 'rxjs';
-import { NewImage } from '../../models/image/new-image';
 
 @Component({
   selector: 'app-create-category-dialog',
