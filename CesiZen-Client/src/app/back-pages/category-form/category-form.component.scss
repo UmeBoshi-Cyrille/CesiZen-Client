@@ -1,0 +1,53 @@
+/* Style for the entire form within the dialog */
+:host form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Adds spacing between form elements */
+  padding: 20px; /* Adds some padding around the form elements */
+}
+
+/* Style for individual MatFormField components */
+:host ::ng-deep .mat-form-field {
+  width: 100%; /* Makes the input fields take full width */
+}
+
+/* Style for the file input container */
+:host > div:nth-child(2) { /* Targets the div containing the file input */
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Adds spacing between the label and the input */
+}
+
+/* Style for the image preview area */
+:host > div:nth-child(3) { /* Targets the div containing the image preview */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns items to the start of the container */
+}
+
+/* Style for the image preview itself */
+:host > div:nth-child(3) > img {
+  border-radius: 4px; /* Adds a subtle rounded border to the image */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+/* Style for the action buttons at the bottom of the dialog */
+:host ::ng-deep .mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  padding: 16px 20px; /* Adds padding around the buttons */
+  gap: 8px; /* Adds spacing between the buttons */
+}
+
+/* Optional: Add some visual distinction to the buttons */
+:host ::ng-deep .mat-raised-button.mat-primary {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+:host ::ng-deep .mat-button {
+  /* You can add specific styles for the "Annuler" button if needed */
+}
+
+.create-btn {
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+}

@@ -1,1 +1,28 @@
-<p>category-form works!</p>
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <div>
+        <label for="category-image">Image de la catégorie</label>
+        <input id="category-image"
+               type="file"
+               accept="image/*"
+               (change)="onFileSelected($event)" />
+    </div>
+    <div *ngIf="selectedImage.url" style="margin-top: 10px;">
+        <img [src]="selectedImage.url"
+             alt="Aperçu"
+             style="max-width: 120px; max-height: 120px; border: 1px solid #ccc; margin-bottom: 10px;" />
+        <button mat-button color="warn" type="button" (click)="removeSelectedImage()">Supprimer l'image</button>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Texte alternatif</mat-label>
+        <input matInput formControlName="alternative" required>
+    </mat-form-field>
+    <mat-dialog-actions>
+        <button mat-button (click)="onCancel()">Annuler</button>
+        <button mat-button type="submit" class="create-btn" [disabled]="createForm.invalid || !selectedImage.file">Créer</button>
+    </mat-dialog-actions>
+</form>

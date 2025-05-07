@@ -5,7 +5,8 @@ describe('Category', () => {
     const category = new Category(
       1,
       'Sample Category',
-      '/Images/sample.jpg'
+      '/Images/sample.jpg',
+      'Sample Title',
     );
     expect(category).toBeTruthy();
   });
