@@ -4,13 +4,14 @@ import { ArticleMinimumDto } from '@models/article/article-minimum-dto';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ArticleCommandService } from '@services/article/article-command.service';
 
 @Component({
   selector: 'app-back-articles',
-  imports: [MatPaginatorModule, MatTableModule, CommonModule, MatIconModule],
+  imports: [MatPaginatorModule, MatTableModule, CommonModule, MatIconModule, RouterLink],
+  standalone: true,
   templateUrl: './back-articles.component.html',
   styleUrl: './back-articles.component.scss'
 })

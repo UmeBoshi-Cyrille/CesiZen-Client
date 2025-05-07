@@ -2,8 +2,8 @@ import { CategoryDto } from '../category/category-dto';
 import { ArticleDto } from './article-dto';
 
 const categories: CategoryDto[] = [
-  { id: 1, name: 'Tech', imagePath: 'tech.png' },
-  { id: 2, name: 'Design', imagePath: 'design.png' }
+  { id: 1, name: 'Tech', imagePath: 'tech.png', alternative: '' },
+  { id: 2, name: 'Design', imagePath: 'design.png', alternative: '' }
 ];
 
 describe('ArticleDto', () => {

@@ -13,13 +13,43 @@
   margin: 0 auto; /* Center wrapper */
 }
 
-.wrapper > h1 {
-    font-size: 2em;
-    border-bottom: solid black 1px;
-    width: 70%;
-    height:50px;
+.container-row {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: solid black 1px;
+  width: 70%;
+  height: 50px;
 }
 
+
+.container-row > h1 {
+  margin-right: 4.5rem;
+  font-size: 2em;
+}
+
+.openbtn {
+  width: 40px;
+  height: 40px;
+  background-color: #111;
+  color: white;
+  font-size: 24px;
+  font-family: Arial, sans-serif; /* Try a cleaner font */
+  line-height: 1; /* Avoid vertical stretching */
+  text-align: center;
+  vertical-align: middle; /* Center text vertically */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0; /* Important to remove spacing issues */
+  margin-bottom: 1px; /* Space below the button */
+}
+
+
+.openbtn:hover {
+  background-color: #444;
+}
 .table-container {
   padding: 20px;
   position: relative;

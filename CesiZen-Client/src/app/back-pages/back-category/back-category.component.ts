@@ -11,11 +11,20 @@ import { CategoryCommandService } from '@services/category/category-command.serv
 import { CategoryEditDialogComponent } from '../category-edit-dialog/category-edit-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NewCategory } from '@models/category/new-category';
+import { CreateCategoryDialogComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'app-back-category',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, CommonModule, MatProgressSpinnerModule, MatIconModule, MatDialogModule],
+  imports: [
+    MatPaginatorModule,
+    MatTableModule,
+    CommonModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   templateUrl: './back-category.component.html',
   styleUrl: './back-category.component.scss'
 })
@@ -99,7 +108,8 @@ export class BackCategoryComponent implements OnInit {
         const categoryDto: CategoryDto = {
           id: categoryId,
           name: updatedCategory.name,
-          imagePath: updatedCategory.imagePath
+          imagePath: updatedCategory.imagePath,
+          alternative: updatedCategory.alternative
         };
 
         this.categoryCommandService.update(categoryId, categoryDto).subscribe({
@@ -117,4 +127,23 @@ export class BackCategoryComponent implements OnInit {
       }
     });
   }
+
+  onCreateForm(): void {
+    const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((newCategory: NewCategory | undefined) => {
+      if (newCategory) {
+        this.categoryCommandService.create(newCategory).subscribe({
+          next: () => {
+            this.snackBar.open('Catégorie créée', 'Fermer', { duration: 3000 });
+            this.loadCategories(); // <--- reload the list so you get fresh data with IDs
+          },
+          error: () => this.snackBar.open('Erreur de création', 'Fermer', { duration: 3000 })
+        });
+      }
+    });
+  }
+
 }
