@@ -10,7 +10,7 @@ import { ByCategoryComponent } from '@pages/by-category/by-category.component';
 import { EmailVerificationComponent } from '@pages/email-verification/email-verification.component';
 import { Error404Component } from '@pages/error-404/error-404.component';
 import { ExerciseComponent } from '@pages/exercise/exercise.component';
-import { ResetPassordComponent } from '@pages/reset-passord/reset-passord.component';
+import { ResetPasswordComponent } from '@pages/reset-passord/reset-password.component';
 import { BackHomeComponent } from '@back-pages/back-home/back-home.component';
 import { BackArticlesComponent } from '@back-pages/back-articles/back-articles.component';
 import { BackArticleComponent } from '@back-pages/back-article/back-article.component';
@@ -23,12 +23,15 @@ import { BackCategoryComponent } from './back-pages/back-category/back-category.
 import { authGuard } from '@services/auth/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ForgetPasswordResponseComponent } from './components/forget-password-response/forget-password-response.component';
+import { ResetForgottenPasswordComponent } from './pages/reset-forgotten-password/reset-forgotten-password.component';
 
 
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: ArticleComponent },
   { path: 'articles/category/:id', component: ByCategoryComponent },
@@ -40,7 +43,10 @@ export const routes: Routes = [
 
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
-  { path: 'reset-password', component: ResetPassordComponent },
+  { path: 'forget-password', component: ForgetPasswordComponent },
+  { path: 'forget-password-response/verify', component: ForgetPasswordResponseComponent },
+  { path: 'reset-forgotten-password', component: ResetForgottenPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'error', component: Error404Component },

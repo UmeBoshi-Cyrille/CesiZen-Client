@@ -8,7 +8,7 @@ import { LoginService } from "@services/login/login.service";
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -16,18 +16,18 @@ export class LoginComponent {
   passwordVisible = false;
   loginError: string | null = null;
 
-  togglePassword() {
-    this.passwordVisible = !this.passwordVisible;
-  }
-
   connexionForm = new FormGroup({
-    identifier: new FormControl('', Validators.required),
+    identifier: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   })
 
   constructor(
     private connexionQueryService: LoginService,
   ) { }
+
+  togglePassword() {
+    this.passwordVisible = !this.passwordVisible;
+  }
 
   onSubmit() {
     this.loginError = null;

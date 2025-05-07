@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { EmailService } from '@services/email/email.service';
+import { PasswordService } from '@services/password/password.service';
+import { HttpResponse } from '@angular/common/http';
+import { EmailShareService } from '@services/email/email-share.service';
 
 @Component({
-  selector: 'app-email-verified',
+  selector: 'app-forget-password-response',
   standalone: true,
   imports: [
     CommonModule,
@@ -15,10 +16,10 @@ import { EmailService } from '@services/email/email.service';
     MatCardModule,
     RouterModule
   ],
-  templateUrl: './email-verified.component.html',
-  styleUrl: './email-verified.component.scss'
+  templateUrl: './forget-password-response.component.html',
+  styleUrl: './forget-password-response.component.scss'
 })
-export class EmailVerifiedComponent implements OnInit {
+export class ForgetPasswordResponseComponent implements OnInit {
   token!: string;
   email!: string;
   message!: string;
@@ -29,7 +30,8 @@ export class EmailVerifiedComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private emailService: EmailService
+    private passwordService: PasswordService,
+    private emailShareService: EmailShareService
   ) { }
 
   ngOnInit() {
@@ -42,26 +44,24 @@ export class EmailVerifiedComponent implements OnInit {
         return;
       }
 
-      this.verifyEmail();
+      this.verify();
     });
   }
 
-  verifyEmail() {
-    this.emailService.verifyEmail(this.email, this.token).subscribe({
+  verify() {
+    this.passwordService.forgetPasswordResponse(this.email, this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: HttpResponse<any>) => {
         this.isLoading = false;
-        
+
         if (response.status === 200) {
-          this.message = response.body?.message || 'Votre email a été vérifié avec succès !';
-          // Optional: Redirect after delay
-          //this.router.navigate(['/login'])
-          setTimeout(() => this.router.navigate(['/login']), 3000);
+          this.message = response.body?.message || 'Vos infos ont été vérifiées avec succès !';
+          this.emailShareService.sendEmail(this.email);
+
+          setTimeout(() => this.router.navigate(['/reset-forgotten-password']), 3000);
         } else {
           this.error = 'Invalid or expired verification link';
         }
-
-        
       },
       error: () => {
         this.isLoading = false;
