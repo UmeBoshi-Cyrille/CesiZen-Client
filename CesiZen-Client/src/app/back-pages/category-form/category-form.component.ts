@@ -7,6 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { CategoryCommandService } from '@services/category/category-command.service';
 import { NewCategory } from '@models/category/new-category';
+import { Router } from '@angular/router';
+import { ImageService } from '@services/image/image.service';
+import { firstValueFrom } from 'rxjs';
+import { NewImage } from '../../models/image/new-image';
 
 @Component({
   selector: 'app-create-category-dialog',
@@ -23,23 +27,20 @@ import { NewCategory } from '@models/category/new-category';
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.scss'
 })
+
 export class CreateCategoryDialogComponent {
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    imagePath: new FormControl('', Validators.required),
     alternative: new FormControl('', Validators.required),
   });
-  selectedImage: { file: File | null; url: string; title: string; alternative: string } = {
-    file: null,
-    url: '',
-    title: '',
-    alternative: ''
-  };
+  selectedImage!: { file: File; url: string; title: string; alternative: string } | null;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateCategoryDialogComponent>,
     private categoryService: CategoryCommandService,
+    private imageService: ImageService,
+    private router: Router,
   ) {}
   
 
@@ -51,7 +52,7 @@ export class CreateCategoryDialogComponent {
       reader.onload = (e: ProgressEvent<FileReader>) => {
         if (e.target && typeof e.target.result === 'string') {
           this.selectedImage = {
-            file,
+            file: file,
             url: e.target.result,
             title: '',
             alternative: ''
@@ -63,48 +64,62 @@ export class CreateCategoryDialogComponent {
   }
 
   removeSelectedImage(): void {
-    this.selectedImage = { file: null, url: '', title: '', alternative: '' };
+    this.selectedImage = null;
   }
 
-  //onCreate(): void {
-  //  if (
-  //    this.createForm.valid &&
-  //    this.selectedImage.file &&
-  //    this.selectedImage.title &&
-  //    this.selectedImage.alternative
-  //  ) {
-  //    // Pass all data back to parent
-  //    this.dialogRef.close({
-  //      ...this.createForm.value,
-  //      image: {
-  //        file: this.selectedImage.file,
-  //        title: this.selectedImage.title,
-  //        alternative: this.selectedImage.alternative
-  //      }
-  //    });
-  //  }
-  //}
+  
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  onSubmit(): void {
-    //if (this.createForm.invalid) {
-    //  return;
-    //}
-    const categoryData: NewCategory = {
-      name: this.createForm.value.name ?? '',
-      imagePath: this.createForm.value.imagePath ?? '',
-      alternative: this.createForm.value.alternative ?? '',
-    };
-    this.categoryService.create(categoryData).subscribe({
-      next: (response) => {
-        console.log('Article créé avec succès:', response);
-      },
-      error: (error) => {
-        console.error('Erreur lors de la création de l\'article:', error);
+  async uploadAndProcessImages(): Promise<string> {
+
+    try {
+
+      const apiPath = await firstValueFrom(this.imageService.uploadImage(this.selectedImage!.file));
+
+      if (apiPath) {
+        return apiPath;
       }
+
+      return apiPath;
+
+    } catch (error) {
+      console.error('Erreur lors du traitement des images:', error);
+      return '';
+    }
+  }
+
+  onSubmit(): void {
+    if (this.createForm.invalid) {
+      return;
+    }
+
+    if (!this.selectedImage) {
+      return;
+    }
+
+    this.uploadAndProcessImages().then((imagePath: string) => {
+      if (!imagePath) {
+        console.error('Image upload failed, aborting category creation');
+        return;
+      }
+
+      const categoryData: NewCategory = {
+        name: this.createForm.value.name ?? '',
+        imagePath: imagePath ?? '',
+        alternative: this.createForm.value.alternative ?? '',
+      };
+      this.dialogRef.close();
+      this.categoryService.create(categoryData).subscribe({
+        next: (response) => {
+          console.log('Article créé avec succès:', response);
+        },
+        error: (error) => {
+          console.error('Erreur lors de la création de l\'article:', error);
+        }
+      });
     });
   }
 }
