@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateCategoryDialogComponent } from './category-form.component';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('CategoryFormComponent', () => {
   let component: CreateCategoryDialogComponent;
@@ -23,6 +25,8 @@ describe('CategoryFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [CreateCategoryDialogComponent],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
         FormBuilder
