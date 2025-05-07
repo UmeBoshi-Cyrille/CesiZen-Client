@@ -116,6 +116,10 @@ export class ArticleFormComponent implements OnInit {
     this.mainImagePath!.alt = alt;
   }
 
+  cancelProcess() {
+    this.router.navigate(['/back-office']);
+  }
+
   async uploadAndProcessImages(): Promise<NewImage[]> {
     this.uploading = true;
     this.uploadError = '';

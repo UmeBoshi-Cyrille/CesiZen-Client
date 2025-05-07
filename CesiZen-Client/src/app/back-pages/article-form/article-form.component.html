@@ -1,73 +1,82 @@
-<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="title">Titre:</label>
-    <input type="text" id="title" formControlName="title" required>
-  </div>
+<div class="main-wrapper">
+    <h1 class="h1-primary">Nouvel Article</h1>
 
-  <div>
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description" required></textarea>
-  </div>
+    <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="title">Titre:</label>
+            <input type="text" id="title" formControlName="title" required>
+        </div>
 
-  <div>
-    <label for="author">Auteur:</label>
-    <input type="text" id="author" formControlName="author" required>
-  </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description" required></textarea>
+        </div>
 
-  <div>
-    <label for="content">Contenu:</label>
-    <textarea id="content" formControlName="content" rows="5"></textarea>
-  </div>
+        <div>
+            <label for="author">Auteur:</label>
+            <input type="text" id="author" formControlName="author" required>
+        </div>
 
-  <div class="cat-image-box">
-    <div>
-      <label for="images">Ajouter des images:</label>
-      <input type="file" id="images" multiple (change)="onFileSelected($event)">
-    </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Catégories</mat-label>
-      <mat-select formControlName="categories" multiple panelClass="custom-select-panel">
-        <mat-option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+        <div>
+            <label for="content">Contenu:</label>
+            <textarea id="content" formControlName="content" rows="5"></textarea>
+        </div>
 
-  
+        <div class="cat-image-box">
+            <div>
+                <label for="images">Ajouter des images:</label>
+                <input type="file" id="images" multiple (change)="onFileSelected($event)">
+            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Catégories</mat-label>
+                <mat-select formControlName="categories" multiple panelClass="custom-select-panel">
+                    <mat-option *ngFor="let category of categories" [value]="category.id">
+                        {{ category.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-  <div>
-    <h3>Images à ajouter:</h3>
-    <div *ngFor="let image of uploadedImages; let i = index" style="display: flex; align-items: center; margin-bottom: 10px;">
-      <img [src]="image.url" alt="Image {{ i + 1 }}" style="max-width: 100px; max-height: 100px; margin-right: 10px;">
-      <div>
-        <label for="title-{{i}}">Titre:</label>
-        <input type="text" id="title-{{i}}" [value]="image.title" (input)="updateImageTitle(i, $event)" required>
-        <button type="button" (click)="removeUploadedImage(i)">Supprimer</button>
-      </div>
-      <div>
-        <label for="alternative-{{i}}">Alternative:</label>
-        <input type="text" id="alternative-{{i}}" [value]="image.alternative" (input)="updateImageAlternative(i, $event)" required>
-        <button type="button" (click)="removeUploadedImage(i)">Supprimer</button>
-      </div>
-      <div>
-        <button type="button"
-                class="image-path-btn"
-                [class.selected]="mainImagePath!.path === image.file.name"
-                (click)="setMainImage(image.file.name, image.url, image.alternative)">
-          Définir comme image principale
-        </button>
-      </div>
-    </div>
-    <div *ngIf="uploadError" style="color: red;">{{ uploadError }}</div>
-    <div *ngIf="uploading">Traitement des images...</div>
-  </div>
 
-  <div *ngIf="mainImagePath">
-    <p>Image principale sélectionnée :</p>
-    <img [src]="mainImagePath.url" alt="mainImagePath.alt" class="main-thumb" />
-  </div>
 
-  <button type="submit" [disabled]="isSubmitDisabled()">Créer l'article</button>
+        <div>
+            <h3>Images à ajouter:</h3>
+            <div *ngFor="let image of uploadedImages; let i = index" style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img [src]="image.url" alt="Image {{ i + 1 }}" style="max-width: 100px; max-height: 100px; margin-right: 10px;">
+                <div>
+                    <label for="title-{{i}}">Titre:</label>
+                    <input type="text" id="title-{{i}}" [value]="image.title" (input)="updateImageTitle(i, $event)" required>
+                    <button type="button" (click)="removeUploadedImage(i)">Supprimer</button>
+                </div>
+                <div>
+                    <label for="alternative-{{i}}">Alternative:</label>
+                    <input type="text" id="alternative-{{i}}" [value]="image.alternative" (input)="updateImageAlternative(i, $event)" required>
+                    <button type="button" (click)="removeUploadedImage(i)">Supprimer</button>
+                </div>
+                <div>
+                    <button type="button"
+                            class="image-path-btn"
+                            [class.selected]="mainImagePath!.path === image.file.name"
+                            (click)="setMainImage(image.file.name, image.url, image.alternative)">
+                        Définir comme image principale
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="uploadError" style="color: red;">{{ uploadError }}</div>
+            <div *ngIf="uploading">Traitement des images...</div>
+        </div>
 
-</form>
+        <div *ngIf="mainImagePath">
+            <p>Image principale sélectionnée :</p>
+            <img [src]="mainImagePath.url" alt="mainImagePath.alt" class="main-thumb" />
+        </div>
+
+        <div class="form-btn">
+            <button type="submit" class="valid-btn" [disabled]="isSubmitDisabled()">Créer l'article</button>
+            <button color="alert" type="button" (click)="cancelProcess()" class="cancel-btn">Annuler</button>
+        </div>
+        
+    </form>
+</div>
+
+
