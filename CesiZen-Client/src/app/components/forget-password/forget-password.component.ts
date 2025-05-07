@@ -26,7 +26,7 @@ export class ForgetPasswordComponent {
     this.passwordService.forgetPassword(this.email).subscribe({
       next: () => {
         this.successMessage = 'Un lien de réinitialisation a été envoyé à votre adresse e-mail.';
-        setTimeout(() => this.router.navigate(['/reset-password']), 2000);
+        setTimeout(() => this.router.navigate(['/']), 2000);
       },
       error: (err) => {
         console.error(err);

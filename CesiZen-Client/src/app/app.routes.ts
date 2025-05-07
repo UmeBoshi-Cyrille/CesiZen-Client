@@ -24,6 +24,8 @@ import { authGuard } from '@services/auth/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ForgetPasswordResponseComponent } from './components/forget-password-response/forget-password-response.component';
+import { ResetForgottenPasswordComponent } from './pages/reset-forgotten-password/reset-forgotten-password.component';
 
 
 
@@ -42,6 +44,8 @@ export const routes: Routes = [
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
+  { path: 'forget-password-response/verify', component: ForgetPasswordResponseComponent },
+  { path: 'reset-forgotten-password', component: ResetForgottenPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
