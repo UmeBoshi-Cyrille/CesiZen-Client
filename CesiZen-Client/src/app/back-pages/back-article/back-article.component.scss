@@ -1,0 +1,38 @@
+.container {
+  margin: 100px auto;
+}
+.content {
+  text-align: justify;
+}
+
+.signature {
+  justify-content: end;
+  text-align: end;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon {
+  margin: 0 5px;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.back:hover {
+  cursor: pointer;
+  color: blue;
+  transform: translateX(-20px);
+  transition: all 0.3s ease-in-out;
+}

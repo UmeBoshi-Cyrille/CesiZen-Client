@@ -50,13 +50,16 @@
     </div>
     <div class="nav-div-buttons">
         <div class="text-center" *ngIf="isLoggedIn">
+            <div class="admin text-center" *ngIf="userData?.role === 'Admin'">
+                <a class="font-seconde" routerLink="/back-office" routerLinkActive="active">Admin</a>
+            </div>
             <p class="font-seconde username">Bienvenue, {{ userData?.username }}</p>
-            <button class="nav-button" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
+                <button class="nav-button" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
+            </div>
+            <div class="text-center" *ngIf="!isLoggedIn">
+                <button class="nav-button" routerLink="/inscription" routerLinkActive="activeBtn">Inscription</button>
+                <button class="nav-button" routerLink="/se-connecter" routerLinkActive="activeBtn">Se connecter</button>
+            </div>
         </div>
-        <div class="text-center" *ngIf="!isLoggedIn">
-            <button class="nav-button" routerLink="/inscription" routerLinkActive="activeBtn">Inscription</button>
-            <button class="nav-button" routerLink="/se-connecter" routerLinkActive="activeBtn">Se connecter</button>
-        </div>
-    </div>
   </nav>
 </header>

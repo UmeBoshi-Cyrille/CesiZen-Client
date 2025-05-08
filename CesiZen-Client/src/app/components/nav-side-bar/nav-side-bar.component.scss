@@ -132,3 +132,15 @@
 .icon {
   margin-right: 10px;
 }
+
+.admin {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.admin:hover {
+  transform: scale(1.2);
+  color: #FFFCF0;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
