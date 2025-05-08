@@ -49,7 +49,7 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
-  { path: 'error', component: Error404Component },
+  { path: '**', component: Error404Component },
 
   { path: 'back-office', component: BackHomeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
   { path: 'back-articles', component: BackArticlesComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
