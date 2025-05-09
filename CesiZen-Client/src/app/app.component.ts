@@ -1,27 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '@components/footer/footer.component';
 import { NavSideBarComponent } from '@components/nav-side-bar/nav-side-bar.component';
 import { NavMobileComponent } from './components/nav-mobile/nav-mobile.component';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AuthService } from './services/auth/auth.service';
+import { RefreshTokenService } from './services/login/refresh-token.service';
 
 
 @Component({
   selector: 'app-root',
-  imports: [NavSideBarComponent, FooterComponent, RouterOutlet, NavMobileComponent, CommonModule],
   standalone: true,
+  imports: [NavSideBarComponent, FooterComponent, RouterOutlet, NavMobileComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'CesiZen-Client';
-  isMobileScreen = false;
+export class AppComponent implements OnInit{
+    title = 'CesiZen-Client';
+    isMobileScreen = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver.observe(['(max-width: 700px)']).subscribe(result => {
-      this.isMobileScreen = result.matches;
-    });
+  constructor(
+      private authService: AuthService,
+      private refreshTokenService: RefreshTokenService,
+      private breakpointObserver: BreakpointObserver
+  ) {
+      this.breakpointObserver.observe(['(max-width: 700px)']).subscribe(result => {
+          this.isMobileScreen = result.matches;
+      });
+  }
+
+  ngOnInit() {
+    this.authService.checkLoginStatus();
+    this.authService.loadUserData();
+    this.refreshTokenService.setRefreshTokenTimer();
   }
 
 }

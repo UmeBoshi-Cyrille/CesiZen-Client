@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PasswordService } from '@services/password/password.service';
 import { ResetForgottenPassword } from '@models/password/reset-forgotten-password.interface';
 import { EmailShareService } from '@services/email/email-share.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-forgotten-password',
@@ -37,7 +38,8 @@ export class ResetForgottenPasswordComponent implements OnInit {
 
   constructor(
     private passwordService: PasswordService,
-    private emailShareService: EmailShareService
+    private emailShareService: EmailShareService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class ResetForgottenPasswordComponent implements OnInit {
   }
 
   cancelEditPassword() {
-    window.location.href = '/';
+    this.router.navigate(['/'])
   }
 
   onPasswordChange() {
@@ -63,7 +65,8 @@ export class ResetForgottenPasswordComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.passwordService.resetForgottenPassword(this.email, resetPasswordData).subscribe({
         next: (response) => {
-          window.location.href = '/login';
+          this.router.navigate(['/login']);
+          //window.location.href = '/login';
           console.log('Password updated successfully:', response);
         },
         error: (error) => {

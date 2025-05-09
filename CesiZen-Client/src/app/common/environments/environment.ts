@@ -14,6 +14,7 @@ export const baseEnv = {
 
 export const environment = {
   deleteCookieUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/delete-cookie`,
+  invalidateTokensUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/invalidate-tokens`,
   forgetPasswordUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/forgot-password`,
   forgetPasswordresponseUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/forgot-password-response`,
   loginUrl: `${baseEnv.apiUrl}/${baseEnv.authentication}/authenticate`,

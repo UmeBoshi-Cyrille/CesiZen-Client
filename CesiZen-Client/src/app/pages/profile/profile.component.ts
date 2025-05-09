@@ -15,6 +15,7 @@ import { UserCommandService } from '@services/user/user-command.service';
 import { UserProfile } from '@models/user/user-profile';
 import { PasswordService } from '@services/password/password.service';
 import { ResetPassword } from '@models/password/reset-password.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit{
     private passwordService: PasswordService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
+    private router: Router
   ) {
     const storedAccount = localStorage.getItem('userData');
 
@@ -155,7 +157,8 @@ export class ProfileComponent implements OnInit{
     if (this.passwordForm.valid) {
       this.passwordService.resetPassword(resetPasswordData).subscribe({
         next: (response) => {
-          window.location.href = '/profile/:id';
+          this.router.navigate(['/profile/:id'])
+          //window.location.href = '/profile/:id';
           console.log('Password updated successfully:', response);
         },
         error: (error) => {
