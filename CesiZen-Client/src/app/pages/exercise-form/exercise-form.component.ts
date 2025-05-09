@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NewExercise } from '@models/exercise/new-exercise';
 import { ExerciseCommandService } from '@services/exercise/exercise-command.service';
 
@@ -22,6 +22,7 @@ export class ExerciseFormComponent {
 
   constructor(
     private exerciseCommandService: ExerciseCommandService,
+    private router: Router,
   ) { }
 
   onSubmit() {
@@ -35,7 +36,7 @@ export class ExerciseFormComponent {
     if (this.exerciseForm.valid) {
       this.exerciseCommandService.create(exerciseData).subscribe({
         next: (response) => {
-          window.location.href = '/exercises';
+          this.router.navigate(['/exercises']);
           console.log('Exercise created successfully:', response);
         },
         error: (error) => {

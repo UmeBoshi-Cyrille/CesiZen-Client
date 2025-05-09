@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -36,10 +37,11 @@ export class ResetPasswordComponent {
 
   constructor(
     private passwordService: PasswordService,
+    private router: Router
   ) { }
 
   cancelEditPassword() {
-    window.location.href = '/';
+    this.router.navigate(['/']);
   }
 
   onPasswordChange() {
@@ -52,7 +54,8 @@ export class ResetPasswordComponent {
     if (this.passwordForm.valid) {
       this.passwordService.resetPassword(resetPasswordData).subscribe({
         next: (response) => {
-          window.location.href = '/profile/:id';
+          this.router.navigate(['/profile/:id']);
+          //window.location.href = '/profile/:id';
           console.log('Password updated successfully:', response);
         },
         error: (error) => {

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrationService } from '@services/registration/registration.service';
-import { RegistrationData } from '../../models/login/registration-data.interface';
+import { RegistrationData } from '@models/login/registration-data.interface';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -33,6 +34,7 @@ export class RegistrationComponent {
 
   constructor(
     private registrationQueryService: RegistrationService,
+    private router: Router
   ) { }
 
 onSubmit() {
@@ -53,7 +55,8 @@ onSubmit() {
         next: (response) => {
           console.log('Registered successfully:', response);
           setTimeout(() => {
-            window.location.href = '/email-verification';
+            this.router.navigate(['/email-verification'])
+            //window.location.href = '/email-verification';
 
           }, 3000);
         },
