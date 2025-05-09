@@ -5,6 +5,8 @@ import { NavSideBarComponent } from '@components/nav-side-bar/nav-side-bar.compo
 import { NavMobileComponent } from './components/nav-mobile/nav-mobile.component';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AuthService } from './services/auth/auth.service';
+import { RefreshTokenService } from './services/login/refresh-token.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit{
     isMobileScreen = false;
 
   constructor(
-    private authService: AuthService,
+      private authService: AuthService,
       private refreshTokenService: RefreshTokenService,
       private breakpointObserver: BreakpointObserver
   ) {
