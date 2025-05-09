@@ -11,8 +11,8 @@ import { RefreshTokenService } from './services/login/refresh-token.service';
 
 @Component({
   selector: 'app-root',
-  imports: [NavSideBarComponent, FooterComponent, RouterOutlet, NavMobileComponent, CommonModule],
   standalone: true,
+  imports: [NavSideBarComponent, FooterComponent, RouterOutlet, NavMobileComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
