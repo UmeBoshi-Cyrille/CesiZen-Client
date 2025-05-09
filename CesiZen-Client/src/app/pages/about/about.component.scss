@@ -1,16 +1,19 @@
 .container {
-  height: 80vh;
+  height: 70vh;
+  padding: 0 16px;
 }
+
 .about-hero {
   position: relative;
   width: 100%;
-  height: 320px;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #e3f2fd;
   margin-bottom: 32px;
   overflow: hidden;
+  padding: 16px 0;
 }
 
 .hero-img {
@@ -34,27 +37,33 @@
 }
 
 .hero-content h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 16px;
   text-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 
 .hero-content p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 400;
   text-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
+/* Responsive row/column layout */
 .row {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* Default: two columns */
+  gap: 24px;
   margin-bottom: 2rem;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .about-card, .contact-card {
+  flex: 1 1 0;
   max-width: 560px;
-  margin: 32px auto 0 auto;
+  min-width: 0;
+  margin: 16px 0 0 0;
   padding: 28px 24px 24px 24px;
   border-radius: 18px;
   box-shadow: 0 6px 24px rgba(33,150,243,0.08);
@@ -75,7 +84,7 @@
 
 .about-card ul li {
   margin-bottom: 8px;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .contact-card form {
@@ -98,25 +107,62 @@ mat-card-actions {
   display: flex;
   gap: 12px;
   margin-top: 8px;
+  flex-wrap: wrap;
 }
+
 .contact-btn {
   border-radius: 3px;
+  flex: 1 1 45%;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .contact-btn:hover {
   background-color: rgba(24, 24, 24);
   color: white;
 }
+
+/* --- Responsive for mobile --- */
+@media (max-width: 900px) {
+  .row {
+    gap: 12px;
+  }
+  .container {
+    height: auto;
+  }
+  .about-card, .contact-card {
+    padding: 18px 10px 18px 10px;
+  }
+}
+
 @media (max-width: 700px) {
   .about-hero {
-    height: 200px;
+    min-height: 120px;
+    padding: 12px 0;
+  }
+  .container {
+    height: auto;
+  }
+  .hero-content h1 {
+    font-size: 1.3rem;
   }
 
-  .hero-content h1 {
-    font-size: 1.5rem;
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .contact-btn {
+    font-size: 0.9rem;
+  }
+
+  .row {
+    flex-direction: column; /* Stack cards vertically on mobile */
+    gap: 16px;
   }
 
   .about-card, .contact-card {
-    padding: 16px 8px 16px 8px;
+    max-width: 100%;
+    margin: 0 0 0 0;
+    padding: 12px 6px;
   }
 }
