@@ -9,9 +9,6 @@ import { AuthService } from '../auth/auth.service';
 export class RefreshTokenService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private refreshSubscription: any;
-
-  
-
   private countdownSubscription?: Subscription;
   private timeLeftSubject = new BehaviorSubject<number>(0);
   timeLeft$ = this.timeLeftSubject.asObservable();
@@ -29,7 +26,7 @@ export class RefreshTokenService {
       if (expirationRaw) {
         const expirationTimestamp = JSON.parse(expirationRaw); // ms since epoch
         const now = Date.now();
-        const refreshBeforeMs = 110000; // 1 minute before expiration
+        const refreshBeforeMs = 60000; // 1 minute before expiration
         const delay = expirationTimestamp - now - refreshBeforeMs;
 
         if (delay > 0) {
@@ -40,30 +37,6 @@ export class RefreshTokenService {
         }
       }
     }
-  }
-
-  private startSilentRefresh(tokenExpirationTime: number) {
-    this.stopRefreshTokenTimer();
-    const delay = (tokenExpirationTime - 4) * 60000;
-    console.log(delay);
-
-    let timeLeft = delay / 1000; // en secondes
-    this.timeLeftSubject.next(timeLeft);
-
-    this.ngZone.runOutsideAngular(() => {
-      this.refreshSubscription = setInterval(() => {
-        this.ngZone.run(() => this.refreshToken());
-      }, delay);
-    });
-
-    this.countdownSubscription = interval(1000).subscribe(() => {
-      timeLeft--;
-      this.timeLeftSubject.next(timeLeft);
-      console.log(`Temps restant avant refresh : ${timeLeft} secondes`);
-      if (timeLeft <= 0) {
-        this.countdownSubscription?.unsubscribe();
-      }
-    });
   }
 
   private startSilentRefreshWithDelay(delay: number) {
