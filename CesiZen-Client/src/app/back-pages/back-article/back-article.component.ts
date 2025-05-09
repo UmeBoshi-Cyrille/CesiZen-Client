@@ -1,12 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { from, map, Observable, switchMap } from 'rxjs';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Article } from '@models/article/article';
+import { ArticleQueryService } from '@services/article/article-query.service';
+import { ImageService } from '@services/image/image.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-back-article',
+  selector: 'app-article',
+  imports: [CommonModule, DatePipe, RouterModule, MatIconModule],
   standalone: true,
-  imports: [],
   templateUrl: './back-article.component.html',
   styleUrl: './back-article.component.scss'
 })
-export class BackArticleComponent {
+export class BackArticleComponent implements OnInit {
+  article$!: Observable<Article & { imageSrc: string }>;
 
+  constructor(
+    private route: ActivatedRoute,
+    private articleQueryService: ArticleQueryService,
+    private imageService: ImageService,
+  ) { }
+
+  ngOnInit() {
+    this.getSingleArticle();
+  }
+
+  private getSingleArticle(): void {
+    const articleId = Number(this.route.snapshot.params['id']);
+    this.article$ = this.articleQueryService.getArticleDetails(articleId).pipe(
+      switchMap(article => {
+        const imagePath = this.imageService.getImageUrl(article.imagePath);
+        return from(this.imageService.checkImageExists(imagePath)).pipe(
+          map(exists => ({
+            ...article,
+            imageSrc: exists ? imagePath : '/assets/default.jpg'
+          }))
+        );
+      })
+    );
+  }
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = '/assets/default.jpg';
+  }
 }

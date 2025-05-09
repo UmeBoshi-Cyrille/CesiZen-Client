@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "reset";
-@use "tailwindcss";
+@import "tailwindcss";
 @import "app/abstract-styles/_mixins.scss";
 
 //COLORS
@@ -49,6 +49,7 @@ main {
 .h1-primary {
   @include title-h1(2rem auto);
 }
+
 .h1-articles-title {
   @include title-h1(1rem auto);
   width: 250px;
@@ -74,6 +75,7 @@ main {
   width: 80%;
   min-height: 80vh;
 }
+
 .box-div-articles {
   width: 100%;
   height: auto;
@@ -83,13 +85,43 @@ main {
   padding: 1rem 1rem;
   margin: 1.5rem auto;
 }
+
 .box-div-connexion {
   @include box-div;
 }
+
 .box-div {
   @include box-div;
   @include flex-center;
 }
+
+.content-div {
+  border: solid 1px;
+  padding-top: 10px;
+  padding-bottom: 70px;
+  padding-left: 120px;
+  padding-right: 120px;
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: start;
+  border-radius: 3px;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgb(128, 128, 128);
+  margin: 2rem auto;
+}
+
 
 .B-btn {
   @include black-button;
@@ -152,3 +184,101 @@ main {
   color: #222 !important;
   // Add any other styling you want
 }
+
+@media (max-width: 900px) {
+  .main-box {
+    background-color: white;
+    margin: 0;
+  }
+
+  .box-div {
+    @include box-div;
+    @include flex-center;
+    background-color: white;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  .h1-form-title {
+    @include title-h1(1rem auto);
+    font-size: 1rem;
+    width: 200px;
+  }
+
+  .h1-articleByCategory-title {
+    width: 150px;
+    font-size: 0.7rem;
+  }
+
+  .box-div-connexion {
+    box-shadow: none;
+    width: 100%;
+  }
+}
+
+  @media (max-width: 700px) {
+    main {
+      @include main-center(auto, auto);
+      width: 100%;
+      justify-content: center;
+    }
+
+    .main-box {
+      width: 100%;
+      padding: 2% 5%;
+    }
+
+    .content-div {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 0px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+      width: 100%;
+      border: none;
+    }
+
+    footer {
+      display: none;
+    }
+
+    .box-div-article {
+      width: 100%;
+      background-color: white;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 1rem 1rem;
+      margin: auto auto;
+    }
+
+    .h1-articles-title {
+      position: relative;
+      text-align: center;
+      margin: 0 auto;
+      border: solid 1px #abaaa7;
+    }
+
+    .h1-articleByCategory-title {
+      width: 250px;
+      font-size: 1rem;
+    }
+
+    .h1-form-title {
+      @include title-h1(1rem auto);
+      font-size: 1rem;
+      width: 180px;
+    }
+
+    .exercise-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 5px;
+      margin-bottom: 7rem;
+      box-shadow: 0 2px 6px rgb(128, 128, 128);
+    }
+  }

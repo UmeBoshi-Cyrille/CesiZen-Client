@@ -1,1 +1,27 @@
-<p>back-article works!</p>
+<div class="container">
+    <article *ngIf="article$ | async as article; else notFound" class="box-div-article">
+        <h1 class="h1-form-title">{{ article.title }}</h1>
+        <div class="signature">
+            <p>{{ article.createdAt | date : "dd MMMM yy, à HH:mm" }}</p>
+            <span>Author: {{ article.author }}</span>
+        </div>
+        <div class="img">
+            <img [src]="article.imageSrc" (error)="onImgError($event)" alt="{{ article.imagePath }}" />
+        </div>
+        <div class="content">
+            <p>Contenue :</p>
+            <p>
+                {{ article.content }}
+            </p>
+        </div>
+    </article>
+        <a class="back" routerLink="/back-office">
+            <mat-icon class="arrow_back icon">
+                arrow_back
+            </mat-icon>
+            Retourner à la page d'accueil
+        </a>
+    <ng-template #notFound>
+        <p>Article not found.</p>
+    </ng-template>
+</div>

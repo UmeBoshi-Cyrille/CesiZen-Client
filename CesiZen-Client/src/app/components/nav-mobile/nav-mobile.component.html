@@ -1,0 +1,66 @@
+<nav class="nav">
+    <div class="nav-div">
+        <ul class="nav-ul">
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ exact: true }">
+                    <mat-icon class="home icon">
+                        home
+                    </mat-icon>
+                    <span>Accueil</span>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/articles" routerLinkActive="active">
+                    <mat-icon class="library_books icon">
+                        library_books
+                    </mat-icon>
+                    <span>Articles</span>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-link" routerLink="/exercises" routerLinkActive="active">
+                    <mat-icon class="free_breakfast icon">
+                        free_breakfast
+                    </mat-icon>
+                    <span>Exercices</span>
+                </a>
+            </li>
+            <li class="nav-li dropdown-container">
+                <a class="nav-link"
+                   (click)="toggleDropdown()"
+                   (keydown.enter)="toggleDropdown()"
+                   tabindex="0">
+                    <mat-icon class="list icon" aria-hidden="true">list</mat-icon>
+                    <span>Menu</span>
+                </a>
+            </li>
+        </ul>
+        <div id="dropdownInformation"
+             class="dropdown-menu"
+             [ngStyle]="{ display: showDropdown ? 'block' : 'none' }">
+            <div class="text-center" *ngIf="isLoggedIn">
+                <p class="font-seconde username">Bienvenue, {{ userData?.username }}</p>
+            </div>
+            <hr />
+            <ul class="nav-drop-ul" aria-labelledby="dropdownInformationButton">
+                <li class="nav-drop-li-1 nav-drop">
+                    <a class="nav-drop-link" routerLink="/about" routerLinkActive="active">
+                        <mat-icon class="face icon">face</mat-icon>
+                        A propos
+                    </a>
+                </li>
+                <li class="nav-drop-li-2 nav-drop">
+                    <a class="nav-drop-link" [routerLink]="'/profile/' + userData?.id" routerLinkActive="active">
+                        <mat-icon class="person icon">person</mat-icon>
+                        Votre profil
+                    </a>
+                </li>
+            </ul>
+            <hr />
+
+            <button class="nav-drop-btn" (click)="logout()" (keydown.enter)="logout()">Déconnexion</button>
+        </div>
+    </div>
+</nav>

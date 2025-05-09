@@ -16,7 +16,7 @@ import { ArticleCommandService } from '@services/article/article-command.service
   styleUrl: './back-articles.component.scss'
 })
 export class BackArticlesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'author', 'createdAt', 'actions'];
+  displayedColumns: string[] = ['title', 'author', 'createdAt', 'show', 'delete'];
   dataSource = new MatTableDataSource<ArticleMinimumDto>();
   pageSizeOptions = [];
   pageNumber = 1;
