@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { UserDataStorage } from '@models/user/user-data-storage';
 import { AuthService } from '@services/auth/auth.service';
+import { LoginService } from '@services/login/login.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class NavSideBarComponent implements OnInit{
 
   constructor(
     private route: RouterModule,
-    private authService: AuthService
+    private authService: AuthService,
+    private loginService: LoginService
   ) {
     const storedAccount = localStorage.getItem('userData');
 
@@ -53,10 +55,6 @@ export class NavSideBarComponent implements OnInit{
   }
 
   logout() {
-    localStorage.removeItem('userData');
-    localStorage.setItem('isLoggedIn', 'false');
-    this.authService.setLoggedOut();
-
-    window.location.href = '/se-connecter';
+    this.loginService.logout();
   }
 }

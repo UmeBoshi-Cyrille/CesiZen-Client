@@ -10,6 +10,8 @@ export class RefreshTokenService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private refreshSubscription: any;
 
+  
+
   private countdownSubscription?: Subscription;
   private timeLeftSubject = new BehaviorSubject<number>(0);
   timeLeft$ = this.timeLeftSubject.asObservable();
@@ -27,7 +29,7 @@ export class RefreshTokenService {
       if (expirationRaw) {
         const expirationTimestamp = JSON.parse(expirationRaw); // ms since epoch
         const now = Date.now();
-        const refreshBeforeMs = 60000; // 1 minute before expiration
+        const refreshBeforeMs = 110000; // 1 minute before expiration
         const delay = expirationTimestamp - now - refreshBeforeMs;
 
         if (delay > 0) {
@@ -95,25 +97,19 @@ export class RefreshTokenService {
           localStorage.setItem('isLoggedIn', JSON.stringify(response.isLoggedIn));
           this.saveTokenExpirationTime(response.tokenExpirationTime);
           this.authService.setLoggedIn();
+          this.authService.loadUserData();
           this.setRefreshTokenTimer();
           // Schedule next silent refresh based on new token expiration
         } else {
-          this.logout();
+          this.loginService.logout();
         }
       },
       error: (error) => {
         console.log(error);
-        this.logout();
+        this.loginService.logout();
         return of(null);
       }
     });
-  }
-
-  private logout() {
-    localStorage.removeItem('userData');
-    localStorage.setItem('isLoggedIn', 'false');
-    this.authService.setLoggedOut();
-    window.location.href = '/login';
   }
 
   private stopRefreshTokenTimer() {
