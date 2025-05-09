@@ -3,6 +3,10 @@ import { Component } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { LoginData } from "@models/login/login-data";
 import { LoginService } from "@services/login/login.service";
+import { UserDataStorage } from "@models/user/user-data-storage";
+import { Router } from "@angular/router";
+import { AuthService } from "@services/auth/auth.service";
+import { RefreshTokenService } from "@services/login/refresh-token.service";
 
 
 @Component({
@@ -23,6 +27,9 @@ export class LoginComponent {
 
   constructor(
     private connexionQueryService: LoginService,
+    private router: Router,
+    private authService: AuthService,
+    private refreshTokenService: RefreshTokenService
   ) { }
 
   togglePassword() {
@@ -31,25 +38,24 @@ export class LoginComponent {
 
   onSubmit() {
     this.loginError = null;
-    console.log(this.connexionForm.value);
     const loginData: LoginData = {
       identifier: this.connexionForm.value.identifier ?? '',
       password: this.connexionForm.value.password ?? '',
     };
     if (this.connexionForm.valid) {
       this.connexionQueryService.authenticate(loginData).subscribe({
-          next: (response) => {
-            console.log('API Response:', response);
-              if (isResponse(response)) {
-                try {
-                  localStorage.setItem('userData', JSON.stringify(response));
-                } catch (e) {
-                  console.error('Error saving to localStorage:', e);
-                }
-              }
+        next: (response) => {
+            if (isResponse(response)) {
+              localStorage.setItem('userData', JSON.stringify(response.user));
+              localStorage.setItem('isLoggedIn', JSON.stringify(response.isLoggedIn));
+              this.saveTokenExpirationTime(response.tokenExpirationTime);
+              this.authService.setLoggedIn();
+              this.authService.loadUserData();
+              this.refreshTokenService.setRefreshTokenTimer();
+            }
          
           // Redirect to homepage
-          window.location.href = '/';
+          this.router.navigate(['/'])
         },
         error: (error) => {
           console.error('Error connexion:', error);
@@ -60,22 +66,24 @@ export class LoginComponent {
       });
     }
     console.log('ConnexionFormComponent initialized.');
-    }
+  }
+
+  private saveTokenExpirationTime(expirationTime: number) {
+    const expirationTimestamp = Date.now() + expirationTime * 60000;
+    localStorage.setItem('tokenExpirationTime', JSON.stringify(expirationTimestamp));
+  }
+
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isResponse(response: any): response is {
-  id: number;
-  username: string;
-  createdAt: Date | string;
-  isActive: boolean;
-  role: string;
+  user: UserDataStorage;
+  isLoggedIn: boolean;
+  tokenExpirationTime: number;
 } {
   return response &&
     typeof response === 'object' &&
-    'id' in response &&
-    'username' in response &&
-    'createdAt' in response &&
-    'isActive' in response &&
-    'role' in response;
+    'user' in response &&
+    'isLoggedIn' in response &&
+    'tokenExpirationTime' in response;
 }
