@@ -6,10 +6,6 @@
 }
 
 .latest-articles {
-  display: flex;
-  flex-direction: column;
-  background-color: #ffeaa8;
-  height: 65vh;
   width: 100%;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -126,4 +122,18 @@
   letter-spacing: 1px;
   //background: rgba(24, 24, 24, 0.66);
   border-radius: 2%;
+}
+
+@media(max-width: 1318px){
+  .latestarticles-grid {
+    background-color: white;
+    height: 80vh;
+  }
+}
+
+@media(max-width: 700px){
+  .latestarticles-grid {
+    height: auto;
+  }
+
 }

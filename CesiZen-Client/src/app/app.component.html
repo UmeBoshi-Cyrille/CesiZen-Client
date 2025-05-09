@@ -1,7 +1,9 @@
 <app-nav-side-bar></app-nav-side-bar>
 <main>
-  <router-outlet />
+    <router-outlet />
 </main>
-<app-footer></app-footer>
-
+<!-- Show footer only if screen width >= 700px -->
+<app-footer *ngIf="!isMobileScreen"></app-footer>
+<!-- Show mobile nav only if screen width <= 700px -->
+<app-nav-mobile *ngIf="isMobileScreen"></app-nav-mobile>
 

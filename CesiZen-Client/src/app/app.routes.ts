@@ -49,7 +49,6 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'verify-email/verify', component: EmailVerifiedComponent },
   { path: 'email-verification', component: EmailVerificationComponent },
-  { path: '**', component: Error404Component },
 
   { path: 'back-office', component: BackHomeComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
   { path: 'back-articles', component: BackArticlesComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
@@ -59,6 +58,8 @@ export const routes: Routes = [
   { path: 'users/:id', component: BackUserComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
   { path: 'users', component: BackUsersComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
   { path: 'back-login', component: BackLoginComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+
+  { path: '**', component: Error404Component },
 ];
 
 

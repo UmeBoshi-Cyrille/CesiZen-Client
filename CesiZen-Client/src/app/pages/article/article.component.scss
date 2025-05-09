@@ -1,5 +1,6 @@
 .content {
   text-align: justify;
+  margin: 1.5rem auto;
 }
 .signature {
   justify-content: end;
@@ -12,4 +13,32 @@
   width: 250px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px;
+}
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  article {
+    width: 100%;
+    margin: 0;
+  }
+  .img {
+    width: 200px;
+  }
+
+  .signature {
+    font-size: 0.89rem;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .content {
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+@media (max-width: 500px) {
+  .img {
+    width: 150px;
+  }
 }
