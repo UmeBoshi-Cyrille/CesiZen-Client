@@ -85,6 +85,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "proxyConfig": "proxy.conf.json",
             "port": 4200,
             "ssl": true,
             "sslCert": "./sign/localhost.crt",
