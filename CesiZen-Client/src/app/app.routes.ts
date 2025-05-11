@@ -26,6 +26,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ForgetPasswordResponseComponent } from './components/forget-password-response/forget-password-response.component';
 import { ResetForgottenPasswordComponent } from './pages/reset-forgotten-password/reset-forgotten-password.component';
+import { RgpdComponent } from './pages/rgpd/rgpd.component';
 
 
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
   { path: 'exercise-form', component: ExerciseFormComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
   { path: 'about', component: AboutComponent },
   { path: 'profile/:id', component: ProfileComponent, canActivate: [authGuard], data: { roles: ['User', 'Admin'] } },
+  { path: 'rgpd', component: RgpdComponent },
 
   { path: 'inscription', component: RegistrationComponent },
   { path: 'se-connecter', component: LoginComponent },
