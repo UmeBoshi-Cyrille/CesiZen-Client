@@ -1,59 +1,39 @@
-# CesiZenClient
+# Client Web CesiZen - Configuration du projet
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Ce document explique comment utiliser et configurer le projet en Angular 19 standalone afin de pouvoir tester ses fonctionnalité couplé à l'api CesiZen.
 
-## Development server
+## Prérequis
+- Avoir installé l'api CesiZen
+- Node.js 18+ npm (inclus avec Node.js)
+- Angular CLI (installé globalement)
 
-To start a local development server, run:
+## Installation
 
-```bash
-ng serve
+Cloner le projet :
+```
+git clone [URL_DU_DÉPÔT]
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+Installer les dépendances :
+```
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+Pour les test en local : Installez un certificat localement dans le dossier sign du projet
+```
+|sign-
+    |----localhost.crt
+    |----localhost.key
 ```
 
-## Building
+## Usage
 
-To build the project run:
-
-```bash
-ng build
+Démarrer le projet : 
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+ng serve --open --ssl
 ```
+L'application est accessible sur https://localhost:4200.
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+GNU GPL v3 (Copyleft, toute modification doit rester open source)
