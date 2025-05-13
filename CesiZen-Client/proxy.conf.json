@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://localhost:7103", // Your ASP.NET API port
+    "secure": false,
+    "changeOrigin": true
+  }
+}
