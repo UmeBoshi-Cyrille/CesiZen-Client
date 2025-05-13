@@ -1,7 +1,7 @@
 export const baseEnv = {
   production: false,
-  //apiUrl: 'https://localhost:7103/api',
-  apiUrl: 'api',
+  apiUrl: 'https://localhost:7103/api',
+  //apiUrl: 'api',
   apiUrlshorten: 'https://localhost:5001',
   query: 'query',
   command: 'command',
