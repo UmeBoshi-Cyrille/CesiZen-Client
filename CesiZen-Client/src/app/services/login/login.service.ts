@@ -94,7 +94,7 @@ export class LoginService {
     localStorage.removeItem('tokenExpirationTime');
     this.invalidateToken();
     this.authService.setLoggedOut();
-    //window.location.href = '/login';
+    window.location.href = '/';
   }
 
   private setParams(email: string, token: string): HttpParams {

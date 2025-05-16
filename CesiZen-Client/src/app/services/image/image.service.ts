@@ -39,7 +39,7 @@ export class ImageService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       processed.forEach((item: any, idx: number) => {
         if (item.imagePath) {
-          const imagePath = `assets/${item.imagePath}`;
+          const imagePath = `${this.apiUrlGetUrlImage}/${item.imagePath}`;
           this.checkImageExists(imagePath).then(exists => {
             processed[idx].imageSrc = exists ? imagePath : '/assets/default.jpg';
             cdr.detectChanges();
